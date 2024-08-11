@@ -1,0 +1,655 @@
+{% extends 'Store/layouts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="Banner">
+    <h1>Our Features</h1>
+    <img src="{% static 'Images/Fear.png' %}" alt="Banner Image">
+    <p>Swastik Electronics and Furniture is your premier destination for high-quality electronics and stylish furniture, combining modern technology with elegant design to enhance your living space. Our extensive range of products includes cutting-edge electronics that bring convenience and efficiency to your daily life, as well as exquisitely crafted furniture that adds both comfort and sophistication to your home.</p>
+    <a href="#">Read More</a>
+</div>
+<div class="codepen-wrapper">
+    <div class="book">
+        <div class="page">
+            <div class="page__1">
+                <img src="{% static 'Images/Service.png' %}" alt="Banner Image">
+                <p>We are For You</p>
+            </div>
+            <div class="page__2">
+                <p>Our dedicated team is committed to providing exceptional service, ensuring that every interaction is seamless.</p>
+            </div>
+        </div>
+    </div>
+    <div class="book">
+        <div class="page">
+            <div class="page__1">
+                <img src="{% static 'Images/Trust1.png' %}" alt="Banner Image">
+                <p>We earn Trust</p>
+            </div>
+            <div class="page__2">
+                <p>At the heart of our business lies an unwavering commitment to earning your trust.</p>
+            </div>
+        </div>
+    </div>
+    <div class="book">
+        <div class="page">
+            <div class="page__1">
+                <img src="{% static 'Images/Time.png' %}" alt="Banner Image">
+                <p>We are 15 Years Old</p>
+            </div>
+            <div class="page__2">
+                <p>With 15 years of experience, we have established a legacy of excellence and reliability. </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+.Banner {
+    text-align: center;
+    padding: 20px;
+}
+
+.Banner h1 {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 20px 0;
+    font-size: 2.5em;
+}
+
+.Banner img {
+    width: 23%;
+    height: 300px;
+    margin: 20px 0;
+    user-select: none;
+}
+
+.Banner p {
+    font-size: 1.3em;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+.Banner a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.2em;
+    border: ridge;
+    border-radius: 20px;
+    padding: 10px 50px;
+    margin-top: 20px;
+    color: inherit;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s;
+    border-color: blue;
+    border-width: 1px;
+}
+
+.Banner a:hover {
+    background-color:rgb(10, 10, 85);
+    color:#f4f4f4;
+    transition: 0.9s ease;
+}
+
+.codepen-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: -40px;    
+            
+        }
+
+        .book {
+            height: 15rem;
+            width: 15rem;
+            font-size: 1.4rem;
+            box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.25);
+            text-align: center;
+            position: relative;
+            margin-left: 50px;
+            border-radius: 20px;
+        }
+
+        .page {
+            width: 100%;
+            height: 15rem;
+            perspective: 1500px;
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .page__1 {
+            background-color: #0D5C63;
+            color: #fff;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            opacity: 1;
+            transition: all 1s .3s;
+            transform-origin: 0 50%;
+            z-index: 2;
+            border-radius: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            border-radius: 20px;
+        }
+
+        .page__1::after {
+            content: "";
+            color: #eff0eb;
+            position: absolute;
+            padding-top: 1.5rem;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            transform: rotateY(180deg);
+            transition: all .3s .5s;
+        }
+
+        .page__2 {
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            border-radius: 20px;
+            color: black;
+            padding: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+
+        .page:hover .page__1 {
+            transform: rotateY(-180deg);
+            box-shadow: 1.5rem 2rem 3rem rgba(0, 0, 0, 0.25);
+        }
+
+        .page:hover .page__1::after {
+            opacity: 1;
+        }
+
+        .page__1 img {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            margin-left: -90px;
+            margin-top:40px;
+            
+        }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="Banner2">
+    <h1>We Maintain Best Quality and Brands</h1>
+    <img src="{% static 'Images/Sigma.Webp' %}" alt="Banner Image">
+    <p>We pride ourselves on offering the finest quality electronics and furniture. Each product in our collection is meticulously selected to ensure it meets our high standards of durability and performance. We partner with renowned brands to bring you the latest innovations and timeless designs. Whether you're upgrading your home electronics or furnishing your space, our curated selection guarantees reliability and style. Experience exceptional craftsmanship and unparalleled quality with every purchase. Trust [Your Company Name] for the best in electronics and furniture.</p>
+</div>
+
+<style>
+.Banner2 {
+    margin-top: 650px;
+    padding: 20px;
+    text-align: center;
+}
+
+.Banner2 h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.Banner2 img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    user-select: none;
+    border-radius: 200px;
+}
+
+.Banner2 p {
+    width: 90%;
+    max-width: 900px;
+    font-size: 1rem;
+    margin: 20px auto;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .Banner2 img {
+        margin-top: 50px;
+    }
+
+    .Banner2 p {
+        font-size: 1.2rem;
+        margin-top: 50px;
+    }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="Banner3">
+    <h1>We Earn Trust</h1>
+    <img src="{% static 'Images/Earn.png' %}" alt="Banner Image">
+    <p>We pride ourselves on offering the finest quality electronics and furniture. Each product in our collection is meticulously selected to ensure it meets our high standards of durability and performance. We partner with renowned brands to bring you the latest innovations and timeless designs. Whether you're upgrading your home electronics or furnishing your space, our curated selection guarantees reliability and style. Experience exceptional craftsmanship and unparalleled quality with every purchase. Trust [Your Company Name] for the best in electronics and furniture.</p>
+</div>
+
+<style>
+.Banner3 {
+    margin-top: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+.Banner3 h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.Banner3 img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    user-select: none;
+    border-radius: 200px;
+}
+
+.Banner3 p {
+    width: 90%;
+    max-width: 900px;
+    font-size: 1.2rem;
+    margin: 20px auto;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .Banner3 img {
+        margin-top: 50px;
+    }
+
+    .Banner3 p {
+        font-size: 1.2rem;
+        margin-top: 50px;
+    }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="Banner4">
+    <h1>We are Since 15 years In  the market</h1>
+    <img src="{% static 'Images/Market.jpg' %}" alt="Banner Image">
+    <p>we have proudly served the market with unwavering commitment and excellence. Our journey began ten years ago with a vision to provide top-notch products and services, and since then, we have consistently evolved to meet the dynamic needs of our customers. Over the years, we have built a reputation for quality, reliability, and innovation, becoming a trusted name in our industry. Our decade-long experience reflects our dedication to customer satisfaction and our ability to adapt to changing market trends. We are grateful for the trust our customers have placed in us and look forward to continuing this legacy of excellence for many more years to come.</p>
+    <a href="#">Read More</a>
+</div>
+
+<style>
+.Banner4 {
+    margin-top: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+.Banner4 h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.Banner4 img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    user-select: none;
+    border-radius: 200px;
+}
+
+.Banner4 p {
+    width: 90%;
+    max-width: 900px;
+    font-size: 1.2rem;
+    margin: 20px auto;
+    text-align: center;
+}
+.Banner4 a{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.2em;
+    border: ridge;
+    border-radius: 20px;
+    padding: 10px 50px;
+    margin-top: 20px;
+    color: inherit;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s;
+    border-color: blue;
+    border-width: 1px;
+
+}
+.Banner4 a:hover{
+    background-color:rgb(10, 10, 85);
+    color:#f4f4f4;
+    transition: 0.9s ease;
+
+}
+
+
+@media (min-width: 768px) {
+    .Banner4 img {
+        margin-top: 50px;
+    }
+
+    .Banner4 p {
+        font-size: 1.2rem;
+        margin-top: 50px;
+    }
+
+
+
+
+}
+</style>
+
+
+<footer>
+    <div class="footer-col about">
+        <h4>About us</h4>
+        <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
+    </div>
+    <div class="footer-col services">
+        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Categories</h4>
+        <ul style="margin-left: 120px;">
+            <li><a href="#">Home Appliences</a></li>
+            <li><a href="#">Kitchen Appliences</a></li>
+            <li><a href="#">Washroom Ware</a></li>
+            <li><a href="#">Handlooms</a></li>
+            <li><a href="#">Bags and Switcase</a></li>
+            <li><a href="#">Moulded Furniture</a></li>
+            <li><a href="#">Glasses and Mugs</a></li>
+        </ul>
+    </div>
+    <div class="footer-col company">
+        <h4 style="margin-left: 50px;">Company</h4>
+        <ul style="margin-left: 50px;">
+            <li><a href="http://127.0.0.1:1000/About/">About</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Legal</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Contact us</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Feedback</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Product Complaints</a></li>
+           
+        </ul>
+    </div>
+    <div class="footer-col follow">
+        <h4>Follow us</h4>
+        <div class="links">
+            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/anveshjain1635/"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="line">
+        <p style="font-size: 20px;color:white;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<style>
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color:rgb(6, 8, 71);
+    padding: 40px 5%;
+    color: black;
+    margin-top:300px;
+    height: 900px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 23px;
+    color: rgb(156, 47, 14);
+    text-transform: capitalize;
+    position: relative;
+
+
+}
+
+.footer-col p{
+color: white;
+
+}
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    background-color:green;
+    height: 2px;
+    width: 90px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    display: block;
+    font-size: 23px;
+    text-transform: capitalize;
+    color: white;
+    text-decoration: none;
+    transition: 0.4s;
+    font-family: "Lora";
+}
+
+ul li a:hover {
+    color: Orange;
+    padding-left: 2px;
+}
+
+.links a {
+    display: inline-block;
+    height: 50px;
+    width: 45px;
+    color: black;
+    background-color: rgba(40, 130, 214, 0.8);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 44px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.links a:hover {
+    color: white;
+    background-color: Orange;
+}
+
+.line {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+
+
+
+@media (max-width: 740px) {
+    .footer-col {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-col h4::before {
+        display: none;
+    }
+}
+
+@media (max-width: 555px) {
+    footer {
+        padding: 20px 2%;
+        height: 600px;
+    }
+
+    .footer-col h4 {
+        font-size: 20px;
+        margin-left: -30px;
+    }
+    .footer-col p{
+       font-size: 10px; 
+       margin-left: 20px;     
+    }
+
+    ul li a {
+        font-size: 15px;
+    }
+
+    .line {
+        font-size: 12px;
+    
+    }
+}
+
+
+
+</style>
+
+
+
+
+<script>
+    // Set Alertify notifier position
+    alertify.set('notifier', 'position', 'top-right');
+
+    // Loop through messages and display them using Alertify
+    {% for msg in messages %}
+        alertify.success('{{ msg }}');
+    {% endfor %}
+</script>
+
+<style>
+    /* Style for Alertify notifications */
+    .ajs-message.ajs-success {
+    border-radius: 50px; /* Add border-radius */
+    /* Add border */
+    background-color: red; /* Change background color to red */
+    color: black; /* Change text color to white */
+    padding: 10px; /* Add padding */
+    margin-bottom: 10px; /* Add margin bottom */
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;    
+
+}
+</style>
+
+
+{% endblock %}
+
+
+

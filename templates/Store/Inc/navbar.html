@@ -1,0 +1,433 @@
+{% load static %}
+<body>
+    <!-- top navbar -->
+    <div class="top-navbar">
+        <div class="top-icons">
+            <a href="http://127.0.0.1:2000" style="color: #1c1c50;font-size: 20px;text-decoration: none;font-family: 'Times New Roman', Times, serif;">Swastik 卐 Traders</a>
+        </div>
+        <div class="other-links">
+            <button id="btn-login"><a href="http://127.0.0.1:2000/Login/">Login</a></button>
+            <button id="btn-signup"><a href="http://127.0.0.1:2000/Signup/">Signup</a></button>
+
+            <a href="http://127.0.0.1:2000/Wishlist/"><i class="fa-solid fa-heart"></i></a>
+            <a href="http://127.0.0.1:2000/Cart/"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+    </div>
+    <!-- top navbar -->
+
+    <div class="home-section">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg" id="navbar">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"><img src="./image/logo.png" alt="" width="180px"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span><i class="fa-solid fa-bars" style="color:burlywood;"></i></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2  lg-1 fs-5 ">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="http://127.0.0.1:2000/" style="color: white;">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a style="color: white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Features
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: white">
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/features/">Our Features</a></li>
+                    </ul>
+                  </li>
+    
+           
+                  <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+                      Category
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections">Collections</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Electronics">Home Appliences</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/KitchenWare">Kitechen Appliences</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Washroom">Washroom Ware</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Handloom">Handlooms</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Bags">Bags and Switcase</a></li>
+                      <li><a class="dropdown-item" href="">Moulded Plastic Furniture</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Glass">Glass and Mugs</a></li>
+                     
+                    </ul>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Orders
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Cart/">Cart</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Wishlist/">Wishlist</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Booking/">My Orders</a></li>
+                          
+                    </ul>
+                  </li>
+    
+               
+                
+                  <li class="nav-item">
+                    <a style="color: white;" class="nav-link" href="http://127.0.0.1:2000/About/">About Us</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      ContactUs
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
+                        <li><a class="dropdown-item" href="http://127.0.0.1:2000/Contact/">Contact Now</a></li>
+                        <li><a class="dropdown-item" href="http://127.0.0.1:2000/Feedback/">Feedback</a></li>
+                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Complaint1/">Product Compliant</a></li>
+                    </ul>
+                  </li>
+    
+                </ul>
+               
+                <form class="d-flex me-5">
+                  <input style="background-color: burlywood; font-size: 20px;" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+                  <button style="color: burlywood;" class="btn btn-outline-success" type="submit" id="search-btn">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+        <!-- navbar -->
+</body>
+</html>
+
+
+<style>
+body {
+    margin: 100;
+    padding: 100;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.top-navbar {
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    background-color: antiquewhite; 
+    z-index: 1000;    
+}
+
+
+
+.top-icons {
+    margin-left: 45px;
+}
+
+.top-icons i {
+    font-size: 25px;
+    color: #1c1c50;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.top-icons i:hover{
+background-color: #0b0b14;
+color: aliceblue;
+border-radius: 20px;
+padding: 10px;
+transition: 0.5s ease;
+
+
+}
+.other-links {
+    margin-right: 60px;
+}
+
+.other-links i {
+    color: #1c1c50;
+    font-size: 28px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+#btn-login {
+    width: 100px;
+    border: 2px solid #1c1c50;
+    color: #1c1c50;
+    font-weight: bold;
+    border-radius: 5px;
+    height: 5vh;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+#btn-login a {
+    text-decoration: none;
+    color: #1c1c50;
+    transition: 0.5s ease;
+}
+
+#btn-login a:hover {
+    background-color: #1c1c50;
+    color: white;
+}
+
+#btn-login:hover {
+    background-color: #1c1c50;
+    color: white;
+}
+
+#btn-signup {
+    width: 100px;
+    border: 2px solid #1c1c50;
+    color: #1c1c50;
+    font-weight: bold;
+    border-radius: 5px;
+    height: 5vh;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+#btn-signup a {
+    text-decoration: none;
+    color: #1c1c50;
+    transition: 0.5s ease;
+}
+
+#btn-signup a:hover {
+    background-color: #1c1c50;
+    color: white;
+}
+
+#btn-signup:hover {
+    background-color: #1c1c50;
+    color: white;
+}
+
+@media screen and (max-width: 1050px) {
+    .top-icons {
+        margin-left: 30px;
+    }
+
+    .top-icons i {
+        font-size: 24px;
+    }
+
+    .other-links i {
+        font-size: 24px;
+    }
+
+    #btn-login, #btn-signup {
+        width: 80px;
+        height: 4vh;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+    }
+
+    .navbar-brand img {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 868px) {
+    .top-icons {
+        margin-left: 20px;
+    }
+
+    .top-icons i {
+        font-size: 20px;
+    }
+
+    .other-links i {
+        font-size: 20px;
+    }
+
+    #btn-login, #btn-signup {
+        width: 70px;
+        height: 4vh;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        font-size: 13px;
+    }
+
+    .navbar-brand img {
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .top-icons {
+        margin-left: 20px;
+    }
+
+    .top-icons i {
+        font-size: 20px;
+    }
+
+    .other-links {
+        margin-right: 10px;
+    }
+
+    .other-links i {
+        font-size: 15px;
+    }
+
+    #btn-login, #btn-signup {
+        width: 60px;
+        height: 4vh;
+        font-size: 12px;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        font-size: 12px;
+    }
+
+    .navbar-brand img {
+        width: 100px;
+    }
+
+
+
+@media screen and (max-width: 350px) {
+    .top-icons {
+        margin-left: 10px;
+    }
+
+    .top-icons i {
+        font-size: 18px;
+    }
+
+    .other-links {
+        margin-right: 5px;
+    }
+
+    .other-links i {
+        font-size: 18px;
+    }
+
+    #btn-login, #btn-signup {
+        width: 55px;
+        height: 3.5vh;
+        font-size: 10px;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        font-size: 11px;
+    }
+
+    .navbar-brand img {
+        width: 90px;
+    }
+
+    .navbar-toggler {
+        font-size: 18px;
+    }
+
+    .navbar-toggler .fa-bars {
+        font-size: 18px;
+    }
+
+    .dropdown li a {
+        font-size: 18px;
+    }
+}
+
+/* Media Queries for Samsung Galaxy S20 Ultra */
+@media screen and (max-width: 320px) {
+    .top-icons {
+        margin-left: 10px;
+    }
+
+    .top-icons i {
+        font-size: 18px;
+    }
+
+    .other-links {
+        margin-right: 5px;
+    }
+
+    .other-links i {
+        font-size: 18px;
+    }
+
+    #btn-login, #btn-signup {
+        width: 55px;
+        height: 3.5vh;
+        font-size: 10px;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        font-size: 11px;
+    }
+
+    .navbar-brand img {
+        width: 90px;
+    }
+
+    .navbar-toggler {
+        font-size: 18px;
+    }
+
+    .navbar-toggler .fa-bars {
+        font-size: 18px;
+    }
+
+    .dropdown li a {
+        font-size: 18px;
+    }
+}
+
+/* home section */
+
+
+
+
+
+
+}
+
+/* home section */
+
+
+/* navbar */
+#navbar {
+    background-color: #11b894;
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    height:70px;       
+}
+
+#navbar .nav-link {
+    color: white;
+    font-weight: bold;
+    margin-left: 15px;
+    transition: 0.5s ease;
+    font-size: 23px;
+    margin-top: 10px;
+
+}
+
+#navbar .nav-link:hover {
+    color: white;
+    border-radius: 5px;
+}
+
+.dropdown li a {
+    color: black;
+    font-size: 20px;
+   
+}
+
+#search-btn {
+    color: white;
+    border: 1px solid white;
+}
+
+#search-btn:hover {
+    background-color: #1c1c50;
+}
+
+</style>

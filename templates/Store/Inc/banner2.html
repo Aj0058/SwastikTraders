@@ -1,0 +1,174 @@
+{% load static %}
+<div class="webdev">
+    <div class="img-wrapper">
+        <img src="{% static 'Images/Elet.png' %}" alt="Banner Image">
+    </div>
+
+    <div class="content-wrapper">
+        <div class="contents">
+            <h2>Swastik Electronics and Furniture</h2>
+            <p>Swastik Electronics and Furniture offers a comprehensive range of high-quality electronics and stylish furniture, catering to all your home and office needs. Our products blend functionality with aesthetic appeal, ensuring both comfort and efficiency. Whether you're looking to upgrade your living space with modern appliances or seeking elegant furniture solutions, Swastik Electronics and Furniture provides exceptional customer service and competitive prices.</p>
+            <a href="http://127.0.0.1:1000/contact/">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.webdev {
+    width: 100%;
+    max-width: 2130px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    overflow-x: hidden;
+    padding: 5rem 0;
+    margin: 0 auto;
+    margin-top: 0px;
+    background-color: rgb(83, 192, 156);
+}
+
+.img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-wrapper img {
+    width: 800px;
+    height: 500px;
+    transition: transform 0.3s;
+    user-select: none;
+    margin-top: 50px;
+    margin-left: -50px;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+    font-size: 24px;
+    font-family: sans-serif;
+}
+
+::selection {
+    background-color: greenyellow;
+    color: black;
+}
+
+.contents {
+    margin-left: -300px;
+    text-align: center;
+}
+
+.contents h2 {
+    margin-bottom: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(5, 5, 66);
+}
+
+.contents p {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-size: 20px;
+    color: black;
+    width: 900px;
+    margin: 0 auto;
+}
+
+.contents a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 30px;
+    background-color: rgb(9, 9, 77);
+    color: antiquewhite;
+    text-decoration: none;
+    border: ridge 3px antiquewhite;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.contents a:hover {
+    background-color: rgb(241, 241, 241);
+    transform: scale(1.10);
+    transition: 0.7s ease;
+    color: rgb(11, 11, 54);
+    font-weight: bold;
+}
+
+.svg-down {
+    margin-top: -10px;
+}
+
+@media (max-width: 1258px) {
+    .webdev {
+        grid-template-columns: 1fr;
+    }
+    .content-wrapper {
+        padding-left: 0;
+        text-align: center;
+    }
+    .img-wrapper img {
+        max-width: 100%;
+        margin-left: 0;
+    }
+    .contents {
+        margin-left: 0;
+    }
+    .contents h2 {
+        font-size: 70px;
+    }
+    .contents p {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .img-wrapper img {
+        max-width: 450px;
+    }
+    .content-wrapper {
+        font-size: 1rem;
+        padding: 10px;
+    }
+    .contents a {
+        width: 50%;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 414px) {
+    .img-wrapper img {
+        max-width: 300px;
+    }
+    .contents h2 {
+        font-size: 50px;
+    }
+    .contents p {
+        font-size: 18px;
+    }
+    .contents a {
+        width: 50%;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 397px) {
+    .img-wrapper img {
+        max-width: 300px;
+    }
+    .contents h2 {
+        font-size: 50px;
+    }
+    .contents p {
+        font-size: 18px;
+    }
+    .contents a {
+        width: 50%;
+        padding: 10px 0;
+    }
+}
+</style>

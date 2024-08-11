@@ -1,0 +1,631 @@
+{% extends 'Store/layouts/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow product_data" style="border-radius: 2px; font-size: 23px;font-weight: bold;font-family: 'Times New Roman', Times, serif;">
+                    <div class="card-body">
+                        {% if cart %}
+                            {% for item in cart %}
+                                <div class="row mb-3" data-product-id="{{ item.product_id }}">
+                                    <div class="col-md-2 my-auto">
+                                        <img src="{{ item.product.Product_image.url }}" height="130px" width="130px" style="user-select: none;">
+                                    </div>
+                                    <div class="col-md-3 my-auto">
+                                        <h6 style="font-size: 20px; font-family: 'Times New Roman', Times, serif;">{{ item.product.name }}</h6>
+                                    </div>
+                                    <div class="col-md-2 my-auto">
+                                        <h6 style="font-size: 20px;">Rs.{{ item.product.Selling_Price|stringformat:'d' }}</h6>
+                                    </div>
+                                    <div class="col-md-3 my-auto">
+                                        <input type="hidden" class="prod_id" value="{{ item.product_id }}">
+                                        {% csrf_token %}
+                                        {% if item.product.quantity >= item.product_qty %}
+                                            <label for="Quantity" style="margin-left: 30px; font-size: 20px; font-family: 'Times New Roman', Times, serif;">Quantity</label>
+                                            <div class="input-group text-center mb-2" style="width: 130px;">
+                                                <button class="btn btn-outline-secondary decrement-btn change-quantity" style="font-size: 23px;">-</button>
+                                                <input style="font-size: 20px;" type="number" class="form-control text-center qty-input" name="quantity" value="{{ item.product_qty }}" min="1" max="{{ item.product.quantity }}">
+                                                <button class="btn btn-outline-secondary increment-btn change-quantity" style="font-size: 23px;">+</button>
+                                            </div>
+                                        {% else %}
+                                            <p>Not enough stock available</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-2 my-auto">
+                                        <button style="font-size: 18px; margin-top: 10px;" class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove</button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                                <a href="http://127.0.0.1:2000/Checkout/" style="border: ridge;border-radius: 5px;padding:10px;text-decoration: none;border-width: 2px;border-color: blue;color: white;margin-left: 1070px;background-color: blue;width:350px;"><i class="fa-regular fa-credit-card"></i> CheckOut</a>
+                            {% else %}
+                            <p>Your cart is empty.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.change-quantity').click(function(e) {
+            e.preventDefault();
+            var $el = $(this).closest('.row');
+            var product_id = $el.data('product-id');
+            var qty_input = $el.find('.qty-input');
+            var quantity = parseInt(qty_input.val());
+            var token = $('input[name=csrfmiddlewaretoken]').val();
+
+            if ($(this).hasClass('increment-btn')) {
+                quantity += 1;
+            } else if ($(this).hasClass('decrement-btn')) {
+                quantity -= 1;
+            }
+
+            if (quantity >= 1) {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'update_cart' %}",
+                    data: {
+                        'product_id': product_id,
+                        'product_qty': quantity,
+                        'csrfmiddlewaretoken': token
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            qty_input.val(quantity);
+                            alertify.success(response.message);
+                        } else {
+                            alertify.error(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error: " + status + " " + error);
+                        console.error(xhr.responseText);
+                        alertify.error("An error occurred: " + xhr.responseText);
+                    }
+                });
+            }
+        });
+
+        $('.delete-cart-item').click(function(e) {
+            e.preventDefault();
+            var $el = $(this).closest('.row');
+            var product_id = $el.data('product-id');
+            var token = $('input[name=csrfmiddlewaretoken]').val();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'delete_cart_item' %}",
+                data: {
+                    'product_id': product_id,
+                    'csrfmiddlewaretoken': token
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        $el.remove();
+                        alertify.success(response.message);
+                    } else {
+                        alertify.error(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + status + "Product Deleted " + error);
+                    console.error(xhr.responseText);
+                    alertify.error("An error occurred: " + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer>
+    <div class="footer-col about">
+        <h4>About us</h4>
+        <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
+    </div>
+    <div class="footer-col services">
+        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Categories</h4>
+        <ul style="margin-left: 120px;">
+            <li><a href="#">Home Appliences</a></li>
+            <li><a href="#">Kitchen Appliences</a></li>
+            <li><a href="#">Washroom Ware</a></li>
+            <li><a href="#">Handlooms</a></li>
+            <li><a href="#">Bags and Switcase</a></li>
+            <li><a href="#">Moulded Furniture</a></li>
+            <li><a href="#">Glasses and Mugs</a></li>
+        </ul>
+    </div>
+    <div class="footer-col company">
+        <h4 style="margin-left: 50px;">Company</h4>
+        <ul style="margin-left: 50px;">
+            <li><a href="http://127.0.0.1:1000/About/">About</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Legal</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Contact us</a></li>
+        </ul>
+    </div>
+    <div class="footer-col follow">
+        <h4>Follow us</h4>
+        <div class="links">
+            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/anveshjain1635/"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="line">
+        <p style="font-size: 20px;color:white;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<style>
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color:rgb(6, 8, 71);
+    padding: 40px 5%;
+    color: black;
+    margin-top:300px;
+    height: 900px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 23px;
+    color: rgb(156, 47, 14);
+    text-transform: capitalize;
+    position: relative;
+
+
+}
+
+.footer-col p{
+color: white;
+
+}
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    background-color:green;
+    height: 2px;
+    width: 90px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    display: block;
+    font-size: 23px;
+    text-transform: capitalize;
+    color: white;
+    text-decoration: none;
+    transition: 0.4s;
+    font-family: "Lora";
+}
+
+ul li a:hover {
+    color: Orange;
+    padding-left: 2px;
+}
+
+.links a {
+    display: inline-block;
+    height: 50px;
+    width: 45px;
+    color: black;
+    background-color: rgba(40, 130, 214, 0.8);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 44px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.links a:hover {
+    color: white;
+    background-color: Orange;
+}
+
+.line {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+
+
+
+@media (max-width: 740px) {
+    .footer-col {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-col h4::before {
+        display: none;
+    }
+}
+
+@media (max-width: 555px) {
+    footer {
+        padding: 20px 2%;
+        height: 600px;
+    }
+
+    .footer-col h4 {
+        font-size: 20px;
+        margin-left: -30px;
+    }
+    .footer-col p{
+       font-size: 10px; 
+       margin-left: 20px;     
+    }
+
+    ul li a {
+        font-size: 15px;
+    }
+
+    .line {
+        font-size: 12px;
+    
+    }
+}
+
+
+
+</style>
+
+
+
+
+<script>
+    // Set Alertify notifier position
+    alertify.set('notifier', 'position', 'top-right');
+
+    // Loop through messages and display them using Alertify
+   
+</script>
+
+<style>
+    /* Style for Alertify notifications */
+    .ajs-message.ajs-success {
+    border-radius: 20px; /* Add border-radius */
+    /* Add border */
+    background-color:rgb(8, 8, 63); /* Change background color to red */
+    color: white; /* Change text color to white */
+    padding: 5px; /* Add padding */
+    margin-top: -2050px; /* Add margin bottom */
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;    
+    width: 250px;
+    margin-left: 1700px;    
+    font-weight: bold;    
+}
+</style>
+
+
+
+
+
+{% endblock content %}
