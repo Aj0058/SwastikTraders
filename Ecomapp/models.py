@@ -190,3 +190,43 @@ class Complaint(models.Model):
     Uploadbill3 = models.ImageField(upload_to=get_file_path, null=True, blank=True)   
     Message3 = models.TextField()
 
+class Order(models.Model):
+    user = models.ForeignKey(User ,on_delete= models.CASCADE)
+    Fname =models.CharField(max_length=150 ,null=False)
+    Lname =models.CharField(max_length=150 ,null=False)
+    Email =models.CharField(max_length=150 ,null=False)
+    Phone =models.CharField(max_length=150 ,null=False)
+    Address =models.TextField(null=False)
+    City =models.CharField(max_length=150 ,null=False)
+    State =models.CharField(max_length=150 ,null=False)
+    Country =models.CharField(max_length=150 ,null=False)
+    Pincode =models.CharField(max_length=150 ,null=False)
+    Total_price =models.FloatField(max_length=150 ,null=False)
+    Payment_mode =models.CharField(max_length=150 ,null=False)
+    Payment_Id = models.CharField(max_length= 250 ,null=False)
+    orderstatus = (
+        ('Pending','Pending'),
+        ('Out of Shipping','Out of Shipping'),
+        ('Completed','Completed'),
+
+    )
+
+    Status = models.CharField(max_length=190 ,choices=orderstatus , default='Pending')
+    message = models.TextField(null=True)
+    tracking_no =models.TextField(max_length=150 , null=True)
+    Created_at =models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now= True)
+
+    def __str__(self):
+        return'{}  - {}'.format(self.id, self.tracking_no)
+    
+
+class Orderitem(models.Model):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    Product =models.ForeignKey(Product,on_delete = models.CASCADE)
+    Price = models.FloatField(null=False,default=False)
+    Quantity =models.IntegerField(null=False, default=False)
+
+
+    def __str__(self):
+         return'{} {}' .format (self.order.id,self.order.tracking_no)
