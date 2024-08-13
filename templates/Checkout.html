@@ -9,6 +9,7 @@
 </style>
 
 <div class="Container mt-3">
+   <form action="{% url 'placeorder' %}" method="POST"></form> 
     <div class="row">
         <!-- Basic Details Section -->
         <div class="col-md-6">
@@ -92,7 +93,7 @@
                             <span class="float-end"> Rs {{ total_price }}</span>
                         </h6> 
                         <div class="mt-3">
-                            <a href="#" class="btn btn-success w-100" style="height:50px;font-size: 23px;font-family: 'Times New Roman', Times, serif;">COD |Place Order</a>
+                            <button type="submit" class="btn btn-success w-100" style="height:50px;font-size: 23px;font-family: 'Times New Roman', Times, serif;">COD |Place Order</button>
                      
                         </div>
                         

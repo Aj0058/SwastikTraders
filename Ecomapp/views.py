@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Product, Cart
 import logging
-
+import random
 logger = logging.getLogger(__name__)
 
 
@@ -309,7 +309,7 @@ def delete_list_item(request):
     return JsonResponse({'status': 'Invalid request'}, status=400)
 
 
-
+@login_required(login_url='Login')
 def Check(request):
     if not request.user.is_authenticated:
         return redirect('login')  # Ensure the user is logged in
@@ -329,7 +329,56 @@ def Check(request):
 
 
 
+@login_required(login_url='Login')
+def placeorder2(request):
+    if request.method =="POST":
+        neworder = Order()
+        neworder.user = request.user
+        neworder.Fname =request.POST.get('Fname')
+        neworder.Lname =request.POST.get('Lname')
+        neworder.Email =request.POST.get('Email')
+        neworder.Phone =request.POST.get('Phone')
+        neworder.Address =request.POST.get('Adress')
+        neworder.City =request.POST.get('City')
+        neworder.State =request.POST.get('state')
+        neworder.Country =request.POST.get('Country')
+        neworder.Pincode =request.POST.get('Pincode')
+        neworder.Total_price =request.POST.get('Totalprice')
+        neworder.Payment_mode =request.POST.get('Paymentmode')
+        
+        cart =Cart.objects.filter(user=request.user)
+        cart_total_price = 0
+        for item in cart:
+            cart_total_price =cart_total_price +item.product.selling_price *item.product_qty
+        
+        
+        neworder.total_price = cart_total_price    
+        trackno = 'AnveshJain' +str(random.randint(11111111,9999999))
+        while Order.objects.filter(tracking_no =trackno)  is None:
+                trackno = 'AnveshJain' +str(random.randint(11111111,9999999))
 
+        neworder.tracking_no =trackno
+        neworder.save()
+
+
+        neworderitems = Cart.objects.filter(user=request.user)
+        for item in neworderitems:
+            Orderitem.objects.create(
+                order=neworder,
+                product=item.product,
+                price=item.product.selling_price,
+                quantity=item.product_qty
+            )           
+
+
+
+
+
+
+
+
+
+    return render(request,'placeorder.html')
 
 
 
