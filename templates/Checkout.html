@@ -9,7 +9,8 @@
 </style>
 
 <div class="Container mt-3">
-   <form action="{% url 'placeorder' %}" method="POST"></form> 
+    <form action="{% url 'placeorder' %}" method="POST">
+        {% csrf_token %}
     <div class="row">
         <!-- Basic Details Section -->
         <div class="col-md-6">
@@ -20,39 +21,39 @@
                     <div class="row">
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">First Name</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter first name">
+                            <input type="text" required class="form-control" name="Fname" style="font-size: 23px;" placeholder="Enter first name">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">Last Name</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter Last name">
+                            <input type="text" required class="form-control" name="Lname" style="font-size: 23px;" placeholder="Enter Last name">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">Email</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter Email">
+                            <input type="text" required class="form-control" name="Email" style="font-size: 23px;" placeholder="Enter Email">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">Phone</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter Phone">
+                            <input type="text" reqired class="form-control" name="Phone" style="font-size: 23px;" placeholder="Enter Phone">
                         </div>
                         <div class="col-md-12 mt-3">
                             <label style="font-family: 'Times New Roman', Times, serif;">Address</label>
-                            <textarea class="form-control" style="font-size: 23px; height: 200px;" placeholder="Enter Address"></textarea>
+                            <textarea required class="form-control" name="Address" style="font-size: 23px; height: 200px;" placeholder="Enter Address"></textarea>
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">City</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter City">
+                            <input type="text" required class="form-control" name="City" style="font-size: 23px;" placeholder="Enter City">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">State</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter State">
+                            <input type="text" required class="form-control" name="State" style="font-size: 23px;" placeholder="Enter State">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">Country</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter Country">
+                            <input type="text" required class="form-control" name="Country" style="font-size: 23px;" placeholder="Enter Country">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label style="font-family: 'Times New Roman', Times, serif;">Pincode</label>
-                            <input type="text" class="form-control" style="font-size: 23px;" placeholder="Enter Pincode">
+                            <input type="text" required class="form-control" name="Pincode" style="font-size: 23px;" placeholder="Enter Pincode">
                         </div>
                     </div>
                 </div>

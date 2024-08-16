@@ -349,56 +349,52 @@ def Check(request):
 
 @login_required(login_url='Login')
 def placeorder2(request):
-    if request.method =="POST":
-        neworder = Order()
-        neworder.user = request.user
-        neworder.Fname =request.POST.get('Fname')
-        neworder.Lname =request.POST.get('Lname')
-        neworder.Email =request.POST.get('Email')
-        neworder.Phone =request.POST.get('Phone')
-        neworder.Address =request.POST.get('Adress')
-        neworder.City =request.POST.get('City')
-        neworder.State =request.POST.get('state')
-        neworder.Country =request.POST.get('Country')
-        neworder.Pincode =request.POST.get('Pincode')
-        neworder.Total_price =request.POST.get('Totalprice')
-        neworder.Payment_mode =request.POST.get('Paymentmode')
+    if request.method == "POST":
+        neworder = Order(
+            user=request.user,
+            Fname=request.POST.get('Fname'),
+            Lname=request.POST.get('Lname'),
+            Email=request.POST.get('Email'),
+            Phone=request.POST.get('Phone'),
+            Address=request.POST.get('Address'),
+            City=request.POST.get('City'),
+            State=request.POST.get('State'),
+            Country=request.POST.get('Country'),
+            Pincode=request.POST.get('Pincode'),
+        )
         
-        cart =Cart.objects.filter(user=request.user)
-        cart_total_price = 0
-        for item in cart:
-            cart_total_price =cart_total_price +item.product.selling_price *item.product_qty
+        # Calculate total price
+        cart = Cart.objects.filter(user=request.user)
+        cart_total_price = sum(item.product.Selling_Price * item.product_qty for item in cart)
+        neworder.Total_price = cart_total_price
         
+        # Generate a unique tracking number
+        trackno = 'AnveshJain' + str(random.randint(1111111, 9999999))
+        while Order.objects.filter(tracking_no=trackno).exists():
+            trackno = 'AnveshJain' + str(random.randint(1111111, 9999999))
+        neworder.tracking_no = trackno
         
-        neworder.total_price = cart_total_price    
-        trackno = 'AnveshJain' +str(random.randint(11111111,9999999))
-        
-        while Order.objects.filter(tracking_no =trackno)  is None:
-                trackno = 'AnveshJain' +str(random.randint(11111111,9999999))
-
-        neworder.tracking_no =trackno
         neworder.save()
-
-
-        neworderitems = Cart.objects.filter(user=request.user)
-        for item in neworderitems:
+        
+        # Save order items
+        for item in cart:
             Orderitem.objects.create(
                 order=neworder,
-                product=item.product,
-                price=item.product.selling_price,
-                quantity=item.product_qty
-            )           
+                Product=item.product,
+                Price=item.product.Selling_Price,
+                Quantity=item.product_qty
+            )
+            # Update product quantity
+            orderproduct = Product.objects.get(id=item.product_id)
+            orderproduct.quantity -= item.product_qty
+            orderproduct.save()
 
+        # Clear the cart
+        Cart.objects.filter(user=request.user).delete()
 
-
-
-
-
-
-
-
-    return render(request,'placeorder.html')
-
+        # Success message
+        messages.success(request, "Your order has been placed successfully.")
+        return redirect('/')
 
 
 
