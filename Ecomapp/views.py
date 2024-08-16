@@ -193,20 +193,29 @@ def Cart2(request):
             logger.info(f"Received POST request with product_id: {prod_id} and product_qty: {prod_qty}")
             product_check = get_object_or_404(Product, id=prod_id)
             logger.info(f"Product found: {product_check}")
-            
 
+            cart_item, created = Cart.objects.get_or_create(user=request.user, product_id=prod_id)
 
-            if Cart.objects.filter(user=request.user, product_id=prod_id,product_qty=prod_qty).exists():
-                logger.info("Product already in Cart")
-                return JsonResponse({"status": "Product already in Cart"}, status=400)
-            else:
+            if created:
                 if product_check.quantity >= prod_qty:
-                    Cart.objects.create(user=request.user, product_id=prod_id, product_qty=prod_qty)
+                    cart_item.product_qty = prod_qty
+                    cart_item.save()
                     logger.info("Product added to cart successfully")
-                    return JsonResponse({"status": "Product added successfully"}, status=400)
+                    return JsonResponse({"status": "Product added successfully"}, status=200)
                 else:
                     logger.warning(f"Only {product_check.quantity} quantity available")
                     return JsonResponse({"status": f"Only {product_check.quantity} quantity available"}, status=400)
+            else:
+                new_qty = cart_item.product_qty + prod_qty
+                if product_check.quantity >= new_qty:
+                    cart_item.product_qty = new_qty
+                    cart_item.save()
+                    logger.info("Product quantity updated in cart")
+                    return JsonResponse({"status": "Product quantity updated in cart"}, status=200)
+                else:
+                    logger.warning(f"Only {product_check.quantity} quantity available")
+                    return JsonResponse({"status": f"Only {product_check.quantity} quantity available"}, status=400)
+
         except ValueError as ve:
             logger.error(f"ValueError: {ve}")
             return JsonResponse({"status": "Invalid input"}, status=400)
@@ -329,6 +338,15 @@ def Check(request):
 
 
 
+
+
+
+
+
+
+
+
+
 @login_required(login_url='Login')
 def placeorder2(request):
     if request.method =="POST":
@@ -354,6 +372,7 @@ def placeorder2(request):
         
         neworder.total_price = cart_total_price    
         trackno = 'AnveshJain' +str(random.randint(11111111,9999999))
+        
         while Order.objects.filter(tracking_no =trackno)  is None:
                 trackno = 'AnveshJain' +str(random.randint(11111111,9999999))
 
