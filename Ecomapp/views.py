@@ -333,16 +333,10 @@ def Check(request):
     for item in cartitems:
         total_price += item.product.Selling_Price * item.product_qty
 
-    context = {'cartitems': cartitems, 'total_price': total_price}
+    Userprofile = Profile.objects.filter(user=request.user).first()
+
+    context = {'cartitems': cartitems, 'total_price': total_price, 'Userprofile' : Userprofile}
     return render(request, 'Checkout.html', context)
-
-
-
-
-
-
-
-
 
 
 
@@ -350,8 +344,31 @@ def Check(request):
 @login_required(login_url='Login')
 def placeorder2(request):
     if request.method == "POST":
+
+        # Update User Information
+        CurrentUser = request.user
+
+        if not CurrentUser.first_name:
+            CurrentUser.first_name = request.POST.get('Fname')
+            CurrentUser.last_name = request.POST.get('Lname')
+            CurrentUser.save()
+
+        # Update or Create Profile Information
+        if not Profile.objects.filter(user=CurrentUser).exists():
+            Userprofile = Profile(
+                user=CurrentUser,
+                phone=request.POST.get('Phone'),
+                address=request.POST.get('Address'),
+                city=request.POST.get('City'),
+                state=request.POST.get('State'),
+                country=request.POST.get('Country'),
+                pincode=request.POST.get('Pincode')
+            )
+            Userprofile.save()
+
+        # Create a new Order
         neworder = Order(
-            user=request.user,
+            user=CurrentUser,
             Fname=request.POST.get('Fname'),
             Lname=request.POST.get('Lname'),
             Email=request.POST.get('Email'),
@@ -395,8 +412,6 @@ def placeorder2(request):
         # Success message
         messages.success(request, "Your order has been placed successfully.")
         return redirect('/')
-
-
 
 
 

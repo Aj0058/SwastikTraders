@@ -16,6 +16,8 @@ admin.site.register(Newproducts)
 admin.site.register(Wishlist)    
 admin.site.register(Order)
 admin.site.register(Orderitem)    
+admin.site.register(Profile)    
+
 
 
 
