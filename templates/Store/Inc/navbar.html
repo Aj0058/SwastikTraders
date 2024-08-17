@@ -82,19 +82,33 @@
                       <li><a class="dropdown-item" href="http://127.0.0.1:2000/Complaint1/">Product Compliant</a></li>
                     </ul>
                   </li>
-    
                 </ul>
-               
-                <form class="d-flex me-5">
-                  <input style="background-color: burlywood; font-size: 20px;" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
-                  <button style="color: burlywood;" class="btn btn-outline-success" type="submit" id="search-btn">Search</button>
-                </form>
-              </div>
+                <div class="Search_bar">
+                    <form class="d-flex me-5" action="{% url 'searchproduct' %}" method="POST">
+                        {% csrf_token %}
+                        <input 
+                            class="form-control me-3" 
+                            name="searchproduct" 
+                            id="SearchProduct" 
+                            type="search" 
+                            placeholder="Search products" 
+                            aria-label="Search" 
+                            style="background-color: burlywood; font-size: 25px;"
+                        >
+                        <button 
+                            class="btn btn-outline-success" 
+                            type="submit" 
+                            id="search-btn" 
+                            style="color: burlywood;"
+                        >
+                            Search
+                        </button>
+                    </form>               
+                </div>                              
+            </div>
             </div>
           </nav>
         <!-- navbar -->
-</body>
-</html>
 
 
 <style>

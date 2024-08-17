@@ -14,6 +14,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Product, Cart
+from django.urls import reverse
+
 import logging
 import random
 logger = logging.getLogger(__name__)
@@ -412,6 +414,40 @@ def placeorder2(request):
         # Success message
         messages.success(request, "Your order has been placed successfully.")
         return redirect('/')
+
+def productlist(request):
+    products = Product.objects.filter(status=0).values_list('name', flat=True)  # Use values_list
+    productlist = list(products)
+    return JsonResponse(productlist, safe=False)
+
+def searchproduct(request):
+    if request.method == 'POST':
+        searcheditem = request.POST.get("searchproduct")
+        if not searcheditem:
+            return redirect(request.META.get('HTTP_REFERER'))  # Redirect to the previous page if search term is empty
+        
+        # Filter products where the name contains the search term
+        products = Product.objects.filter(name__icontains=searcheditem)
+        
+        if products.exists():
+            # If products exist, you might want to redirect to a search results page
+            # This depends on how you want to display search results
+            # For simplicity, we'll redirect to a results page
+            return redirect(reverse('search_results') + f'?q={searcheditem}')
+        else:
+            messages.info(request, "No products matched your search")
+            return redirect(request.META.get('HTTP_REFERER'))  # Redirect back to the previous page if no products found
+    
+    return redirect(request.META.get('HTTP_REFERER'))  # Redirect if not a POST request
+
+
+def search_results(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(name__icontains=query)
+    return render(request, 'search_results.html', {'products': products, 'query': query})
+
+
+
 
 
 
