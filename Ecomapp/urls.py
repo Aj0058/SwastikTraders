@@ -20,6 +20,8 @@ urlpatterns = [
     path('update-cart/', views.update_cart, name='update_cart'),
     path('delete-cart-item/', views.delete_cart_item, name='delete_cart_item'),
     path('placeOrder/', views.placeorder2, name='placeorder'),
+    path('Pay/', views.Pay, name='Pay'),
+    
     
     
     
@@ -46,12 +48,19 @@ urlpatterns = [
 
 
 
+# Email Integration Urls ###
+  path('activate/<uidb64>/<token>/', views. activate, name='activate'),
 
 
 
 
-
-
+#Dashborad Url ##
+path('Dashboard/' , views.Dash ,name='Dashboard'),
+path('Compl/' , views.Compl ,name='Dashboard'),
+path('Customer/' , views.Customer ,name='Customer'),
+path('Billing/' , views.Bill ,name='Billing'),
+path('contact-list/', views.contact_list_view, name='contact_list'),
+path('feedback3/', views. Feedback2, name='feedback_list'),
 
 
 

@@ -15,7 +15,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Product, Cart
 from django.urls import reverse
-
+from django.core.mail import send_mail, EmailMultiAlternatives
+from .Email import send_verification_email
+from django.utils.encoding import force_str
+from django .utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
 import logging
 import random
 logger = logging.getLogger(__name__)
@@ -72,7 +76,7 @@ def Aboutus(request):
 
 @csrf_exempt 
 def Contactus(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
         phone = request.POST['phone']
@@ -83,9 +87,7 @@ def Contactus(request):
         contact.save()
 
         return redirect('success')    
-     return render(request, 'Contact.html')
-     
-     
+    return render(request, 'Contact.html')     
 
 @csrf_exempt 
 def FeedbackView(request):
@@ -158,24 +160,44 @@ def Login(request):
 
 
 def Signup(request):
-     if request.method == "POST":
+    if request.method == "POST":
         name = request.POST.get('name')
-        Email = request.POST.get('email')
+        email = request.POST.get('email')
         pass1 = request.POST.get('Password1')
         pass2 = request.POST.get('Password2')
 
-        if not (name and Email and pass1 and pass2):
+        if not (name and email and pass1 and pass2):
             return HttpResponse("All fields are required!")
         
         if pass1 != pass2:
             return redirect('notmatch')
         
-        my_user = User.objects.create_user(name,Email,pass1)
+        my_user = User.objects.create_user(username=name, email=email, password=pass1)
         my_user.save()    
+        
+        # Send Verification Email #
+        send_verification_email(request, my_user)
+        
         return redirect("Login") 
-     return render(request,'Signup.html')
+    return render(request, 'Signup.html')
 
 
+def activate(request, uidb64, token):
+    try:
+        # Decode the user's ID
+        uid = force_str(urlsafe_base64_encode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        # If the token is valid, activate the user
+        user.is_active = True
+        user.save()
+        return redirect('login')  # Redirect to the login page after successful activation
+    else:
+        # If the token is invalid or user doesn't exist, show an error message
+        return HttpResponse('Activation link is invalid!')
 
 @csrf_exempt
 def Logout(request):
@@ -270,19 +292,37 @@ def cart(request):
     return render(request, 'Cart.html', context)
 
 
+# Dashboard Views ###
+
+def Dash(request):
+    return render(request,'Dash.html')
 
 
 
 
+def Compl(request):
+    return render(request,'Dash.html')
+
+
+def Customer(request):
+    users = User.objects.all()
+    return render(request,'Customer.html',{'users':users})
+
+
+def Bill(request):
+    return render(request,'Dash.html')
 
 
 
+def contact_list_view(request):
+    contacts = Contact.objects.all()  # Fetch all contacts from the database
+    return render(request, 'contact_list.html', {'contacts': contacts})
 
+def Feedback2(request):
+    feedback_list = Feedback.objects.all()  # Fetch all feedback from the database
+    return render(request, 'Feed_back.html', {'feedback_list': feedback_list})
 
-
-
-
-
+############## DashBoard #########################
 
 @login_required(login_url=Login)
 def Wishlists(request):
@@ -413,7 +453,7 @@ def placeorder2(request):
 
         # Success message
         messages.success(request, "Your order has been placed successfully.")
-        return redirect('/')
+        return redirect('Pay')
 
 def productlist(request):
     products = Product.objects.filter(status=0).values_list('name', flat=True)  # Use values_list
@@ -478,3 +518,5 @@ def Send(request):
 def Feed(request):
     return render(request,'Feed.html')
 
+def Pay(request):
+    return render(request,'Pay.html')
