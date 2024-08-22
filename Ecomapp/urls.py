@@ -44,6 +44,7 @@ urlpatterns = [
     path('SendMessage/', views.Send, name='success'),
     path('Feed/', views.Feed, name='Feedback'),
     
+    
 
 
 
@@ -56,15 +57,13 @@ urlpatterns = [
 
 #Dashborad Url ##
 path('Dashboard/' , views.Dash ,name='Dashboard'),
-path('Compl/' , views.Compl ,name='Dashboard'),
 path('Customer/' , views.Customer ,name='Customer'),
-path('Billing/' , views.Bill ,name='Billing'),
+path('orders/', views.order_list, name='order_list'),
 path('contact-list/', views.contact_list_view, name='contact_list'),
 path('feedback3/', views. Feedback2, name='feedback_list'),
-
-
-
-
-
-
+path('complent/',views. complaint_list, name='complaint_list'),
 ]
+
+
+
+

@@ -293,25 +293,25 @@ def cart(request):
 
 
 # Dashboard Views ###
-
+@login_required(login_url=Login)
 def Dash(request):
     return render(request,'Dash.html')
 
 
 
 
-def Compl(request):
-    return render(request,'Dash.html')
-
+def complaint_list(request):
+    return render(request, 'complaint_list.html')
 
 def Customer(request):
     users = User.objects.all()
     return render(request,'Customer.html',{'users':users})
 
 
-def Bill(request):
-    return render(request,'Dash.html')
-
+def order_list(request):
+    orders = Order.objects.select_related('user').all()
+    return render(request, 'order_list.html', {'orders': orders})
+    
 
 
 def contact_list_view(request):

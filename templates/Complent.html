@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swastik 卐 Traders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <a style="text-decoration: none;" href="{% url 'home' %}">
+                <h2 style="background-color: Orange; padding: 5px; border-radius: 20px; font-size: 26px;">
+                    Swastik 卐 Traders
+                </h2>
+            </a>
+            <ul style="font-size:28px">
+                <li><a href="{% url 'contact_list' %}"><i class="fas fa-phone" style="color: tomato; font-size: 33px;"></i> Contact</a></li><hr>
+                <li><a href="{% url 'feedback_list' %}"><i class="fas fa-comment-dots" style="color: tomato; font-size: 30px;"></i> Feedback</a></li><hr>
+                <li><a href="{% url 'complaint_list' %}"><i class="fas fa-exclamation-circle" style="color: tomato; font-size: 30px;"></i> Complaints</a></li><hr>
+                <li><a href="{% url 'Customer' %}"><i class="fas fa-user-plus" style="color: tomato; font-size: 30px;"></i> Customers List</a></li><hr>
+                <li><a href="#"><i class="fa-solid fa-money-bill" style="color: tomato; font-size: 30px;"></i> Billing Chart</a></li><hr>
+                <div class="social" style="margin-top: 470px;">
+                    <h2 style="background-color: Orange;">Contact</h2>
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-whatsapp" style="color: tomato; font-size: 27px;"></i> WhatsApp</a></li><hr>
+                        <li><a href="#"><i class="fa-brands fa-facebook" style="color: tomato; font-size: 27px;"></i> Facebook</a></li><hr>
+                        <li><a href="{% url 'home' %}"><i class="fas fa-home" style="color: tomato; font-size: 27px;"></i> Home</a></li><hr>
+                        <li><a href="#"><i class="fa-solid fa-right-to-bracket" style="color: tomato; font-size: 27px;"></i> Register prop</a></li><hr>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="main-content">
+            <h1 style="font-family: 'Times New Roman', Times, serif; background-color: rebeccapurple; padding: 10px; border-radius: 5px; color: #fff;">
+                <i class="fa-solid fa-door-open" style="color: orangered;"></i> Welcome to the Dashboard...
+            </h1>
+            <hr style="height: 3px; background-color: orangered; width: 100%;">
+            <p>Select an option from the sidebar to get started.</p>
+
+            <!-- Complaints List Section -->
+            <div class="container">
+                <hr style="height: 3px; background-color: orangered;">
+                <table style="width:100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: orange; color: white;">
+                            <th style="padding: 10px;">Name</th>
+                            <th style="padding: 10px;">Email</th>
+                            <th style="padding: 10px;">Phone</th>
+                            <th style="padding: 10px;">Product</th>
+                            <th style="padding: 10px;">Model</th>
+                            <th style="padding: 10px;">Uploaded Bill</th>
+                            <th style="padding: 10px;">Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for complaint in complaints %}
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">
+                                {{ complaint.Name3 }}
+                            </td>
+                            <td style="padding: 10px;">
+                                <a href="mailto:{{ complaint.Email3 }}" style="text-decoration: none; color: inherit;">{{ complaint.Email3 }}</a>
+                            </td>
+                            <td style="padding: 10px;">
+                                <a href="tel:{{ complaint.Phone3 }}" style="text-decoration: none; color: inherit;">{{ complaint.Phone3 }}</a>
+                            </td>
+                            <td style="padding: 10px;">
+                                {{ complaint.Product3 }}
+                            </td>
+                            <td style="padding: 10px;">
+                                {{ complaint.Model3 }}
+                            </td>
+                            <td style="padding: 10px;">
+                                {% if complaint.Uploadbill3 %}
+                                <a href="{{ complaint.Uploadbill3.url }}" target="_blank">View Bill</a>
+                                {% else %}
+                                No Bill Uploaded
+                                {% endif %}
+                            </td>
+                            <td style="padding: 10px;">
+                                {{ complaint.Message3 }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

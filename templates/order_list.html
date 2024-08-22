@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swastik 卐 Traders</title>
+    <title>Order Details - Swastik 卐 Traders</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,16 +17,16 @@
                 </h2>
             </a>
             <ul style="font-size:28px">
-                <li><a href="{% url 'contact_list' %}"><i class="fas fa-phone"style="color: tomato; font-size: 33px;"></i> Contact</a></li><hr>
-                <li><a href="{% url 'feedback_list' %}"><i class="fas fa-comment-dots"style="color: tomato; font-size: 30px;"></i> Feedback</a></li><hr>
-                <li><a href="#complaints"><i class="fas fa-exclamation-circle"style="color: tomato; font-size: 30px;"></i> Complaints</a></li><hr>
-                <li><a href="{% url 'Customer' %}"><i class="fas fa-user-plus"style="color: tomato; font-size: 30px;"></i> Customers List</a></li><hr>
+                <li><a href="{% url 'contact_list' %}"><i class="fas fa-phone" style="color: tomato; font-size: 33px;"></i> Contact</a></li><hr>
+                <li><a href="{% url 'feedback_list' %}"><i class="fas fa-comment-dots" style="color: tomato; font-size: 30px;"></i> Feedback</a></li><hr>
+                <li><a href="{% url 'complaint_list' %}"><i class="fas fa-exclamation-circle" style="color: tomato; font-size: 30px;"></i> Complaints</a></li><hr>
+                <li><a href="{% url 'Customer' %}"><i class="fas fa-user-plus" style="color: tomato; font-size: 30px;"></i> Customers List</a></li><hr>
                 <li><a href="{% url 'order_list' %}"><i class="fa-solid fa-money-bill" style="color: tomato; font-size: 30px;"></i> Billing Chart</a></li><hr>
                 <div class="social" style="margin-top: 470px;">
                     <h2 style="background-color: Orange;">Contact</h2>
                     <ul>
                         <li><a href="#"><i class="fa-brands fa-whatsapp" style="color: tomato; font-size: 27px;"></i> WhatsApp</a></li><hr>
-                        <li><a href="#"><i class="fa-brands fa-facebook"style="color: tomato; font-size: 27px;"></i> Facebook</a></li><hr>
+                        <li><a href="#"><i class="fa-brands fa-facebook" style="color: tomato; font-size: 27px;"></i> Facebook</a></li><hr>
                         <li><a href="#"><i class="fa-solid fa-user-plus" style="color: Orangered;"></i> Register prop</a></li><hr>
                         <li><a href="{% url 'home' %}"><i class="fa-solid fa-right-to-bracket"style="color: tomato; font-size: 27px;"></i> Exit</a></li><hr>
                     </ul>
@@ -37,12 +37,55 @@
         <!-- Main Content Section -->
         <div class="main-content">
             <h1 style="font-family: 'Times New Roman', Times, serif; background-color: rebeccapurple; padding: 10px; border-radius: 5px; color: #fff;">
-                <i class="fa-solid fa-door-open" style="color: orangered;"></i> Welcome to the Dashboard...
+                <i class="fas fa-box" style="color: orangered;"></i> Order Details
             </h1>
             <hr style="height: 3px; background-color: orangered; width: 100%;">
-            <p>Select an option from the sidebar to get started.</p>
+            <p>Below is the list of all orders.</p>
 
-           
+            <!-- Order List Section -->
+            <div class="container">
+                <hr style="height: 3px; background-color: orangered;">
+                <table style="width:100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: orange; color: white;">
+                            <th style="padding: 10px;">Order ID</th>
+                            <th style="padding: 10px;">User</th>
+                            <th style="padding: 10px;">First Name</th>
+                            <th style="padding: 10px;">Last Name</th>
+                            <th style="padding: 10px;">Email</th>
+                            <th style="padding: 10px;">Phone</th>
+                            <th style="padding: 10px;">Address</th>
+                            <th style="padding: 10px;">City</th>
+                            <th style="padding: 10px;">State</th>
+                            <th style="padding: 10px;">Country</th>
+                            <th style="padding: 10px;">Pincode</th>
+                            <th style="padding: 10px;">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">{{ order.id }}</td>
+                            <td style="padding: 10px;">{{ order.user.username }}</td>
+                            <td style="padding: 10px;">{{ order.Fname }}</td>
+                            <td style="padding: 10px;">{{ order.Lname }}</td>
+                            <td style="padding: 10px;">{{ order.Email }}</td>
+                            <td style="padding: 10px;">{{ order.Phone }}</td>
+                            <td style="padding: 10px;">{{ order.Address }}</td>
+                            <td style="padding: 10px;">{{ order.City }}</td>
+                            <td style="padding: 10px;">{{ order.State }}</td>
+                            <td style="padding: 10px;">{{ order.Country }}</td>
+                            <td style="padding: 10px;">{{ order.Pincode }}</td>
+                            <td style="padding: 10px;">₹{{ order.Total_price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
 <style>
     body {
