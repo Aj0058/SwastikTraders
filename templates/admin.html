@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* Style for the popup form */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #333;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .popup.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            z-index: 99;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+{% if popup %}
+<div class="overlay active"></div>
+<div class="popup active">
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Your dashboard content goes here -->
+
+<script>
+    // Function to hide the popup and overlay
+    function hidePopup() {
+        document.querySelector('.popup').classList.remove('active');
+        document.querySelector('.overlay').classList.remove('active');
+    }
+
+    // Event listener to detect clicks outside the popup form
+    document.querySelector('.overlay').addEventListener('click', function(e) {
+        hidePopup();
+    });
+
+    // Prevent the form from closing when clicking inside it
+    document.querySelector('.popup').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+</script>
+
+</body>
+</html>

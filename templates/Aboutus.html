@@ -11,7 +11,7 @@
 
 <style>
 .Banner44 img {
-    width: 1950px;
+    width: 100%;
     height: 780px;
     margin-left: 0px;
     margin-top: -4px;
@@ -146,8 +146,8 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin-top: -20px;
+        margin-top: 50px;
+        padding: 10px;
     }
 
     .book {
@@ -159,6 +159,12 @@
         position: relative;
         margin: 20px;
         border-radius: 20px;
+        transition: transform 0.3s ease;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .book:hover {
+        transform: scale(1.05);
     }
 
     .page {
@@ -167,58 +173,33 @@
         perspective: 1500px;
         position: relative;
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        border-radius: 20px;
+    }
+
+    .page__1, .page__2 {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 20px;
+        backface-visibility: hidden;
+        transition: transform 1s ease, box-shadow 0.3s ease;
     }
 
     .page__1 {
         background-color: #0D5C63;
         color: #fff;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        position: absolute;
-        top: 0;
-        opacity: 1;
-        transition: all 1s .3s;
-        transform-origin: 0 50%;
         z-index: 2;
-        border-radius: 20px;
-        font-family: 'Times New Roman', Times, serif;
-    }
-
-    .page__1::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        opacity: 0;
-        transform: rotateY(180deg);
-        transition: all .3s .5s;
     }
 
     .page__2 {
         background-color: #ffffff;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 1;
-        border-radius: 20px;
         color: black;
-        padding: 10px;
-        font-family: 'Times New Roman', Times, serif;
-    }
-
-    .page:hover .page__1 {
-        transform: rotateY(-180deg);
-        box-shadow: 1.5rem 2rem 3rem rgba(0, 0, 0, 0.25);
-    }
-
-    .page:hover .page__1::after {
-        opacity: 1;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .page__1 img {
@@ -231,23 +212,20 @@
         user-select: none;
     }
 
+    .page:hover .page__1 {
+        transform: rotateY(-180deg);
+    }
+
+    .page:hover .page__2 {
+        transform: rotateY(0deg);
+    }
+
     @media (max-width: 768px) {
         .book {
             height: 12rem;
             width: 12rem;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin: 10px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .book {
-            flex-direction: column-reverse;
-            height: 14rem;
-            width: 14rem;
-            font-size: 1.1rem;
-            margin: 5px;
-            margin-top: 20px;
         }
 
         .page__1 img {
@@ -255,10 +233,25 @@
             height: 60%;
         }
     }
+
+    @media (max-width: 480px) {
+        .book {
+            height: 10rem;
+            width: 10rem;
+            font-size: 1rem;
+            margin: 5px;
+        }
+
+        .page__1 img {
+            width: 50%;
+            height: 50%;
+        }
+
+        .page__2 {
+            padding: 15px 5px;
+        }
+    }
 </style>
-
-
-
 
 
 
@@ -353,6 +346,9 @@
     padding: 5rem 0;
     margin: 0 auto;
     margin-top: 90px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Ensure text centers in responsive layout */
 }
 
 .imgWrapper {
@@ -362,15 +358,14 @@
 }
 
 .imgWrapper img {
-    width:500px;
+    width: 500px;
     height: 500px;
     transition: transform 0.3s;
     user-select: none;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-   
+    border-radius: 20px;
 }
-
 
 .contentWrapper {
     display: flex;
@@ -381,70 +376,57 @@
     font-family: sans-serif;
 }
 
-.textWrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    text-transform: capitalize;
-
-}
-
-.textWrapper span:first-child {
-    display: inline-block;
-    background: #383f47;
-    width: 70px;
-    height: 5px;
-    
-}
-
 .content {
     display: block;
+    text-align: center;
 }
 
 .content h2 {
     margin-bottom: 20px;
-    font-size: 45px;
+    font-size: 35px;
     font-weight: bold;
-    font-family: Satisfy;
-    text-align: center;
-    width: 300px;
-    background-color: darkorange;
+    font-family: 'Satisfy', cursive;
+    width: 100%; /* Ensure the title is centered */
+    color: hotpink;
 }
 
 .content p {
     margin-bottom: 20px;
     line-height: 1.5;
     font-size: 23px;
-    width: 500px;
+    width: 100%; /* Ensure the text block is centered */
 }
 
-.content a:hover{
+.content a:hover {
     color: #000;
     transition: 0.5s ease;
     box-shadow: 0px 0px 5px black;
     border-radius: 10px;
     padding: 3px;
-
 }
-.content a{
+
+.content a {
     color: orangered;
 }
+
 @media (max-width: 1058px) {
     .WebDev {
         grid-template-columns: 1fr;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
     }
+
     .contentWrapper {
         order: 2;
         padding-left: 0;
         text-align: center;
     }
+
     .imgWrapper {
         order: 1;
         margin-bottom: 20px;
     }
+
     .imgWrapper img {
         max-width: 100%;
     }
@@ -454,9 +436,11 @@
     .imgWrapper img {
         max-width: 300px;
     }
+
     .content {
         font-size: 16px;
     }
+
     .content a {
         width: 100%;
         margin-left: 0;
@@ -468,8 +452,9 @@
     .imgWrapper img {
         max-width: 250px;
         max-height: 250px;
-    
+        margin-left: -20px;
     }
+
     .content h2 {
         font-size: 28px;
     }
@@ -484,6 +469,7 @@
         padding: 10px 0;
     }
 }
+
 </style>
 
 
@@ -562,13 +548,9 @@
                 In 2010, recognizing the burgeoning potential in the electronics market, Mr. Yogendra Kumar Jain, alongside his son Lokesh Jain, decided to establish a firm that would offer cutting-edge electronics products to consumers. The father-son duo combined their strengths—Yogendra's vast experience and Lokesh's innovative approach—to create a business that quickly gained a reputation for reliability and superior customer service.</p>
                 <a href="https://www.facebook.com/profile.php?id=100069594031670" style="font-size: 50px;"><i class="fa-brands fa-facebook"></i></a>
                 <a href="#" style="font-size: 50px;margin: 40px;"><i class="fa-brands fa-square-whatsapp"></i></a>
-                
-    
         </div>
     </div>
 </div>
-
-
 
 <style>
 .WebDev3 {
@@ -580,8 +562,6 @@
     overflow-x: hidden;
     padding: 5rem 0;
     margin: 0 auto;
-    margin-top: 250px;
-    margin-left: 30px;
 }
 
 .imgWrapper3 {
@@ -595,139 +575,81 @@
     height: 600px;
     transition: transform 0.3s;
     user-select: none;
-    margin-top: 50px;
-    margin-left: -150px;
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-
+    margin: 0 auto;
+    border-radius: 20px;
 }
 
 .contentWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 30px;
+    text-align: center;
     font-size: 24px;
     font-family: sans-serif;
 }
 
-.textWrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    text-transform: capitalize;
-}
-
-.textWrapper span:first-child {
-    display: inline-block;
-    background: #383f47;
-    width: 70px;
-    height: 5px;
-}
-
 .content4 {
-    display: block;
+    max-width: 800px;
     color: #000;
+    margin: 0 auto;
 }
 
 .content4 h2 {
     margin-bottom: 20px;
-    font-size: 45px;
+    font-size: 35px;
     font-weight: bold;
-    font-family: Satisfy;
-    text-align: center;
-    margin-left: -300px;
-    color: #000;
-    background-color: rgb(211, 198, 11);
-    width: 500px;
+    font-family: 'Satisfy', cursive;
+    color: red;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .content4 p {
     margin-bottom: 20px;
     line-height: 1.5;
     font-size: 25px;
-    margin-left: -300px;
-    color:#000;      
-    width: 800px;  
-    text-align: center;
+    color: #000;
+    margin: 0 auto;
 }
-.content4 a{
+
+.content4 a {
     color: orangered;
 }
 
-.content4 a:hover{
-color: #000;
-transition: 0.5s ease;
-
+.content4 a:hover {
+    color: #000;
+    transition: 0.5s ease;
 }
 
 @media (max-width: 1058px) {
     .WebDev3 {
         grid-template-columns: 1fr;
     }
-    .contentWrapper {
-        order: 2;
-        padding-left: 0;
-        text-align: center;
-    }
-    .imgWrapper3 {
-        order: 1;
-        margin-bottom: 20px;
-    }
-    .imgWrapper3 img {
-        max-width: 100%;
-        margin-left: 0;
-    }
-    .content4 h2 {
-        margin-left: 0;
-    }
-    .content4 p {
-        margin-left: 0;
-    }
-    .content a {
-        margin-left: 0;
-    }
 }
 
 @media (max-width: 768px) {
     .imgWrapper3 img {
-        max-width: 300px;
+        width: 300px;
+        height: auto;
     }
     .contentWrapper {
         font-size: 16px;
-    }
-    .content a {
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 0;
     }
 }
 
 @media (max-width: 480px) {
     .imgWrapper3 img {
-        max-width: 250px;
+        width: 250px;
     }
     .content4 h2 {
         font-size: 28px;
     }
-    .content4 p{
+    .content4 p {
         font-size: 15px;
-        width: 500px;
-
-    }
-    .content a {
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 0;
     }
 }
-
 </style>
-
-
 
 
 
@@ -758,22 +680,20 @@ transition: 0.5s ease;
             <h2>Our Cofounder</h2>
             <p>Lokesh Jain, the co-founder of Swastik Electronics and Furniture, has been a driving force behind the company's growth and success. Since its inception in 2010, Lokesh has played a pivotal role in shaping Swastik Electronics and Furniture into a leading name in the industry. His vision and innovative approach have been instrumental in expanding the business from a specialized electronics store to a comprehensive retail destination offering a wide range of products, including high-quality furniture and kitchen appliances.
             Under Lokesh’s leadership, Swastik Electronics and Furniture has earned a reputation for its commitment to quality, exceptional customer service, and a keen understanding of market trends. His dedication to excellence and continuous pursuit of innovation have set the company apart, ensuring it remains at the forefront of the industry. Lokesh’s entrepreneurial spirit and strategic insights have not only driven the company’s expansion but also solidified its position as a trusted brand among customers.</p>
-            <a href="https://www.facebook.com/lokesh.jain.102361" style="font-size: 50px;margin-left: 110px;"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=%2B918209435284&context=ARA5IO-vlQm6Lb0jzeHq3vMPvEfsptTkrrU1Icmte0B1qquGPcosuPgKoJk1ujt2-MTyf74yszzSZXr6eB5Tbfw8u6FoXnr_YT496PvOHYXDPT3VXyLXVTbbj-QBsLlAmHqqyXZk1iyYRYwC-BZRWD9kew&source=FB_Page&app=facebook&entry_point=page_cta&fbclid=IwZXh0bgNhZW0CMTAAAR3reSCz5zSEaZfT13Vma_dVXPK4wmb-qEc1aBL95unWF_zETpvKAN6d5Z8_aem_QxawMD4DYwRyJwin15-3mg" style="font-size: 50px;margin-left: 70px;"><i class="fa-brands fa-square-whatsapp"></i></a>
-            <a href="#" style="font-size: 50px;margin-left: 70px;"><i class="fa-brands fa-square-instagram"></i></a>
-            
+            <a href="https://www.facebook.com/lokesh.jain.102361" style="font-size: 50px;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=%2B918209435284&context=ARA5IO-vlQm6Lb0jzeHq3vMPvEfsptTkrrU1Icmte0B1qquGPcosuPgKoJk1ujt2-MTyf74yszzSZXr6eB5Tbfw8u6FoXnr_YT496PvOHYXDPT3VXyLXVTbbj-QBsLlAmHqqyXZk1iyYRYwC-BZRWD9kew&source=FB_Page&app=facebook&entry_point=page_cta&fbclid=IwZXh0bgNhZW0CMTAAAR3reSCz5zSEaZfT13Vma_dVXPK4wmb-qEc1aBL95unWF_zETpvKAN6d5Z8_aem_QxawMD4DYwRyJwin15-3mg" style="font-size: 50px; margin: 40px;"><i class="fa-brands fa-square-whatsapp"></i></a>
+            <a href="#" style="font-size: 50px;"><i class="fa-brands fa-square-instagram"></i></a>
         </div>
     </div>
 </div>
 
 <style>
 .WebDev2 {
-    width: 80%;
+    width: 100%;
     max-width: 1170px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 50px;
-    overflow-x: hidden;
     padding: 5rem 0;
     margin: 0 auto;
     margin-top: 250px;
@@ -786,89 +706,65 @@ transition: 0.5s ease;
 }
 
 .imgWrapper2 img {
-    width:400px;
+    width: 400px;
     height: 400px;
     transition: transform 0.3s;
     user-select: none;
     border-radius: 0px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-radius: 20px;
 }
-
 
 .contentWrapper2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 30px;
     font-size: 24px;
     font-family: sans-serif;
 }
 
-.textWrapper2 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    text-transform: capitalize;
-
-}
-
-.textWrapper2 span:first-child {
-    display: inline-block;
-    background: #383f47;
-    width: 70px;
-    height: 5px;
-    
-}
-
 .content2 {
-    display: block;
+    text-align: center;
 }
 
 .content2 h2 {
     margin-bottom: 20px;
-    font-size: 45px;
+    font-size: 35px;
     font-weight: bold;
-    font-family: Satisfy;
+    font-family: 'Satisfy', cursive;
     text-align: center;
-    background-color: aqua;
+    color: rebeccapurple;
 }
 
 .content2 p {
     margin-bottom: 20px;
     line-height: 1.5;
     font-size: 23px;
-    width: 480px;
+    max-width: 480px;
     text-align: center;
+    margin: 0 auto;
 }
-.content2 a{
-    text-align: center;
-    margin-top: 50px;
+
+.content2 a {
     color: orangered;
+    margin: 0 20px;
 }
-.content2 a:hover{
-color: #000;
-padding: 2px;
-transition: 0.5s ease;
+
+.content2 a:hover {
+    color: #000;
+    transition: 0.5s ease;
 }
+
 @media (max-width: 1058px) {
     .WebDev2 {
         grid-template-columns: 1fr;
-    }
-    .contentWrapper2 {
-        order: 2;
-        padding-left: 0;
         text-align: center;
     }
-    .imgWrapper2 {
-        order: 1;
-        margin-bottom: 20px;
+    .content2 p {
+        margin: 0 auto;
     }
-    .imgWrapper2 img {
-        max-width: 100%;
+    .content2 a {
+        margin-left: 0;
     }
 }
 
@@ -876,13 +772,8 @@ transition: 0.5s ease;
     .imgWrapper2 img {
         max-width: 300px;
     }
-    .content2 {
+    .contentWrapper2 {
         font-size: 16px;
-    }
-    .content2 a {
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 0;
     }
 }
 
@@ -890,25 +781,15 @@ transition: 0.5s ease;
     .imgWrapper2 img {
         max-width: 250px;
         max-height: 250px;
-    
     }
     .content2 h2 {
         font-size: 28px;
     }
-
     .content2 p {
         font-size: 15px;
     }
-
-    .content a {
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 0;
-    }
 }
 </style>
-
-
 
 
 
@@ -947,35 +828,34 @@ transition: 0.5s ease;
 
 <div class="WebDev4">
     <div class="imgWrapper4">
-        <a href="#"><img src="{% static 'Images/Mummy.jpg' %}"></a>
+        <a href="#"><img src="{% static 'Images/Mummy.jpg' %}" alt="Ratna Jain"></a>
     </div>
 
     <div class="contentWrapper">
         <div class="content5">
-            <h2>Propwritter</h2>
-            <p>Ratna Jain, the proprietor and financial advisor of our firm, plays a crucial role in steering the company towards financial stability and growth. With her sharp financial acumen and strategic foresight, Ratna has been instrumental in managing the firm's financial operations and ensuring its economic health. Her expertise in financial planning and management has been pivotal in making informed decisions that drive the company's success.
-                As the proprietor, Ratna brings a unique perspective to the business, combining her deep understanding of financial markets with a commitment to the firm's long-term vision. Her leadership in financial advisory has helped the company navigate complex economic landscapes, optimize resource allocation, and achieve sustainable growth. Ratna’s dedication and strategic insights have been vital in establishing a robust financial foundation for the firm, enabling it to expand its horizons and continually exceed customer expectations.</p>
-            <a href="#" style="font-size: 50px;margin-left: -40px;"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" style="font-size: 50px;margin-left: 70px;"><i class="fa-brands fa-square-whatsapp"></i></a>
-            <a href="#" style="font-size: 50px;margin-left: 70px;"><i class="fa-brands fa-square-instagram"></i></a>
+            <h2>Proprietor</h2>
+            <p>Ratna Jain, the proprietor and financial advisor of our firm, plays a crucial role in steering the company towards financial stability and growth. With her sharp financial acumen and strategic foresight, Ratna has been instrumental in managing the firm's financial operations and ensuring its economic health. Her expertise in financial planning and management has been pivotal in making informed decisions that drive the company's success.</p>
+            <p>As the proprietor, Ratna brings a unique perspective to the business, combining her deep understanding of financial markets with a commitment to the firm's long-term vision. Her leadership in financial advisory has helped the company navigate complex economic landscapes, optimize resource allocation, and achieve sustainable growth. Ratna’s dedication and strategic insights have been vital in establishing a robust financial foundation for the firm, enabling it to expand its horizons and continually exceed customer expectations.</p>
+            <div class="socialLinks">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-square-whatsapp"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+            </div>
         </div>
     </div>
 </div>
 
-
-
 <style>
 .WebDev4 {
     width: 100%;
-    max-width: 2110px;
+    max-width: 1200px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-    overflow-x: hidden;
-    padding: 5rem 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 2rem;
     margin: 0 auto;
-    margin-top: 250px;
-    margin-left: 30px;
+    align-items: center;
+    text-align: center;
 }
 
 .imgWrapper4 {
@@ -985,143 +865,84 @@ transition: 0.5s ease;
 }
 
 .imgWrapper4 img {
-    width: 400px;
-    height: 400px;
-    transition: transform 0.3s;
-    user-select: none;
-    margin-top: 50px;
-    margin-left: -60px;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .contentWrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-left: 30px;
-    font-size: 24px;
-    font-family: sans-serif;
-}
-
-.textWrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    text-transform: capitalize;
-}
-
-.textWrapper span:first-child {
-    display: inline-block;
-    background: #383f47;
-    width: 70px;
-    height: 5px;
-}
-
-.content5 {
-    display: block;
-    color: #000;
+    padding: 1rem;
 }
 
 .content5 h2 {
-    margin-bottom: 20px;
-    font-size: 45px;
-    font-weight: bold;
-    font-family: Satisfy;
-    text-align: center;
-    margin-left: -300px;
-    color: #000;
-    background-color: rgb(10, 120, 194);
-    width: 500px;
+    font-size: 36px;
+    font-family: 'Satisfy', cursive;
+    color: rgb(10, 120, 194);
+    margin-bottom: 1rem;
 }
 
 .content5 p {
-    margin-bottom: 20px;
-    line-height: 1.5;
-    font-size: 25px;
-    margin-left: -300px;
-    color:#000;      
-    width: 800px;  
-    text-align: center;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    max-width: 800px;
 }
-.content5 a{
-color: orangered;
 
+.socialLinks a {
+    font-size: 40px;
+    color: orangered;
+    margin: 0 10px;
+    transition: color 0.3s;
 }
-.content5 a:hover{
-color: #000;
-transition: 0.5s;
 
-}
-@media (max-width: 1058px) {
-    .WebDev4 {
-        grid-template-columns: 1fr;
-    }
-    .contentWrapper {
-        order: 2;
-        padding-left: 0;
-        text-align: center;
-    }
-    .imgWrapper4 {
-        order: 1;
-        margin-bottom: 20px;
-    }
-    .imgWrapper4 img {
-        max-width: 100%;
-        margin-left: 0;
-    }
-    .content5 h2 {
-        margin-left: 0;
-    }
-    .content5 p {
-        margin-left: 0;
-    }
-    .content5 a {
-        margin-left: 0;
-    }
+.socialLinks a:hover {
+    color: #000;
 }
 
 @media (max-width: 768px) {
-    .imgWrapper4 img {
-        max-width: 300px;
+    .WebDev4 {
+        grid-template-columns: 1fr;
     }
-    .contentWrapper {
+
+    .content5 h2 {
+        font-size: 28px;
+    }
+
+    .content5 p {
         font-size: 16px;
+        padding: 0 10px;
     }
-    .content5 a {
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 0;
+
+    .socialLinks a {
+        font-size: 30px;
     }
 }
 
 @media (max-width: 480px) {
-    .imgWrapper4 img {
-        max-width: 350px;
-        max-height: 350px;
-    }
     .content5 h2 {
-        font-size: 28px;
+        font-size: 24px;
     }
-    .content5 p{
-        font-size: 15px;
-        width: 500px;
+
+    .content5 p {
+        font-size: 14px;
     }
-    .content5 a {
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 0;
+
+    .imgWrapper4 img {
+        max-width: 300px;
+    }
+
+    .socialLinks a {
+        font-size: 25px;
     }
 }
-
 </style>
-
-
-
 
 
 
@@ -1131,7 +952,7 @@ transition: 0.5s;
         <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
     </div>
     <div class="footer-col services">
-        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Categories</h4>
+        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
         <ul style="margin-left: 120px;">
             <li><a href="#">Home Appliences</a></li>
             <li><a href="#">Kitchen Appliences</a></li>
@@ -1151,7 +972,6 @@ transition: 0.5s;
             <li><a href="http://127.0.0.1:1000/contact/">Feedback</a></li>
             <li><a href="http://127.0.0.1:1000/contact/">Product Complaints</a></li>
            
-            
         </ul>
     </div>
     <div class="footer-col follow">
@@ -1172,17 +992,18 @@ transition: 0.5s;
 footer {
     display: flex;
     flex-wrap: wrap;
-    background-color:rgb(6, 8, 71);
+    background-color: rgb(6, 8, 71);
     padding: 40px 5%;
     color: black;
-    margin-top:300px;
-    height: 900px;
+    margin-top: 300px;
+    height: auto; /* Change from fixed height */
 }
 
 .footer-col {
     flex: 1;
     min-width: 200px;
     margin-bottom: 20px;
+    text-align: center; /* Center align content on smaller screens */
 }
 
 .footer-col h4 {
@@ -1192,20 +1013,20 @@ footer {
     color: rgb(156, 47, 14);
     text-transform: capitalize;
     position: relative;
-
-
 }
 
-.footer-col p{
-color: white;
-
+.footer-col p {
+    color: white;
+    font-size: 20px; /* Adjusted for consistent sizing */
 }
+
 .footer-col h4::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 50%; /* Center the line */
+    transform: translateX(-50%);
     bottom: -6px;
-    background-color:green;
+    background-color: green;
     height: 2px;
     width: 90px;
 }
@@ -1254,12 +1075,10 @@ ul li a:hover {
 
 .line {
     text-align: center;
-    font-size: 14px;
+    font-size: 20px; /* Ensure readability */
+    color: white;
     margin-top: 20px;
 }
-
-
-
 
 @media (max-width: 740px) {
     .footer-col {
@@ -1275,16 +1094,17 @@ ul li a:hover {
 @media (max-width: 555px) {
     footer {
         padding: 20px 2%;
-        height: 600px;
+        height: auto; /* Adjust for smaller screens */
     }
 
     .footer-col h4 {
         font-size: 20px;
-        margin-left: -30px;
+        margin-left: 0;
     }
-    .footer-col p{
-       font-size: 10px; 
-       margin-left: 20px;     
+
+    .footer-col p {
+        font-size: 15px;
+        margin-left: 0;
     }
 
     ul li a {
@@ -1293,11 +1113,8 @@ ul li a:hover {
 
     .line {
         font-size: 12px;
-    
     }
 }
-
-
 
 </style>
 
@@ -1309,7 +1126,9 @@ ul li a:hover {
     alertify.set('notifier', 'position', 'top-right');
 
     // Loop through messages and display them using Alertify
-    
+    {% for msg in messages %}
+        alertify.success('{{ msg }}');
+    {% endfor %}
 </script>
 
 <style>
@@ -1320,7 +1139,7 @@ ul li a:hover {
     background-color: red; /* Change background color to red */
     color: black; /* Change text color to white */
     padding: 10px; /* Add padding */
-    margin-top: 10px; /* Add margin bottom */
+    margin-bottom: 10px; /* Add margin bottom */
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;    
 
@@ -1328,6 +1147,6 @@ ul li a:hover {
 </style>
 
 
+{% endblock %}
 
 
-{% endblock content %}

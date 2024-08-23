@@ -23,6 +23,7 @@ from django.contrib.auth.tokens import default_token_generator
 import logging
 import random
 logger = logging.getLogger(__name__)
+from .forms import RegisterForm
 
 
 
@@ -134,6 +135,17 @@ def Complaint(request):
             return render(request, 'Complaint.html', {'error': 'All fields are required'})
     return render(request, 'Complaint.html')
 
+
+
+
+
+
+
+
+
+
+
+########################## Authetication & Checkout ##############
 def Login(request):
     if request.user.is_authenticated:
         messages.info(request, 'You are already logged in.')
@@ -292,8 +304,31 @@ def cart(request):
     return render(request, 'Cart.html', context)
 
 
-# Dashboard Views ###
-@login_required(login_url=Login)
+##################################### Checkout ###########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########################### Dashboard Views ############################
+
+
+
+
+
+
+
 def Dash(request):
     return render(request,'Dash.html')
 
@@ -322,7 +357,39 @@ def Feedback2(request):
     feedback_list = Feedback.objects.all()  # Fetch all feedback from the database
     return render(request, 'Feed_back.html', {'feedback_list': feedback_list})
 
+
+
+
 ############## DashBoard #########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################### wishlist ##############################
 
 @login_required(login_url=Login)
 def Wishlists(request):
@@ -487,7 +554,7 @@ def search_results(request):
     return render(request, 'search_results.html', {'products': products, 'query': query})
 
 
-
+##############################################################################
 
 
 

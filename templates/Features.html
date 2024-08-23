@@ -451,7 +451,7 @@
         <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
     </div>
     <div class="footer-col services">
-        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Categories</h4>
+        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
         <ul style="margin-left: 120px;">
             <li><a href="#">Home Appliences</a></li>
             <li><a href="#">Kitchen Appliences</a></li>
@@ -491,17 +491,18 @@
 footer {
     display: flex;
     flex-wrap: wrap;
-    background-color:rgb(6, 8, 71);
+    background-color: rgb(6, 8, 71);
     padding: 40px 5%;
     color: black;
-    margin-top:300px;
-    height: 900px;
+    margin-top: 300px;
+    height: auto; /* Change from fixed height */
 }
 
 .footer-col {
     flex: 1;
     min-width: 200px;
     margin-bottom: 20px;
+    text-align: center; /* Center align content on smaller screens */
 }
 
 .footer-col h4 {
@@ -511,20 +512,20 @@ footer {
     color: rgb(156, 47, 14);
     text-transform: capitalize;
     position: relative;
-
-
 }
 
-.footer-col p{
-color: white;
-
+.footer-col p {
+    color: white;
+    font-size: 20px; /* Adjusted for consistent sizing */
 }
+
 .footer-col h4::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 50%; /* Center the line */
+    transform: translateX(-50%);
     bottom: -6px;
-    background-color:green;
+    background-color: green;
     height: 2px;
     width: 90px;
 }
@@ -573,12 +574,10 @@ ul li a:hover {
 
 .line {
     text-align: center;
-    font-size: 14px;
+    font-size: 20px; /* Ensure readability */
+    color: white;
     margin-top: 20px;
 }
-
-
-
 
 @media (max-width: 740px) {
     .footer-col {
@@ -594,16 +593,17 @@ ul li a:hover {
 @media (max-width: 555px) {
     footer {
         padding: 20px 2%;
-        height: 600px;
+        height: auto; /* Adjust for smaller screens */
     }
 
     .footer-col h4 {
         font-size: 20px;
-        margin-left: -30px;
+        margin-left: 0;
     }
-    .footer-col p{
-       font-size: 10px; 
-       margin-left: 20px;     
+
+    .footer-col p {
+        font-size: 15px;
+        margin-left: 0;
     }
 
     ul li a {
@@ -612,11 +612,8 @@ ul li a:hover {
 
     .line {
         font-size: 12px;
-    
     }
 }
-
-
 
 </style>
 
@@ -647,9 +644,4 @@ ul li a:hover {
 
 }
 </style>
-
-
-{% endblock %}
-
-
-
+{% endblock content %}
