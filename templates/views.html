@@ -109,23 +109,23 @@
     <div class="footer-col services">
         <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
         <ul style="margin-left: 120px;">
-            <li><a href="#">Home Appliences</a></li>
-            <li><a href="#">Kitchen Appliences</a></li>
-            <li><a href="#">Washroom Ware</a></li>
-            <li><a href="#">Handlooms</a></li>
-            <li><a href="#">Bags and Switcase</a></li>
-            <li><a href="#">Moulded Furniture</a></li>
-            <li><a href="#">Glasses and Mugs</a></li>
+            <li><a href="{% url 'collections' %}">Home Appliences</a></li>
+            <li><a href="{% url 'collections' %}">Kitchen Appliences</a></li>
+            <li><a href="{% url 'collections' %}">Washroom Ware</a></li>
+            <li><a href="{% url 'collections' %}">Handlooms</a></li>
+            <li><a href="{% url 'collections' %}">Bags and Switcase</a></li>
+            <li><a href="{% url 'collections' %}">Moulded Furniture</a></li>
+            <li><a href="{% url 'collections' %}">Glasses and Mugs</a></li>
         </ul>
     </div>
     <div class="footer-col company">
         <h4 style="margin-left: 50px;">Company</h4>
         <ul style="margin-left: 50px;">
-            <li><a href="http://127.0.0.1:1000/About/">About</a></li>
+            <li><a href="{% url 'Aboutus' %}">About</a></li>
             <li><a href="http://127.0.0.1:1000/contact/">Legal</a></li>
-            <li><a href="http://127.0.0.1:1000/contact/">Contact us</a></li>
-            <li><a href="http://127.0.0.1:1000/contact/">Feedback</a></li>
-            <li><a href="http://127.0.0.1:1000/contact/">Product Complaints</a></li>
+            <li><a href="{% url 'Contact' %}">Contact us</a></li>
+            <li><a href="{% url 'Feedbacks' %}">Feedback</a></li>
+            <li><a href="{% url 'Complaint' %}">Product Complaints</a></li>
            
         </ul>
     </div>
@@ -301,29 +301,4 @@ ul li a:hover {
 }
 </style>
 
-
-{% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% endblock content %}

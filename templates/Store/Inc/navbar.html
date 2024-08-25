@@ -3,14 +3,14 @@
     <!-- top navbar -->
     <div class="top-navbar">
         <div class="top-icons">
-            <a href="http://127.0.0.1:2000" style="color: #1c1c50;font-size: 20px;text-decoration: none;font-family: 'Times New Roman', Times, serif;">Swastik 卐 Traders</a>
+            <a href="{% url 'home' %}" style="color: #1c1c50;font-size: 20px;text-decoration: none;font-family: 'Times New Roman', Times, serif;">Swastik 卐 Traders</a>
         </div>
         <div class="other-links">
-            <button id="btn-login"><a href="http://127.0.0.1:2000/Login/">Login</a></button>
-            <button id="btn-signup"><a href="http://127.0.0.1:2000/Signup/">Signup</a></button>
+            <button id="btn-login"><a href="{% url 'Login' %}">Login</a></button>
+            <button id="btn-signup"><a href="{% url 'Signup' %}">Signup</a></button>
 
-            <a href="http://127.0.0.1:2000/Wishlist/"><i class="fa-solid fa-heart"></i></a>
-            <a href="http://127.0.0.1:2000/Cart/"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="{% url 'Wishlist' %}"><i class="fa-solid fa-heart"></i></a>
+            <a href="{% url 'Cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
     </div>
     <!-- top navbar -->
@@ -26,14 +26,14 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2  lg-1 fs-5 ">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="http://127.0.0.1:2000/" style="color: white;">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="color: white;">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a style="color: white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Features
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: white">
-                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/features/">Our Features</a></li>
+                      <li><a class="dropdown-item" href="{% url 'Features' %}">Our Features</a></li>
                     </ul>
                   </li>
     
@@ -43,7 +43,7 @@
                       Category
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
-                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections">Collections</a></li>
+                      <li><a class="dropdown-item" href="{% url 'collections' %}">Collections</a></li>
                       <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Electronics">Home Appliences</a></li>
                       <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/KitchenWare">Kitechen Appliences</a></li>
                       <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Washroom">Washroom Ware</a></li>
@@ -60,9 +60,9 @@
                       Orders
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
-                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Cart/">Cart</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Wishlist/">Wishlist</a></li>
-                      <li><a class="dropdown-item" href="http://127.0.0.1:2000/Booking/">My Orders</a></li>
+                      <li><a class="dropdown-item" href="{% url 'Cart' %}">Cart</a></li>
+                      <li><a class="dropdown-item" href="{% url 'Wishlist' %}">Wishlist</a></li>
+                      <li><a class="dropdown-item" href="{% url 'Booking' %}">My Orders</a></li>
                           
                     </ul>
                   </li>
@@ -70,16 +70,16 @@
                
                 
                   <li class="nav-item">
-                    <a style="color: white;" class="nav-link" href="http://127.0.0.1:2000/About/">About Us</a>
+                    <a style="color: white;" class="nav-link" href="{% url 'Aboutus' %}">About Us</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       ContactUs
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
-                        <li><a class="dropdown-item" href="http://127.0.0.1:2000/Contact/">Contact Now</a></li>
-                        <li><a class="dropdown-item" href="http://127.0.0.1:2000/Feedback/">Feedback</a></li>
-                        <li><a class="dropdown-item" href="http://127.0.0.1:2000/Complaint1/">Product Compliant</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Contact' %}">Contact Now</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Feedbacks' %}">Feedback</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Feedbacks' %}">Product Compliant</a></li>
                    
                     </ul>
                   </li>
@@ -218,6 +218,11 @@ transition: 0.5s ease;
     color: white;
 }
 
+.navbar-toggler.active {
+    background-color: aquamarine;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 @media screen and (max-width: 1050px) {
     .top-icons {
         margin-left: 30px;
