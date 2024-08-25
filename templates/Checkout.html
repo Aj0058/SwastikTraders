@@ -5,14 +5,18 @@
 <style>
     .container-custom {
         margin-left: 80px;
+        
     }
 
     .form-label {
         font-family: 'Times New Roman', Times, serif;
+        color: white;
+        
     }
 
     .form-control-custom, .form-textarea {
         font-size: 23px;
+        background-color: beige;
     }
 
     .form-textarea {
@@ -136,9 +140,9 @@
             <!-- Basic Details Section -->
             <div class="col-md-6">
                 <div class="card shadow">
-                    <div class="card-body">
-                        <h2 class="card-title-custom">Basic Details</h2>
-                        <hr>
+                    <div class="card-body shadow" style="background-color:chocolate;">
+                        <h2 class="card-title-custom" style="color: aliceblue;">Basic Details</h2>
+                        <hr style="color: bisque;height: 5px;">
                         <div class="row">
                             <div class="col-md-6 mt-2">
                                 <label class="form-label">First Name</label>
@@ -184,16 +188,16 @@
             <!-- Order Summary Section -->
             <div class="col-md-5">
                 <div class="card shadow">
-                    <div class="card-body">
-                        <h3 class="card-title-custom">Order Summary</h3>
-                        <hr>
+                    <div class="card-body"style="background-color:chocolate">
+                        <h3 class="card-title-custom" style="color: aliceblue;">Order Summary</h3>
+                        <hr style="color: white;padding: 10px;">
                         {% if cartitems %}
                             <table class="table table-striped table-bordered order-summary-table">
-                                <thead>
+                                <thead">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Qty</th>
-                                        <th>Price</th>
+                                        <th style="background-color: bisque;font-family: 'Times New Roman', Times, serif;">Name</th>
+                                        <th style="background-color: bisque;font-family: 'Times New Roman', Times, serif;">Qty</th>
+                                        <th style="background-color: bisque;font-family: 'Times New Roman', Times, serif;">Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -209,12 +213,12 @@
                                     {% endfor %}
                                 </tbody>
                             </table>
-                            <h6 class="order-summary-grand-total">Grand Total
+                            <h6 class="order-summary-grand-total" style="color: aliceblue;font-family: 'Times New Roman', Times, serif;">Grand Total
                                 <span class="float-end">Rs {{ total_price }}</span>
                             </h6> 
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-success w-100 btn-place-order">COD | Place Order</button>
-                                <button type="button" class="btn btn-primary PaywithRazor w-100 btn-place-order mt-2">Pay With Razorpay</button>
+                                <button type="button" class="btn btn-warning PaywithRazorpay w-100 btn-place-order mt-2">Pay With Razorpay</button>
                             </div>
                         {% else %}
                             <h4>Your Cart is Empty</h4>
@@ -225,6 +229,145 @@
         </div>
     </form>
 </div>
+
+<script>
+$(document).ready(function () {
+    $('.PaywithRazorpay').click(function (e) { 
+        e.preventDefault();
+        
+        var Fname = $("[name='Fname']").val();
+        var Lname = $("[name='Lname']").val();
+        var Email = $("[name='Email']").val();
+        var Phone = $("[name='Phone']").val();
+        var Address = $("[name='Address']").val();
+        var City = $("[name='City']").val();
+        var State = $("[name='State']").val();
+        var Country = $("[name='Country']").val();
+        var Pincode = $("[name='Pincode']").val();
+
+        // Basic validation
+        if (Fname == "" || Lname == "" || Email == "" || Phone == "" || Address == "" || City == "" || State == "" || Country == "" || Pincode == "") {
+            alert("All fields are required");
+            return false;
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "/proceed-to-pay/",
+                success: function (response) {
+                    console.log(response);
+
+                    var options = {
+                        "key": "rzp_test_uQxYwKDDPACuYG", // Replace with your Razorpay Key ID
+                        "amount": response.total_price * 100, // Amount in paise
+                        "currency": "INR",
+                        "name": "Swastik Traders",
+                        "description": "Thank you For Purchasing ",
+                        "image": "", // Replace with your logo URL
+                        "handler": function (response) {
+                            alert("Payment ID: " + response.razorpay_payment_id);
+                        },
+                        "prefill": {
+                            "name": Fname + " " + Lname,
+                            "email": Email,
+                            "contact": Phone
+                        },
+                        "notes": {
+                            "address": Address + ", " + City + ", " + State + ", " + Country + " - " + Pincode
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+
+                    var rzp1 = new Razorpay(options);
+
+                    rzp1.on('payment.failed', function (response) {
+                        alert("Payment failed: " + response.error.description);
+                    });
+
+                    rzp1.open();
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error: " + error);
+                    alert("Something went wrong, please try again later.");
+                }
+            });
+        }
+    });
+});
+
+</script>
+
+{% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock scripts %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

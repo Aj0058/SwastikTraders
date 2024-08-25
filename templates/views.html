@@ -1,0 +1,329 @@
+{% extends 'Store/layouts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm" style="background-color: rgb(59, 42, 25);">
+                <div class="card-header" style="font-family: 'Times New Roman', Times, serif; background-color: peru; color: aliceblue;">
+                    <h3>Order View</h3>
+                </div>
+          
+                <div class="card-body">
+                    <div class="row" style="background-color: beige;">
+                        <div class="col-md-12 col-lg-6 mb-4 mb-lg-0">
+                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: cadetblue; padding: 8px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Shipping Details</h4>
+                            <hr>
+                            <div class="form-group">
+                                <label class="label">First Name:</label>
+                                <div class="value">{{ order.Fname }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Last Name:</label>
+                                <div class="value">{{ order.Lname }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Email:</label>
+                                <div class="value">{{ order.Email }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Phone:</label>
+                                <div class="value">{{ order.Phone }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Address:</label>
+                                <div class="value">{{ order.Address }}, {{ order.City }}, {{ order.State }}, {{ order.Country }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Zip Code:</label>
+                                <div class="value">{{ order.Pincode }}</div>    
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12 col-lg-6">
+                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: chocolate; padding: 10px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Order Items</h4>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="background-color: forestgreen; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;">Name</th>
+                                            <th style="background-color: rgb(163, 119, 60); font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;">Quantity</th>
+                                            <th style="background-color: cadetblue; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;">Price</th>
+                                            <th style="background-color: cornflowerblue; font-size: 1.5rem;font-family:'Times New Roman', Times, serif;color: aliceblue;">Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in orderitems %}
+                                            <tr style="border-radius: 20px;">
+                                                <td style="background-color: forestgreen; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;">{{ item.Product.name }}</td> 
+                                                <td style="background-color: rgb(180, 137, 81); font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">{{ item.Quantity }}</td> 
+                                                <td style="background-color: cadetblue; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;text-align: center;color: aliceblue;">{{ item.Product.Selling_Price }}</td> 
+                                                <td style="background-color: cornflowerblue;font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;">
+                                                    <img src="{{ item.Product_image.url }}" alt="" style="width: 50px; height: 50px;">
+                                                </td>
+                                                
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h4 style="font-size: 1.7rem; background-color: red; color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Grand Total: {{ order.Total_price }}</h4>
+                            <h4 style="font-size: 1.7rem; background-color: cadetblue; color: white; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Payment Status: {{ order.Status }}</h4>
+                            <h4 style="font-size: 1.5rem; background-color: rgb(39, 105, 146); color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Tracking Number: {{ order.tracking_no }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.label {
+    font-size: 1.7rem; /* Larger font size for labels */
+    color: black; /* Default text color for labels */
+    font-family: 'Times New Roman', Times, serif;
+}
+.value {
+    font-size: 1.5rem; /* Larger font size for values */
+    font-family: 'Times New Roman', Times, serif;
+}
+.form-group {
+    margin-bottom: 1rem; /* Space between each form group */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+</style>
+
+
+
+<footer>
+    <div class="footer-col about">
+        <h4>About us</h4>
+        <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
+    </div>
+    <div class="footer-col services">
+        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
+        <ul style="margin-left: 120px;">
+            <li><a href="#">Home Appliences</a></li>
+            <li><a href="#">Kitchen Appliences</a></li>
+            <li><a href="#">Washroom Ware</a></li>
+            <li><a href="#">Handlooms</a></li>
+            <li><a href="#">Bags and Switcase</a></li>
+            <li><a href="#">Moulded Furniture</a></li>
+            <li><a href="#">Glasses and Mugs</a></li>
+        </ul>
+    </div>
+    <div class="footer-col company">
+        <h4 style="margin-left: 50px;">Company</h4>
+        <ul style="margin-left: 50px;">
+            <li><a href="http://127.0.0.1:1000/About/">About</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Legal</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Contact us</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Feedback</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Product Complaints</a></li>
+           
+        </ul>
+    </div>
+    <div class="footer-col follow">
+        <h4>Follow us</h4>
+        <div class="links">
+            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/anveshjain1635/"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="line">
+        <p style="font-size: 20px;color:white;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<style>
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(6, 8, 71);
+    padding: 40px 5%;
+    color: black;
+    margin-top: 300px;
+    height: auto; /* Change from fixed height */
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+    text-align: center; /* Center align content on smaller screens */
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 23px;
+    color: rgb(156, 47, 14);
+    text-transform: capitalize;
+    position: relative;
+}
+
+.footer-col p {
+    color: white;
+    font-size: 20px; /* Adjusted for consistent sizing */
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 50%; /* Center the line */
+    transform: translateX(-50%);
+    bottom: -6px;
+    background-color: green;
+    height: 2px;
+    width: 90px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    display: block;
+    font-size: 23px;
+    text-transform: capitalize;
+    color: white;
+    text-decoration: none;
+    transition: 0.4s;
+    font-family: "Lora";
+}
+
+ul li a:hover {
+    color: Orange;
+    padding-left: 2px;
+}
+
+.links a {
+    display: inline-block;
+    height: 50px;
+    width: 45px;
+    color: black;
+    background-color: rgba(40, 130, 214, 0.8);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 44px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.links a:hover {
+    color: white;
+    background-color: Orange;
+}
+
+.line {
+    text-align: center;
+    font-size: 20px; /* Ensure readability */
+    color: white;
+    margin-top: 20px;
+}
+
+@media (max-width: 740px) {
+    .footer-col {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-col h4::before {
+        display: none;
+    }
+}
+
+@media (max-width: 555px) {
+    footer {
+        padding: 20px 2%;
+        height: auto; /* Adjust for smaller screens */
+    }
+
+    .footer-col h4 {
+        font-size: 20px;
+        margin-left: 0;
+    }
+
+    .footer-col p {
+        font-size: 15px;
+        margin-left: 0;
+    }
+
+    ul li a {
+        font-size: 15px;
+    }
+
+    .line {
+        font-size: 12px;
+    }
+}
+
+</style>
+
+
+
+
+<script>
+    // Set Alertify notifier position
+    alertify.set('notifier', 'position', 'top-right');
+
+    // Loop through messages and display them using Alertify
+    {% for msg in messages %}
+        alertify.success('{{ msg }}');
+    {% endfor %}
+</script>
+
+<style>
+    /* Style for Alertify notifications */
+    .ajs-message.ajs-success {
+    border-radius: 50px; /* Add border-radius */
+    /* Add border */
+    background-color: red; /* Change background color to red */
+    color: black; /* Change text color to white */
+    padding: 10px; /* Add padding */
+    margin-bottom: 10px; /* Add margin bottom */
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;    
+
+}
+</style>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

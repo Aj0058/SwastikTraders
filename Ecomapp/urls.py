@@ -43,7 +43,7 @@ urlpatterns = [
     path('NotResponse/',views.Password, name="notmatch"),
     path('SendMessage/', views.Send, name='success'),
     path('Feed/', views.Feed, name='Feedback'),
-    
+    path('order-view/<str:t_no>/', views.vieworder, name='vieworder'),
     
 
 
@@ -62,6 +62,16 @@ path('orders/', views.order_list, name='order_list'),
 path('contact-list/', views.contact_list_view, name='contact_list'),
 path('feedback3/', views. Feedback2, name='feedback_list'),
 path('complent/',views. complaint_list, name='complaint_list'),
+
+
+############ Razorpay Url ######
+path('proceed-to-pay/', views.Razorpaycheck, name='Payment')
+
+
+
+
+
+
 
 ]
 

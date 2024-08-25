@@ -75,6 +75,7 @@ def feature(request):
 def Aboutus(request):
      return render(request,'Aboutus.html')
 
+@login_required(login_url='Login')
 @csrf_exempt 
 def Contactus(request):
     if request.method == 'POST':
@@ -90,6 +91,7 @@ def Contactus(request):
         return redirect('success')    
     return render(request, 'Contact.html')     
 
+@login_required(login_url='Login')
 @csrf_exempt 
 def FeedbackView(request):
      if request.method == 'POST':
@@ -106,7 +108,7 @@ def FeedbackView(request):
         return redirect('Feedback')    
      return render(request, 'Feedback.html')
 
-
+@login_required(login_url='Login')
 @csrf_exempt
 def Complaint(request):
     if request.method == 'POST':
@@ -566,9 +568,17 @@ def search_results(request):
 
 
 # its all about for Clipart messages #
-
+@login_required(login_url='Login')
 def Book(request):
-     return render(request,'Book.html')
+     orders = Order.objects.filter(user=request.user)
+     context = {'orders':orders}
+     return render(request,'Book.html',context)
+
+def vieworder(request, t_no):
+    order = get_object_or_404(Order, tracking_no=t_no, user=request.user)
+    orderitems = Orderitem.objects.filter(order=order)
+    context = {'order': order, 'orderitems': orderitems}
+    return render(request, 'views.html', context)
 
 def already(request):
     return render(request,'already.html')
@@ -587,3 +597,18 @@ def Feed(request):
 
 def Pay(request):
     return render(request,'Pay.html')
+
+
+
+
+
+
+
+############################### Razorpay Views #######################
+def Razorpaycheck(request):
+    cart = Cart.objects.filter(user=request.user)
+    total_price = 0 
+    for item in cart:
+        total_price += item.product.Selling_Price * item.product_qty
+    
+    return JsonResponse({'total_price': total_price})
