@@ -32,7 +32,7 @@ def home(request):
     demand = Demand .objects.filter(status=0)
     delership = Delership .objects.filter()
     context ={'Arrival':arrival,'Demand':demand,'Delership':delership}
-    return render(request, 'home.html',context) 
+    return render(request, 'index.html',context) 
  
 
 
