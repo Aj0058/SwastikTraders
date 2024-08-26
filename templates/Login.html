@@ -79,7 +79,7 @@
     <div class="item">
         <div class="contact"></div>
         <div class="submit-form">
-            <div class="first-text">Let's get In Touch</div>
+            <div class="first-text" style="font-family: 'Times New Roman', Times, serif;">Let's get In Touch</div>
             <img class="logoimg" style="user-select: none;" src="{% static 'Images/Cont.gif' %}">
             <div class="Social">
                 <ul class="Media">
@@ -89,7 +89,7 @@
                     <a href="https://www.instagram.com/anveshjain1635/"><i class="fab fa-instagram"></i></a>
                 </ul>
                 <div class="Submit">
-                    <a class="Log" href="http://127.0.0.1:2000/" style="margin-top: -70px;position: absolute;margin-left:150px;font-size:30px;text-decoration: none;color: white;font-family: Satisfy;">Code<span style="color: orange;">Station</span></a>
+                    <a class="Log" href="{% url 'home' %}" style="margin-top: -70px;position: absolute;margin-left:120px;font-size:30px;text-decoration: none;color: seagreen;font-family: Satisfy;font-weight: bold;">Swastik<span style="color: seagreen;"> 卐 </span> <span style="color: seagreen;">Traders</span></a>
                     <h4 class="Third-text">Login Now</h4>
                     <form method="POST">
                         {% csrf_token %}
