@@ -51,7 +51,10 @@ def collectionsview(request, slug):
         else:
              messages.warning(request,"No Such Category Found")
              return redirect('collections')
-        
+
+
+
+@login_required(login_url='Login')
 def productview(request, cate_slug, prod_slug):
     if Category.objects.filter(slug=cate_slug).exists():
         if Product.objects.filter(slug=prod_slug).exists():
@@ -222,7 +225,7 @@ def Logout(request):
 
 
 
-
+@login_required(login_url=Login)
 def Cart2(request):
     if request.method == "POST":
         try:
@@ -400,7 +403,7 @@ def Wishlists(request):
     return render(request, 'Wishlist.html', context)
 
 
-
+@login_required(login_url=Login)
 def addWishlist(request):
     if request.method == "POST":
         if request.user.is_authenticated:

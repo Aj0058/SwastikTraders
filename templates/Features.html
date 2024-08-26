@@ -592,15 +592,6 @@ ul li a:hover {
 
 
 
-<script>
-    // Set Alertify notifier position
-    alertify.set('notifier', 'position', 'top-right');
-
-    // Loop through messages and display them using Alertify
-    {% for msg in messages %}
-        alertify.success('{{ msg }}');
-    {% endfor %}
-</script>
 
 <style>
     /* Style for Alertify notifications */
