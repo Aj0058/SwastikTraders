@@ -94,6 +94,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR / 'media'  # Separate media files from static files
