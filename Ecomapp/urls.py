@@ -50,8 +50,7 @@ urlpatterns = [
 
 
 # Email Integration Urls ###
-  path('activate/<uidb64>/<token>/', views. activate, name='activate'),
-
+   path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 
 
 

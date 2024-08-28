@@ -143,13 +143,6 @@ def Complaint(request):
 
 
 
-
-
-
-
-
-
-
 ########################## Authetication & Checkout ##############
 def Login(request):
     if request.user.is_authenticated:
@@ -208,13 +201,13 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):
-        # If the token is valid, activate the user
         user.is_active = True
         user.save()
-        return redirect('login')  # Redirect to the login page after successful activation
+        return redirect('Login')  # Redirect to login page after activation
     else:
-        # If the token is invalid or user doesn't exist, show an error message
         return HttpResponse('Activation link is invalid!')
+
+
 
 @csrf_exempt
 def Logout(request):
