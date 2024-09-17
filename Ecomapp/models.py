@@ -226,7 +226,8 @@ class Orderitem(models.Model):
     Product =models.ForeignKey(Product,on_delete = models.CASCADE)
     Price = models.FloatField(null=False,default=False)
     Quantity =models.IntegerField(null=False, default=False)
-
+    Productimg = models.ImageField(upload_to='path/to/upload', null=True, blank=True)
+   
 
     def __str__(self):
          return'{} {}' .format (self.order.id,self.order.tracking_no)
