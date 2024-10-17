@@ -5,10 +5,10 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="card shadow-sm"style="background-color:Teal">
+                <div class="card shadow-sm black"style="">
 
-                    <div class="card-header text-white" style="font-family: 'Times New Roman', Times, serif; background-color: rgb(30, 114, 86); padding: 5px;">
-                        <h2 class="text-center my-2" style="font-size: 2.5rem;"><i class="fa-solid fa-cart-flatbed" style="color: rgb(51, 38, 6);"></i> My Orders</h2>
+                    <div class="card-header text-white" style="font-family: 'Times New Roman', Times, serif; padding: 5px;">
+                        <h2 class="text-center my-2" style="font-size: 2.5rem;color: black;"><i class="fa-solid fa-cart-flatbed" style="color: rgb(51, 38, 6);"></i> My Orders</h2>
                     </div>
                     <div class="">
                         <a class="btn1" href="{% url 'Checkout' %}" style="text-decoration: none;font-size:24px;border: ridge;padding: 10px 30px;border-width: 1px;background-color: rgb(21, 19, 15);margin-top: -65px;position: absolute;margin-left: 1150px;font-family: 'Times New Roman', Times, serif;color: aliceblue;border-radius: 5px;">Back</a>
@@ -19,21 +19,21 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr style="font-size: 1.5rem; font-family: 'Times New Roman', Times, serif;">
-                                        <th class="bg-success text-white text-center">Orders Date</th>
-                                        <th class="bg-danger text-white text-center">Tracking Number</th>
-                                        <th class="bg-primary text-white text-center">Total Price</th>
-                                        <th class="bg-dark text-white text-center">Status</th>
-                                        <th class="bg-secondary text-white text-center">Action</th>
+                                        <th class="text-white text-center"style="background-color:black;">Orders Date</th>
+                                        <th class="text-white text-center"style="background-color:black;">Tracking Number</th>
+                                        <th class="text-white text-center"style="background-color:black">Total Price</th>
+                                        <th class="text-white text-center"style="background-color:black">Status</th>
+                                        <th class="text-white text-center"style="background-color:black">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for item in orders %}
                                         <tr style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
-                                            <td style="color: aliceblue;" class="bg-success text-center">{{ item.Created_at }}</td>
-                                            <td class="bg-danger text-white text-center">{{ item.tracking_no }}</td>
-                                            <td  style="color: aliceblue;"class="bg-primary text-center">{{ item.Total_price }}</td>
-                                            <td class="bg-dark text-white text-center">{{ item.Status }}</td>
-                                            <td class="bg-secondary text-center">
+                                            <td style="color: black;font-size: 1.5rem;" class="text-center">{{ item.Created_at }}</td>
+                                            <td style="color: black;font-size: 1.5rem;" class="text-center">{{ item.tracking_no }}</td>
+                                            <td style="color: black;"class="text-center">{{ item.Total_price }}</td>
+                                            <td style="color: black;"class="text-center">{{ item.Status }}</td>
+                                            <td class="text-center">
                                                 <a href="{% url 'vieworder' item.tracking_no %}" class="btn btn-success text-white" style="font-size: 1.25rem; padding: 8px 12px;color: black;">View order</a>
                                             </td>
                                         </tr>

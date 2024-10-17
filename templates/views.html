@@ -6,15 +6,15 @@
 <div class="container my-3">
     <div class="row">
         <div class="col-md-12">
-            <div class="card shadow-sm" style="background-color: seagreen;">
-                <div class="card-header" style="font-family: 'Times New Roman', Times, serif; background-color: seagreen; color: aliceblue;">
+            <div class="card shadow-sm" style="background-color:black;">
+                <div class="card-header" style="font-family: 'Times New Roman', Times, serif; background-color:; color: aliceblue;">
                     <h3>Order View</h3>
                 </div>
           
                 <div class="card-body">
-                    <div class="row" style="background-color: beige;">
+                    <div class="row" style="background-color: white;">
                         <div class="col-md-12 col-lg-6 mb-4 mb-lg-0">
-                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: cadetblue; padding: 8px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Shipping Details</h4>
+                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: black; padding: 8px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Shipping Details</h4>
                             <hr>
                             <div class="form-group">
                                 <label class="label">First Name:</label>
@@ -43,26 +43,26 @@
                         </div>
                         
                         <div class="col-md-12 col-lg-6">
-                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: chocolate; padding: 10px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Order Items</h4>
+                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: black; padding: 10px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Order Items</h4>
                             <hr>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="background-color: forestgreen; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Name</th>
-                                            <th style="background-color: rgb(163, 119, 60); font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Quantity</th>
-                                            <th style="background-color: cadetblue; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Price</th>
-                                            <th style="background-color: cornflowerblue; font-size: 1.5rem;font-family:'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Image</th>
+                                            <th style="background-color: black; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Name</th>
+                                            <th style="background-color: black; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Quantity</th>
+                                            <th style="background-color: black; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Price</th>
+                                            <th style="background-color: black; font-size: 1.5rem;font-family:'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Image</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for item in orderitems %}
                                             <tr style="border-radius: 20px;">
-                                                <td style="background-color: forestgreen; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;">{{ item.Product.name }}</td> 
-                                                <td style="background-color: rgb(180, 137, 81); font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">0 {{ item.Quantity }}</td> 
-                                                <td style="background-color: cadetblue; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;text-align: center;color: aliceblue;">{{ item.Product.Selling_Price }}</td> 
-                                                <td style="background-color: cornflowerblue;font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;">
-                                                    <img src="{{ item.Product_image.url }}" alt="" style="width: 50px; height: 50px;">
+                                                <td style="background-color:white; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: black;">{{ item.Product.name }}</td> 
+                                                <td style="background-color:White; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: black;text-align: center;">0 {{ item.Quantity }}</td> 
+                                                <td style="background-color:White; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;text-align: center;color: black;">{{ item.Product.Selling_Price }}</td> 
+                                                <td style="background-color:White;font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;">
+                                                    <img src="{{ item.product.Product_image.url }}" alt="" style="width: 50px; height: 50px;">
                                                 </td>
                                                 
                                             </tr>
@@ -70,9 +70,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <h4 style="font-size: 1.7rem; background-color: red; color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Grand Total: {{ order.Total_price }}</h4>
-                            <h4 style="font-size: 1.7rem; background-color: cadetblue; color: white; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Payment Status: {{ order.Status }}</h4>
-                            <h4 style="font-size: 1.5rem; background-color: rgb(39, 105, 146); color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Tracking Number: {{ order.tracking_no }}</h4>
+                            <h4 style="font-size: 1.7rem; background-color: black; color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Grand Total: {{ order.Total_price }}</h4>
+                            <h4 style="font-size: 1.7rem; background-color: black; color: white; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Payment Status: {{ order.Status }}</h4>
+                            <h4 style="font-size: 1.5rem; background-color: black; color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Tracking Number: {{ order.tracking_no }}</h4>
                         </div>
                     </div>
                 </div>
