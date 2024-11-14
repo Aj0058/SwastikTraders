@@ -79,7 +79,7 @@
     <div class="item">
         <div class="contact"></div>
         <div class="submit-form">
-            <div class="first-text" style="font-family: 'Times New Roman', Times, serif;">Let's get In Touch</div>
+            <div class="first-text" style="font-family: 'Times New Roman', Times, serif;margin-top: 20px;">Let's get In Touch</div>
             <img class="logoimg" style="user-select: none;" src="{% static 'Images/Swagat.jpg' %}">
             <div class="Social">
                 <ul class="Media">
@@ -102,7 +102,7 @@
                             <label for="">Password</label>
                         </div>
                         <div class="Instruction">
-                            <p style="color: #fff;font-size: 20px;margin-left: 50px;">You Don't Have an account <a href="http://127.0.0.1:2000/Signup/" style="color:orange;margin-left: 50px;">Register</a></p>
+                            <p style="color: #fff;font-size: 20px;margin-left: 50px;">You Don't Have an account <a href="http://127.0.0.1:2000/Signup/" style="color:orange;margin-left: 100px;">Register</a></p>
                         </div>
                         <div class="input-box">
                             <button type="submit" class="submit-btn" style="font-size: 25px;">Login</button>
@@ -158,8 +158,19 @@ width: 400px;
 height: 400px;
 margin-left: -420px;
 margin-top: 20px;
+user-select: none;
+animation: rotate 5s linear infinite; 
+border-radius: 200px;
 }
 
+@keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 .Media {
 font-size: 40px;
 margin-left: -350px;
@@ -185,7 +196,7 @@ transform: translateY(-10px);
 
 .Third-text {
 font-size: 40px;
-margin-top: -600px;
+margin-top: -550px;
 text-align: center;
 color:darkgoldenrod;
 font-family: Lora;
@@ -197,6 +208,7 @@ padding: 0 50px;
 height: 100%;
 width: 100%;
 overflow: hidden;
+margin-top: 40px;
 }
 
 .input-box {

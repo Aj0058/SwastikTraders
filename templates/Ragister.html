@@ -67,7 +67,19 @@
         width: 200px;
         height: 200px;
         margin: 20px auto;
+        user-select: none;
+        animation: rotate 5s linear infinite; 
+        border-radius: 200px;
+
     }
+    @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
     .Media {
         font-size: 30px;
