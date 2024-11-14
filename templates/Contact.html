@@ -88,7 +88,7 @@
                     <a href="#"><i class="fa-brands fa-twitter"></i></a>
                 </ul>
                 <div class="Submit2">
-                    <h4 class="Third-text2">Contact US</h4>
+                    <h4 class="Third-text2"style="color:darkgoldenrod">Contact US</h4>
                     <form method="POST"action="#" class="Form2">
                         {% csrf_token %}
                         <div class="input-box2">
@@ -112,7 +112,7 @@
                             <label for="" style="color: #fff;font-size: 20px;margin-top:10px;font-family:serif;">Messages</label>
                         </div>
                         <div class="input-box2">
-                            <button type="submit2" onclick="whatsaap()" class="submit-btn2" value="send Enqiry" style="margin-left: 150px;background-color: rgb(185, 169, 95);padding: 10px 30px;border-radius: 10px;">Send Message</button>
+                            <button type="submit2" onclick="whatsaap()" class="submit-btn2" value="send Enqiry" style="margin-left: 150px;background-color:black;padding: 10px 30px;border-radius: 10px;">Send Message</button>
                         </div>
                     </form>
                     
@@ -157,7 +157,7 @@
     }
     
     .submit-form2 {
-    background-color: darkgoldenrod;
+    background-color: black;
     margin-top:-100px;    
 }
     
@@ -187,7 +187,7 @@
     
     .Media2 i:hover {
     color: black;
-    background-color:orange;
+    background-color:orange;    
     transition: 0.6s ease;
     transform: translateY(-10px);
     }
@@ -289,7 +289,7 @@
     /* CSS for Submit Button Only */
     .submit-btn2 {
         display: block;
-        background-color: orange;
+        background-color: darkgoldenrod;
         padding: 15px 30px;
         border: none;
         border-radius: 10px;
@@ -300,13 +300,16 @@
         margin-left: 200px; /* Set margin-left as requested */
         text-align: center; /* Center text within the button */
         margin-top:150px;
+        box-shadow: 2px 2px 2px darkgoldenrod ;
+        
     }
     
     .submit-btn2:hover {
-        background-color: rgb(5, 175, 119);
-        color: black;
-        box-shadow: 0px 0px 4px black;
-        transition: 0.5s ease;
+        background-color:black;
+        color:darkgoldenrod;
+        box-shadow: 10px 10px 2px darkgoldenrod ;
+        transition: 0.1s ease;
+        font-weight: bold;
     }
         
     

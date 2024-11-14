@@ -1,141 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swastik 卐 Traders</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Sticky Navigation with Preloader</title>
+    <style>
+        /* Basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            padding: 20px;
+            background-color: Green;
+            color: white;
+            text-align: center;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: black;
+            padding: 10px 10px;
+            transition: all 0.5s ease; /* Add transition effect */
+            height: 8%;
+        }
+
+        .navbar.sticky :hover {
+            width: 100%;
+            background-color: black;
+            padding: 10px 10px;
+            transition: all 0.5s ease; /* Add transition effect */
+            height: 8%;
+            transition: 0.5ease;
+        }
+
+        .navbar.sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            font-size: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: goldenrod;
+            font-size: 20px;
+            padding: 10px;
+            transition: color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .navbar a:hover {
+            color: #3498db;
+        }
+
+        /* Section styling */
+        main {
+            padding: 20px;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Preloader styling */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        /* Loader animation */
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar Section -->
-        <div class="sidebar">
-            <a style="text-decoration: none;" href="{% url 'Dashboard' %}">
-                <h2 style="background-color: Orange; padding: 5px; border-radius: 20px; font-size: 26px;">
-                    Swastik 卐 Traders
-                </h2>
-            </a>
-            <ul style="font-size:28px">
-                <li><a href="{% url 'contact_list' %}"><i class="fas fa-phone"style="color: tomato; font-size: 33px;"></i> Contact</a></li><hr>
-                <li><a href="{% url 'feedback_list' %}"><i class="fas fa-comment-dots"style="color: tomato; font-size: 30px;"></i> Feedback</a></li><hr>
-                <li><a href="#complaints"><i class="fas fa-exclamation-circle"style="color: tomato; font-size: 30px;"></i> Complaints</a></li><hr>
-                <li><a href="{% url 'Customer' %}"><i class="fas fa-user-plus"style="color: tomato; font-size: 30px;"></i> Customers List</a></li><hr>
-                <li><a href="{% url 'order_list' %}"><i class="fa-solid fa-money-bill" style="color: tomato; font-size: 30px;"></i> Billing Chart</a></li><hr>
-                <div class="social" style="margin-top: 470px;">
-                    <h2 style="background-color: Orange;">Contact</h2>
-                    <ul>
-                        <li><a href="#"><i class="fa-brands fa-whatsapp" style="color: tomato; font-size: 27px;"></i> WhatsApp</a></li><hr>
-                        <li><a href="#"><i class="fa-brands fa-facebook"style="color: tomato; font-size: 27px;"></i> Facebook</a></li><hr>
-                        <li><a href="#"><i class="fa-solid fa-user-plus" style="color: Orangered;"></i> Register prop</a></li><hr>
-                        <li><a href="{% url 'home' %}"><i class="fa-solid fa-right-to-bracket"style="color: tomato; font-size: 27px;"></i> Exit</a></li><hr>
-                    </ul>
-                </div>
-            </ul>
-        </div>
 
-        <!-- Main Content Section -->
-        <div class="main-content">
-            <h1 style="font-family: 'Times New Roman', Times, serif; background-color: rebeccapurple; padding: 10px; border-radius: 5px; color: #fff;">
-                <i class="fa-solid fa-door-open" style="color: orangered;"></i> Welcome to the Dashboard...
-            </h1>
-            <hr style="height: 3px; background-color: orangered; width: 100%;">
-            <p>Select an option from the sidebar to get started.</p>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
 
-           
+    <!-- Header -->
+    <header class="header">
+        <h1>I Love Rajakhera</h1>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        height: 100vh;
-    }
+    </header>
 
-    .container {
-        display: flex;
-        width: 100%;
-    }
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    .sidebar {
-        width: 250px;
-        background-color: rgb(8, 105, 73);
-        color: white;
-        padding: 20px;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        height: 100vh;
-        position: fixed;
-        overflow-y: auto;
-    }
+    <!-- Main Content -->
+    <main>
+        <section id="home"><h2>Home Section</h2><p>Content goes here...</p></section>
+        <section id="about"><h2>About Section</h2><p>Content goes here...</p></section>
+        <section id="services"><h2>Services Section</h2><p>Content goes here...</p></section>
+        <section id="contact"><h2>Contact Section</h2><p>Content goes here...</p></section>
+    </main>
 
-    .sidebar h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 30px;
-    }
+    <!-- JavaScript for Preloader and Sticky Navbar -->
+    <script>
+        // Function to hide the preloader once the page is fully loaded
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+        });
 
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-    }
+        // JavaScript to activate sticky class on scroll
+        window.onscroll = function() { stickyNav() };
 
-    .sidebar ul li {
-        margin: 15px 0;
-    }
+        const navbar = document.getElementById("navbar");
+        const sticky = navbar.offsetTop;
 
-    .sidebar ul li a {
-        color: white;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        font-size: 22px;
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .sidebar ul li a:hover {
-        background-color: rgb(56, 54, 54);
-    }
-
-    .main-content {
-        flex: 1;
-        padding: 20px;
-        background-color: #fff;
-        margin-left: 270px; /* Adjust this margin to match sidebar width + padding */
-    }
-
-    .main-content h1 {
-        margin-top: 0;
-    }
-
-    hr {
-        background-color: orangered;
-        height: 3px;
-        border: none;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    table th, table td {
-        padding: 10px;
-        text-align: left;
-    }
-
-    table th {
-        background-color: orange;
-        color: white;
-    }
-
-    table tbody tr:hover {
-        background-color: #f2f2f2;
-    }
-</style>
+        function stickyNav() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky");
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>
