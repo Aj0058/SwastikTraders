@@ -1,0 +1,235 @@
+{% extends 'Store/layouts/main.html' %}
+{% load static %}
+
+<div class="container" style="height: 100%; max-width: 100%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow product_data" style="margin-top: 70px; height: auto; border: groove; border-color: cadetblue; border-width: 1px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            {% if product.Tag %}
+                                <label class="product-view-tag" style="font-size: 16px; font-weight: bold; border-radius: 2px; padding: 2px; text-align: center; background-color: green; color: white; margin-top: 10px; font-weight: 800; font-family: 'Times New Roman', Times, serif; width: 70px;">{{ product.Tag }}</label>
+                            {% endif %}  
+                            <img src="{{ product.Product_image.url }}" class="w-100 main-image" alt="image" style="border-color: #ccc; border-radius: 0px; width: 220px; height: 350px; margin-top: 10px;">
+                            {% for image in product.Product.all %}
+                                <a href="#" class="thumbnail-link" data-image-url="{{ image.image.url }}" style="margin-left: 10px;">
+                                    <img src="{{ image.image.url }}" class="thumbnail-image shadow" width="70" height="70" alt="image" style="border-style: ridge; border-width: 2px; border-color: aquamarine; margin-top: 10px; border-radius: 5px;">
+                                </a>
+                            {% endfor %}                   
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="mb-0" style="font-family: 'Times New Roman', Times, serif;">
+                                {{ product.name }}
+                                {% if product.trending %}
+                                    <label class="float-end badge bg-primary trending_tag" style="font-size: 16px; margin-top: 10px; border-radius: 2px; width: 100px;">Trending</label>
+                                {% endif %} 
+                            </h2>      
+                            <hr>
+                            <label class="me-3 fw-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">Original Rs.<s style="color: red;">{{ product.Orignal_Price|stringformat:'d' }}</s></label>
+                            <label class="fw-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">Selling Rs.{{ product.Selling_Price|stringformat:'d' }}</label>    
+                            <p class="mt-3" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">
+                            {{product.Small_description}}
+                            </p>
+                            <hr>
+                            {% if product.quantity > 0 %}
+                            <label class="badge bg-success">In Stock</label>
+                            {% else %}
+                            <label class="badge bg-danger">Out of Stock</label>  
+                            {% endif %}
+                            <div class="col-md-3">
+                                {% csrf_token %}    
+                                <input type="hidden" value="{{ product.id }}" class="prod_id">
+                                <label for="Quantity" style="font-family: 'Times New Roman', Times, serif; font-size: 25px;">Quantity</label>
+                                <div class="input-group text-center mb-3" style="width: 150px;">
+                                    <button id="dec-btn" onclick="dec()" class="input-group-text-decrement-btn" style="border-radius: 5px; background-color: lightgray; width: 35px; font-size: 25px; text-align: center; color: black; font-family: Serif;">-</button> 
+                                    <input id="q-item" type="text" name="Quantity" class="form-control qty-input text-center shadow" value="0" style="border-radius: 2px;">
+                                    <button id="inc-btn" onclick="inc()" class="input-group-text-Increment-btn" style="border-radius: 5px; background-color: lightgray; width: 30px; font-size: 25px; color: black; font-family: Serif">+</button>
+                                </div>
+                                <div class="col-md-10">
+                                    <br/>
+                                    <button type="button" class="btn btn-primary me-3 float-start addToCartBtn" style="font-size: 16px; border: black; font-family: serif; font-weight: 800; color: white; margin-top: 50px; margin-left: 200px; width: 150px; height: 40px;">Add to Cart  <i class="fa fa-shopping-cart" style="font-size: 20px; color: black;"></i></button>
+
+                                    <button type="button" class="btn btn-success me-3 float-start addToWishlistBtn" style="font-size: 15px; border: black; font-family: serif; font-weight: 800; color: white; margin-top: -40px; margin-left: 20px; width: 150px; height: 40px;">Add to Wishlist   <i class="fa fa-heart" style="font-size: 20px; color: red;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h3 style="margin-left: 10px; margin-top: 50px; border-radius: 7px; color: black; width: 200px; text-align: center; font-family: 'Times New Roman', Times, serif;">Description</h3>
+                    <p class="mt-0" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif; font-size: 20px;">
+                    {{product.description}}
+                    </p>    
+                </div>    
+            </div>
+        </div>
+    </div>     
+</div>
+
+<script>
+    function dec(){
+        var x = document.getElementById('q-item');
+        var quantity = parseInt(x.value) ;
+
+        quantity = quantity-1;
+        if(quantity<0){
+            alert("Quantity cannot be negative");
+            return;
+        }
+        x.value = quantity;
+    }
+
+    function inc(){
+        var x = document.getElementById('q-item');
+        var quantity = parseInt(x.value) ;
+
+        quantity = quantity+1;
+        if(quantity > 10){
+            alert("Maximum limit reached");
+            return ;
+        }
+
+        x.value = quantity;
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var mainImage = document.querySelector('.main-image');
+        var thumbnailLinks = document.querySelectorAll('.thumbnail-link');
+
+        thumbnailLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var imageUrl = this.getAttribute('data-image-url');
+                mainImage.setAttribute('src', imageUrl);
+            });
+        });
+    });
+</script>
+<script>
+    // Function to handle the "Add to Cart" button click event
+    function addToCart() {
+        // Trigger Alertify notification for adding to cart
+        alertify.success('Your product has been added to the cart');
+    }
+
+    // Function to handle the "Add to Wishlist" button click event
+    function addToWishlist() {
+        // Trigger Alertify notification for adding to wishlist
+        alertify.success('Your product has been added to the wishlist');
+    }
+
+    // Decrease quantity function
+    function dec(){
+        var x = document.getElementById('q-item');
+        var quantity = parseInt(x.value) ;
+
+        quantity = quantity - 1;
+        if(quantity < 0){
+            alert("Quantity cannot be negative");
+            return;
+        }
+        x.value = quantity;
+    }
+
+    // Increase quantity function
+    function inc(){
+        var x = document.getElementById('q-item');
+        var quantity = parseInt(x.value) ;
+
+        quantity = quantity + 1;
+        if(quantity > 10){
+            alert("Maximum limit reached");
+            return;
+        }
+
+        x.value = quantity;
+    }
+
+    // Event listener for DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", function() {
+        var mainImage = document.querySelector('.main-image');
+        var thumbnailLinks = document.querySelectorAll('.thumbnail-link');
+
+        thumbnailLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var imageUrl = this.getAttribute('data-image-url');
+                mainImage.setAttribute('src', imageUrl);
+            });
+        });
+
+        // Event listener for "Add to Cart" button
+        document.querySelector('.addToCartBtn').addEventListener('click', addToCart);
+
+        // Event listener for "Add to Wishlist" button
+        document.querySelector('.addToWishlistBtn').addEventListener('click', addToWishlist);
+    });
+</script>
+
+<style>
+    @media (max-width: 768px) {
+        .container {
+            width: 100%;
+        }
+        .card {
+            height: auto;
+        }
+        .main-image {
+            width: 100%;
+            height: auto;
+        }
+        .thumbnail-image {
+            width: 50px;
+            height: 50px;
+        }
+        .product-view-tag,
+        .trending_tag {
+            font-size: 14px;
+            width: auto;
+        }
+        .fw-bold {
+            font-size: 16px;
+        }
+        .btn {
+            width: 100px;
+            height: 30px;
+            font-size: 12px;
+        }
+        .qty-input {
+            width: 50px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 15px;
+        }
+        .main-image {
+            width: 100%;
+            height: auto;
+        }
+        .thumbnail-image {
+            width: 40px;
+            height: 40px;
+        }
+        .product-view-tag,
+        .trending_tag {
+            font-size: 12px;
+            width: auto;
+        }
+        .fw-bold {
+            font-size: 14px;
+        }
+        .btn {
+            width: 80px;
+            height: 25px;
+            font-size: 10px;
+        }
+        .qty-input {
+            width: 40px;
+        }
+    }
+</style>

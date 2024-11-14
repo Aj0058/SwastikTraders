@@ -14,7 +14,7 @@
                                 <div class="category-image">
                                     <img src="{{ item.image.url }}" alt="category image" class="w-100" style="height: 270px; object-fit: cover;" />
                                 </div>
-                                <p style="font-family: 'Times New Roman', Times, serif; text-align: center; font-size: 25px; color: darkgoldenrod; margin: 15px 0;">{{ item.name }}</p>
+                                <p style="font-family: 'Times New Roman', Times, serif; text-align: center; font-size: 25px; color:Red; margin: 15px 0;">{{ item.name }}</p>
                             </div>
                         </a>
                     </div>
@@ -29,17 +29,18 @@
     .card {
         width: 80%;
         margin-top: 100px;
-        background-color: rgb(10, 10, 59);
+        background-color: black;
         user-select: none;
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        
     }
 
     .card:hover {
-        background-color: black;
-        color: aliceblue;
+        background-color: darkgoldenrod;
         transition: 0.5s ease;
         user-select: none;
         box-shadow: 0px 0px 4px black;
+
     }
 
     .category-image img {
@@ -64,28 +65,28 @@
 <footer>
     <div class="footer-col about">
         <h4>About us</h4>
-        <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
+        <p style="color: Orange;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
     </div>
     <div class="footer-col services">
         <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
         <ul style="margin-left: 120px;">
-            <li><a href="#">Home Appliences</a></li>
-            <li><a href="#">Kitchen Appliences</a></li>
-            <li><a href="#">Washroom Ware</a></li>
-            <li><a href="#">Handlooms</a></li>
-            <li><a href="#">Bags and Switcase</a></li>
-            <li><a href="#">Moulded Furniture</a></li>
-            <li><a href="#">Glasses and Mugs</a></li>
+            <li><a href="{% url 'collections' %}">Home Appliences</a></li>
+            <li><a href="{% url 'collections' %}">Kitchen Appliences</a></li>
+            <li><a href="{% url 'collections' %}">Washroom Ware</a></li>
+            <li><a href="{% url 'collections' %}">Handlooms</a></li>
+            <li><a href="{% url 'collections' %}">Bags and Switcase</a></li>
+            <li><a href="{% url 'collections' %}">Moulded Furniture</a></li>
+            <li><a href="{% url 'collections' %}">Glasses and Mugs</a></li>
         </ul>
     </div>
     <div class="footer-col company">
         <h4 style="margin-left: 50px;">Company</h4>
         <ul style="margin-left: 50px;">
-            <li><a href="http://127.0.0.1:1000/About/">About</a></li>
+            <li><a href="{% url 'Aboutus' %}">About</a></li>
             <li><a href="http://127.0.0.1:1000/contact/">Legal</a></li>
-            <li><a href="http://127.0.0.1:1000/contact/">Contact us</a></li>
-            <li><a href="http://127.0.0.1:1000/contact/">Feedback</a></li>
-            <li><a href="http://127.0.0.1:1000/contact/">Product Complaints</a></li>
+            <li><a href="{% url 'Contact' %}">Contact us</a></li>
+            <li><a href="{% url 'Feedbacks' %}">Feedback</a></li>
+            <li><a href="{% url 'Complaint' %}">Product Complaints</a></li>
            
         </ul>
     </div>
@@ -99,7 +100,8 @@
         </div>
     </div>
     <div class="line">
-        <p style="font-size: 20px;color:white;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+        <p style="font-size: 20px;color:Orange;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+        
     </div>
 </footer>
 
@@ -107,7 +109,7 @@
 footer {
     display: flex;
     flex-wrap: wrap;
-    background-color: rgb(6, 8, 71);
+    background-color:black;
     padding: 40px 5%;
     color: black;
     margin-top: 300px;
@@ -131,7 +133,7 @@ footer {
 }
 
 .footer-col p {
-    color: white;
+    color: Orange;
     font-size: 20px; /* Adjusted for consistent sizing */
 }
 
@@ -159,7 +161,7 @@ ul li a {
     display: block;
     font-size: 23px;
     text-transform: capitalize;
-    color: white;
+    color: Orange;
     text-decoration: none;
     transition: 0.4s;
     font-family: "Lora";
@@ -175,7 +177,7 @@ ul li a:hover {
     height: 50px;
     width: 45px;
     color: black;
-    background-color: rgba(40, 130, 214, 0.8);
+    background-color: Orange;
     margin: 0 10px 10px 0;
     text-align: center;
     line-height: 44px;
@@ -184,14 +186,15 @@ ul li a:hover {
 }
 
 .links a:hover {
-    color: white;
-    background-color: Orange;
+    color: orange;
+    background-color: black;
+    box-shadow: 5px 5px 0px orange;
 }
 
 .line {
     text-align: center;
     font-size: 20px; /* Ensure readability */
-    color: white;
+    color: orange;
     margin-top: 20px;
 }
 
@@ -236,15 +239,7 @@ ul li a:hover {
 
 
 
-<script>
-    // Set Alertify notifier position
-    alertify.set('notifier', 'position', 'top-right');
 
-    // Loop through messages and display them using Alertify
-    {% for msg in messages %}
-        alertify.success('{{ msg }}');
-    {% endfor %}
-</script>
 
 <style>
     /* Style for Alertify notifications */

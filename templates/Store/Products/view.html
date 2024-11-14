@@ -10,12 +10,12 @@
 <div class="container" style="height: 150%; width: 120%;">
     <div class="row">
         <div class="col-md-12">
-            <div class="card shadow product_data" style="margin-top: 70px; height: 830px; border: groove; border-color: cadetblue; border-width: 1px; background-color: rgb(25, 211, 211);">
+            <div class="card shadow product_data" style="margin-top: 70px; height: 830px; border: groove; border-color: cadetblue; border-width: 1px; background-color: black;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 text-center">
                             {% if product.Tag %}
-                                <label class="product-view-tag" style="font-size: 16px; font-weight: bold; border-radius: 2px; padding: 2px; text-align: center; background-color: green; color: white; margin-top: 10px; font-weight: 800; font-family: 'Times New Roman', Times, serif; width: 70px;">{{ product.Tag }}</label>
+                                <label class="product-view-tag" style="font-size: 16px; font-weight: bold; border-radius: 2px; padding: 2px; text-align: center; background-color: green; color: white; margin-top: 10px; font-weight: 800; font-family: 'Times New Roman', Times, serif; width: 70px;color:darkgoldenrod">{{ product.Tag }}</label>
                             {% endif %}
                             <img src="{{ product.Product_image.url }}" class="w-100 main-image" alt="image" style="border-color: #ccc; border-radius: 0px; width: 220px; height: 350px; margin-top: 10px;">
                             {% for image in product.Product.all %}
@@ -25,17 +25,17 @@
                             {% endfor %}
                         </div>
                         <div class="col-md-8">
-                            <h2 class="mb-0" style="font-family: 'Times New Roman', Times, serif;">
+                            <h2 class="mb-0" style="font-family: 'Times New Roman', Times, serif;color:darkgoldenrod">
                                 {{ product.name }}
                                 {% if product.trending %}
-                                    <label class="float-end badge bg-primary trending_tag" style="font-size: 16px; margin-top: 10px; border-radius: 2px; width: 100px; background-color: black;">Trending</label>
+                                    <label class="float-end badge bg-primary trending_tag" style="font-size: 16px; margin-top: 10px; border-radius: 2px; width: 100px; background-color:darkgoldenrod;">Trending</label>
                                 {% endif %}
                             </h2>
                             <hr>
-                            <label class="me-3 fw-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">Original Rs.<s style="color: red;">{{ product.Orignal_Price|stringformat:'d' }}</s></label>
-                            <label class="fw-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">Selling Rs.{{ product.Selling_Price|stringformat:'d' }}</label>
-                            <p class="mt-3" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">{{ product.Small_description }}</p>
-                            <p class="me-3 fw-bold" style="font-size: 23px; font-family: 'Times New Roman', Times, serif;">{{ product.Size }}</p>
+                            <label class="me-3 fw-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;color: darkgoldenrod;">Original Rs.<s style="color:darkgoldenrod;">{{ product.Orignal_Price|stringformat:'d' }}</s></label>
+                            <label class="fw-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;color:darkgoldenrod">Selling Rs.{{ product.Selling_Price|stringformat:'d' }}</label>
+                            <p class="mt-3" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;color: darkgoldenrod;">{{ product.Small_description }}</p>
+                            <p class="me-3 fw-bold" style="font-size: 23px; font-family: 'Times New Roman', Times, serif;color:darkgoldenrod">{{ product.Size }}</p>
                             <hr>
                             {% if product.quantity > 0 %}
                                 <label class="badge bg-success">In Stock</label>
@@ -45,7 +45,7 @@
                             <div class="col-md-3">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{ product.id }}" class="prod_id">
-                                <label for="Quantity" style="font-family: 'Times New Roman', Times, serif; font-size: 25px;">Quantity</label>
+                                <label for="Quantity" style="font-family: 'Times New Roman', Times, serif; font-size: 25px;color:darkgoldenrod">Quantity</label>
                                 <div class="input-group text-center mb-3" style="width: 150px;">
                                     <button id="dec-btn" onclick="dec()" class="input-group-text-decrement-btn" style="border-radius: 5px; background-color: lightgray; width: 35px; font-size: 25px; text-align: center; color: black; font-family: Serif;">-</button>
                                     <input id="q-item" type="text" name="Quantity" class="form-control qty-input text-center shadow" value="1" style="border-radius: 2px; width: 50px;">
@@ -62,9 +62,9 @@
                 </div>
 
                 <div class="col-md-12">
-                    <h3 style="margin-left: 10px; margin-top: 50px; border-radius: 7px; color: black; width: 200px; text-align: center; font-family: 'Times New Roman', Times, serif; background-color: brown; color: #fff;">Description</h3>
-                    <p class="mt-0" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif; font-size: 20px;">{{ product.description }}</p>
-                    <p class="mt-0" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif; font-size: 20px;">{{ product.description2 }}</p>
+                    <h3 style="margin-left: 10px; margin-top: 50px; border-radius: 7px; color: black; width: 200px; text-align: center; font-family: 'Times New Roman', Times, serif; background-color: darkgoldenrod; color: #fff;">Description</h3>
+                    <p class="mt-0" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif; font-size: 20px;color: darkgoldenrod;">{{ product.description }}</p>
+                    <p class="mt-0" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif; font-size: 20px;color: darkgoldenrod;">{{ product.description2 }}</p>
                 </div>
             </div>
         </div>
@@ -366,7 +366,7 @@
 <footer>
     <div class="footer-col about">
         <h4>About us</h4>
-        <p style="color: white;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
+        <p style="color: Orange;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
     </div>
     <div class="footer-col services">
         <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
@@ -401,7 +401,8 @@
         </div>
     </div>
     <div class="line">
-        <p style="font-size: 20px;color:white;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+        <p style="font-size: 20px;color:Orange;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+        
     </div>
 </footer>
 
@@ -409,7 +410,7 @@
 footer {
     display: flex;
     flex-wrap: wrap;
-    background-color: rgb(6, 8, 71);
+    background-color:black;
     padding: 40px 5%;
     color: black;
     margin-top: 300px;
@@ -433,7 +434,7 @@ footer {
 }
 
 .footer-col p {
-    color: white;
+    color: Orange;
     font-size: 20px; /* Adjusted for consistent sizing */
 }
 
@@ -461,7 +462,7 @@ ul li a {
     display: block;
     font-size: 23px;
     text-transform: capitalize;
-    color: white;
+    color: Orange;
     text-decoration: none;
     transition: 0.4s;
     font-family: "Lora";
@@ -477,7 +478,7 @@ ul li a:hover {
     height: 50px;
     width: 45px;
     color: black;
-    background-color: rgba(40, 130, 214, 0.8);
+    background-color: Orange;
     margin: 0 10px 10px 0;
     text-align: center;
     line-height: 44px;
@@ -486,14 +487,15 @@ ul li a:hover {
 }
 
 .links a:hover {
-    color: white;
-    background-color: Orange;
+    color: orange;
+    background-color: black;
+    box-shadow: 5px 5px 0px orange;
 }
 
 .line {
     text-align: center;
     font-size: 20px; /* Ensure readability */
-    color: white;
+    color: orange;
     margin-top: 20px;
 }
 
@@ -538,15 +540,7 @@ ul li a:hover {
 
 
 
-<script>
-    // Set Alertify notifier position
-    alertify.set('notifier', 'position', 'top-right');
 
-    // Loop through messages and display them using Alertify
-    {% for msg in messages %}
-        alertify.success('{{ msg }}');
-    {% endfor %}
-</script>
 
 <style>
     /* Style for Alertify notifications */
@@ -562,5 +556,6 @@ ul li a:hover {
 
 }
 </style>
+
 
 {% endblock content %}

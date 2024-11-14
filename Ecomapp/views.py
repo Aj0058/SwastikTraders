@@ -571,10 +571,17 @@ def Book(request):
      return render(request,'Book.html',context)
 
 def vieworder(request, t_no):
-    order = get_object_or_404(Order, tracking_no=t_no, user=request.user)
-    orderitems = Orderitem.objects.filter(order=order)
-    context = {'order': order, 'orderitems': orderitems}
+    try:
+        order = get_object_or_404(Order, tracking_no=t_no, user=request.user)
+        orderitems = Orderitem.objects.filter(order=order)
+        context = {'order': order, 'orderitems': orderitems}
+    except Exception as e:
+        logging.error(f"Error retrieving order or items for tracking number {t_no}: {e}")
+        # Optional: redirect to an error page or display an error message
+        context = {'error_message': 'An error occurred while retrieving your order. Please try again later.'}
+
     return render(request, 'views.html', context)
+
 
 def already(request):
     return render(request,'already.html')
@@ -608,3 +615,13 @@ def Razorpaycheck(request):
         total_price += item.product.Selling_Price * item.product_qty
     
     return JsonResponse({'total_price': total_price})
+
+
+
+
+def Gallary(request):
+    return render(request,'Gall.html')    
+
+
+def Vidios(request):
+    return render(request,'Vidio.html')    

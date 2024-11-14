@@ -21,7 +21,8 @@ urlpatterns = [
     path('delete-cart-item/', views.delete_cart_item, name='delete_cart_item'),
     path('placeOrder/', views.placeorder2, name='placeorder'),
     path('Pay/', views.Pay, name='Pay'),
-    
+    path('Gall/',views.Gallary,name='Gallery'),
+    path('Vidios/',views.Vidios,name='Vidios'),
     
     
     
