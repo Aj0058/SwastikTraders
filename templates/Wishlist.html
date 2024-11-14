@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card shadow product_data" style="border-radius: 2px; font-size: 25px; font-weight: bold; font-family: 'Times New Roman', Times, serif;background-color: beige;">
+                <div class="card shadow product_data" style="border-radius: 2px; font-size: 25px; font-weight: bold; font-family: 'Times New Roman', Times, serif;background-color:white;">
                     <div class="card-body cartdata">
                         {% if wishlist %}
                             {% for item in wishlist %}
@@ -15,10 +15,10 @@
                                         <img src="{{ item.product.Product_image.url }}" height="130px" width="130px" style="user-select: none;">
                                     </div>
                                     <div class="col-md-3 my-auto">
-                                        <h6 style="font-size: 20px; font-family: 'Times New Roman', Times, serif;">{{ item.product.name }}</h6>
+                                        <h6 style="font-size: 25px; font-family: 'Times New Roman', Times, serif;">{{ item.product.name }}</h6>
                                     </div>
                                     <div class="col-md-2 my-auto">
-                                        <h6 style="font-size: 20px;">Rs.{{ item.product.Selling_Price|stringformat:'d' }}</h6>
+                                        <h6 style="font-size: 25px;">Rs.{{ item.product.Selling_Price|stringformat:'d' }}</h6>
                                     </div>
                                     <div class="col-md-2 my-auto">
                                         <a href="{% url 'productview' item.product.category.slug item.product.slug %}" style="font-size: 18px; margin-top: 10px; background-color: rgb(46, 46, 168); border-color: blue;" class="btn btn-danger delete-cart-item"><i class="fa-solid fa-eye"></i> View order</a>

@@ -32,7 +32,7 @@
                     <a style="color: white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Features
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: white">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #170c49;color: white">
                       <li><a class="dropdown-item" href="{% url 'Features' %}">Our Features</a></li>
                     </ul>
                   </li>
@@ -42,7 +42,7 @@
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
                       Category
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #160855;color: White;">
                       <li><a class="dropdown-item" href="{% url 'collections' %}">Collections</a></li>
                       <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/Electronics">Home Appliences</a></li>
                       <li><a class="dropdown-item" href="http://127.0.0.1:2000/collections/KitchenWare">Kitechen Appliences</a></li>
@@ -59,7 +59,7 @@
                     <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Orders
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #100742;color: burlywood;">
                       <li><a class="dropdown-item" href="{% url 'Cart' %}">Cart</a></li>
                       <li><a class="dropdown-item" href="{% url 'Wishlist' %}">Wishlist</a></li>
                       <li><a class="dropdown-item" href="{% url 'Booking' %}">My Orders</a></li>
@@ -76,7 +76,7 @@
                     <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       ContactUs
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #11b894;color: burlywood;">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #16076b;color: burlywood;">
                         <li><a class="dropdown-item" href="{% url 'Contact' %}">Contact Now</a></li>
                         <li><a class="dropdown-item" href="{% url 'Feedbacks' %}">Feedback</a></li>
                         <li><a class="dropdown-item" href="{% url 'Complaint' %}">Product Compliant</a></li>
@@ -94,7 +94,7 @@
                             type="search" 
                             placeholder="Search products" 
                             aria-label="Search" 
-                            style="background-color: burlywood; font-size: 25px;"
+                            style="background-color: white; font-size: 25px;"
                         >
                         <button 
                             class="btn btn-outline-success" 
@@ -132,6 +132,11 @@ body {
        
 }
 
+.Search_bar{
+    position: relative; /* or 'fixed' if you want it to stay at the top */
+    z-index: 1000; /* Higher than other elements on the page */
+}
+
 
 
 .top-icons {
@@ -140,7 +145,7 @@ body {
 
 .top-icons i {
     font-size: 25px;
-    color: #1c1c50;
+    color: #d1d1da;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -159,7 +164,7 @@ transition: 0.5s ease;
 }
 
 .other-links i {
-    color: #1c1c50;
+    color: #06062c;
     font-size: 28px;
     margin-left: 20px;
     cursor: pointer;
@@ -242,8 +247,20 @@ transition: 0.5s ease;
         height: 4vh;
     }
 
+    .navbar-nav{
+        background-color:#1c1c50;
+        height:500px;
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap; 
+        position: relative; /* or 'fixed' if you want it to stay at the top */
+        z-index: 1000; /* Higher than other elements on the page */
+    
+    }
+
     .navbar-nav .nav-item .nav-link {
         font-size: 14px;
+    
     }
 
     .navbar-brand img {
@@ -414,7 +431,7 @@ transition: 0.5s ease;
 
 /* navbar */
 #navbar {
-    background-color: #11b894;
+    background-color: #13064e;
     font-size: 15px;
     font-family: 'Roboto Slab', serif;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -437,7 +454,7 @@ transition: 0.5s ease;
 }
 
 .dropdown li a {
-    color: black;
+    color:White;
     font-size: 20px;
    
 }

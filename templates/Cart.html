@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card shadow product_data" style="border-radius: 2px; font-size: 23px;font-weight: bold;font-family: 'Times New Roman', Times, serif;background-color: bisque;z-index:800;">
+                <div class="card shadow product_data" style="border-radius: 2px; font-size: 23px;font-weight: bold;font-family: 'Times New Roman', Times, serif;background-color: White;z-index:800;">
                     <div class="card-body">
                         {% if cart %}
                             {% for item in cart %}
@@ -15,10 +15,10 @@
                                         <img src="{{ item.product.Product_image.url }}" height="130px" width="130px" style="user-select: none;">
                                     </div>
                                     <div class="col-md-3 my-auto">
-                                        <h6 style="font-size: 20px; font-family: 'Times New Roman', Times, serif;">{{ item.product.name }}</h6>
+                                        <h6 style="font-size: 25px; font-family: 'Times New Roman', Times, serif;">{{ item.product.name }}</h6>
                                     </div>
                                     <div class="col-md-2 my-auto">
-                                        <h6 style="font-size: 20px;">Rs.{{ item.product.Selling_Price|stringformat:'d' }}</h6>
+                                        <h6 style="font-size: 25px;">Rs.{{ item.product.Selling_Price|stringformat:'d' }}</h6>
                                     </div>
                                     <div class="col-md-3 my-auto">
                                         <input type="hidden" class="prod_id" value="{{ item.product_id }}">
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                                <a href="http://127.0.0.1:2000/Checkout/" style="border: ridge;border-radius: 5px;padding:10px;text-decoration: none;border-width: 2px;border-color: blue;color: white;margin-left: 0px;background-color: blue;width:350px;"></i> CheckOut</a>
+                                <a href="http://127.0.0.1:2000/Checkout/" style="border: ridge;border-radius: 25px;padding:10px;text-decoration: none;border-width: 0.5px;color: black;margin-left: 0px;background-color:yellow;width:550px;"></i> CheckOut</a>
                             {% else %}
                             <p>Your cart is empty.</p>
                         {% endif %}
