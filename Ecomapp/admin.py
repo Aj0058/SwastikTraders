@@ -17,6 +17,10 @@ admin.site.register(Wishlist)
 admin.site.register(Order)
 admin.site.register(Orderitem)    
 admin.site.register(Profile)    
+admin.site.register(Photo)    
+admin.site.register(Video)    
+admin.site.register(Brands)    
+admin.site.register(Logo)    
 
 
 

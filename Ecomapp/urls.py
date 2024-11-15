@@ -23,6 +23,7 @@ urlpatterns = [
     path('Pay/', views.Pay, name='Pay'),
     path('Gall/',views.Gallary,name='Gallery'),
     path('Vidios/',views.Vidios,name='Vidios'),
+    path('Companies/',views.Companies,name='Companies'),
     
     
     

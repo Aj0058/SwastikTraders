@@ -10,6 +10,8 @@ def get_file_path(instance, filename):
     now_time = datetime.datetime.now().strftime('%y%m%d%H%M%S')
     filename ="%s%s" %(now_time,original_filename)
     return os.path.join('uploads/', filename)
+    return f"uploads/videos/{filename}"
+    return f"uploads/brands/{filename}"
 
 class Category(models.Model):  
     slug = models.CharField(max_length=150, null=False, blank=False)
@@ -26,6 +28,32 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
+
+class Photo(models.Model):  
+    image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Brands(models.Model):  
+    image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+class Logo(models.Model):  
+    Logo = models.ImageField(upload_to=get_file_path, null=True, blank=True)
+    name = models.CharField(max_length=200,null=True,blank=True)
+    Description = models.CharField(max_length=1200,null=True,blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+
+class Video(models.Model):
+    title = models.CharField(max_length=255)  # Title of the video
+    description = models.TextField(blank=True, null=True)  # Description of the video
+    video_file = models.FileField(upload_to=get_file_path)  # Video file upload
+    created_at = models.DateTimeField(auto_now_add=True)  # Date and time the video was created
+
+   
 
 
 class Product(models.Model):

@@ -619,9 +619,18 @@ def Razorpaycheck(request):
 
 
 
+
 def Gallary(request):
-    return render(request,'Gall.html')    
+    photos = Photo.objects.filter()  # Renamed variable to avoid conflict
+    context = {'photo': photos}  # Keep the key as 'photo' for template consistency
+    return render(request, 'Gall.html', context)
 
 
 def Vidios(request):
     return render(request,'Vidio.html')    
+
+
+def Companies(request):
+    brands = Brands.objects.all()  # Fetch all Brand objects
+    context = {'Brands': brands}  # Corrected the key name to lowercase
+    return render(request, 'Companies.html', context)  # Pass the context to render

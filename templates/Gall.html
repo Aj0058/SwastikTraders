@@ -4,18 +4,20 @@
 {% block content %}
 
 <div class="heading">
-    <img class="logoimg" src="{% static 'Images/Gif2.gif' %}">
     <h1>Gallery of Swastik Traders</h1>
     <p>Explore our diverse range of high-quality products at Swastik Traders. Our gallery showcases our latest collections across electronics, furniture, kitchen appliances, and more, designed to meet every need and taste. With over a decade of experience, we take pride in offering reliable, stylish, and modern products for your home and lifestyle. Scroll through our gallery to see the variety, quality, and innovation that make Swastik Traders a trusted name in the industry.</p>
 </div>
 
 <div class="Vidios">
-    <img class="video-img" src="{% static 'Images/lunch33.jpg' %}">
-    
+    {% for photo in photo %}
+        <img class="video-img" src="{{ photo.image.url }}" alt="Video Thumbnail">
+    {% empty %}
+        <p>No images available in the gallery.</p>
+    {% endfor %}
 </div>
-
 <style>
 /* Center the image above the text */
+
 .heading {
     text-align: center;
     padding: 50px 5%;
@@ -34,25 +36,37 @@
     font-weight: bold;
     font-size: 2.5rem; /* Increase font size */
     margin-top: 20px;
+    color: darkgoldenrod;
 }
 
 .heading p {
-    font-family: Cursive;
+    font-family:'sans-serif';
     font-size: 1.2rem; /* Increase font size */
-    color: Orangered;
+    color:darkgoldenrod;
     max-width: 90%;
     margin: 10px auto;
     width: 800px;
 }
 
 /* Style for video section image */
-.Vidios .video-img {
-    width: 250px;
-    height: auto;
-    margin: 20px auto;
-    display: block;
-    user-select: none;
-}
+/* Basic styling for the video gallery */
+.Vidios {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-left: 5px;
+        }
+        .video-img {
+            width: 350px;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            transition: transform 0.3s;
+        }
+        .video-img:hover {
+            transform: scale(1.20);
+        }
 </style>
 
 
@@ -177,7 +191,7 @@ footer {
     background-color:black;
     padding: 40px 5%;
     color: black;
-    margin-top: 300px;
+    margin-top: 200px;
     height: auto; /* Change from fixed height */
 }
 
