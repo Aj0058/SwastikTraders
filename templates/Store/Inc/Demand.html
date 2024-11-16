@@ -55,7 +55,7 @@
     <img src="{% static 'Images/bott.jpg' %}" alt="Banner Image">
     <div class="overlay"></div>    
     <p class="thot">"If you like our products please give us feedback"</p>
-    <a class="Click" href="{% url 'Feedbacks' %}">Feedback</a>
+    <a class="Click" href="{% url 'Feedbacks' %}">FEEDBACK</a>
 </div>
 
 <style>
@@ -113,13 +113,14 @@
         border-radius:30px;
         width: 250px;
         padding:10px;
-        background-color: rgb(12, 12, 66);
+        background-color: darkgoldenrod;
         border-width: 1px;
+        
     }
     .Click:hover{
-        background-color: aliceblue;
-        color: rgb(9, 9, 56);
-        transition: 0.5S EASE;
+        background-color: transparent;
+        color: white;
+
 
     }
     @media (max-width: 768px) {

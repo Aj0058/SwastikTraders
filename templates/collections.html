@@ -14,7 +14,7 @@
                                 <div class="category-image">
                                     <img src="{{ item.image.url }}" alt="category image" class="w-100" style="height: 270px; object-fit: cover;" />
                                 </div>
-                                <p style="font-family: 'Times New Roman', Times, serif; text-align: center; font-size: 25px; color:Red; margin: 15px 0;">{{ item.name }}</p>
+                                <p style="font-family: 'Times New Roman', Times, serif; text-align: center; font-size: 25px; color:White; margin: 15px 0;text-transform: uppercase;">{{ item.name }}</p>
                             </div>
                         </a>
                     </div>
@@ -40,7 +40,7 @@
         transition: 0.5s ease;
         user-select: none;
         box-shadow: 0px 0px 4px black;
-
+        box-shadow:black;
     }
 
     .category-image img {
@@ -61,22 +61,21 @@
 
 
 
-
 <footer>
     <div class="footer-col about">
         <h4>About us</h4>
-        <p style="color: Orange;font-size: 20px;">I am a skilled web developer specializing in Python full stack development. With expertise in both front-end and back-end technologies, I create responsive, high-quality web applications tailored to client needs. Let’s collaborate to build exceptional digital solutions together.</p>
+        <p style="color: Orange;font-size: 20px;font-family: 'Times New Roman', Times, serif;">Established in 2010 by the dynamic duo of Mr. Yogendra Kumar Jain and his son Lokesh Jain, our firm has been a trusted name in the electronics and furniture industry for over 15 years. What began as a humble venture in electronics has flourished into a comprehensive enterprise, expanding to include furniture, kitchen appliances, and More.</p>
     </div>
     <div class="footer-col services">
         <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
         <ul style="margin-left: 120px;">
-            <li><a href="{% url 'collections' %}">Home Appliences</a></li>
-            <li><a href="{% url 'collections' %}">Kitchen Appliences</a></li>
-            <li><a href="{% url 'collections' %}">Washroom Ware</a></li>
-            <li><a href="{% url 'collections' %}">Handlooms</a></li>
-            <li><a href="{% url 'collections' %}">Bags and Switcase</a></li>
-            <li><a href="{% url 'collections' %}">Moulded Furniture</a></li>
-            <li><a href="{% url 'collections' %}">Glasses and Mugs</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Electronics">Home Appliences</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/KitchenWare">Kitchen Appliences</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Washroom">Washroom Ware</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Handloom">Handlooms</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Bags">Bags and Switcase</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Plastic%20Furnioture">Moulded Furniture</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Glass">Glasses and Mugs</a></li>
         </ul>
     </div>
     <div class="footer-col company">
@@ -100,7 +99,7 @@
         </div>
     </div>
     <div class="line">
-        <p style="font-size: 20px;color:Orange;">Copyright © 2024 Codestation. All Rights Reserved.</p>
+        <p style="font-size: 20px;color:Orange;font-family: 'Times New Roman', Times, serif;">Copyright © 2024 SwastikTraders. All Rights Reserved.</p>
         
     </div>
 </footer>
@@ -130,6 +129,7 @@ footer {
     color: rgb(156, 47, 14);
     text-transform: capitalize;
     position: relative;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .footer-col p {
