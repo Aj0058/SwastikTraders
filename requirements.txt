@@ -1,0 +1,5 @@
+Django>=4.2,<5.0
+python-decouple>=5.1,<6.0
+psycopg2>=2.9,<3.0  # If you're using PostgreSQL, adjust if using SQLite or other DB
+gunicorn>=20.1,<21.0
+django-environ>=0.8,<1.0  # If you are using django-environ for settings
