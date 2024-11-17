@@ -1,256 +1,194 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <title>
-    {% block title %}
-    {% endblock %}
-  </title>
-  <style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #f8f9fa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 900px;
-        background-color: #fff;
-        border-radius: 20px;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .first-text {
-        color: #333;
-        padding: 40px;
-        font-size: 28px;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 20px;
-        font-family:Serif;
-    }
-
-    .submit-form {
-        width: 100%;
-        padding: 40px;
-        background-color:black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #fff;
-        border-radius: 0 0 20px 20px;
-    }
-
-    .logoimg {
-        width: 200px;
-        height: 200px;
-        margin: 20px auto;
-        user-select: none;
-        animation: rotate 5s linear infinite; 
-        border-radius: 200px;
-
-    }
-    @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-    .Media {
-        font-size: 30px;
-        margin: 20px 0;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .Media i {
-        background-color: black;
-        padding: 10px;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-        border-radius: 50%;
-        color: white;
-        transition: transform 0.3s, background-color 0.3s;
-    }
-
-    .Media i:hover {
-        background-color: orange;
-        transform: translateY(-5px);
-    }
-
-    .Third-text {
-        font-size: 36px;
-        margin-bottom: 40px;
-        text-align: center;
-        color: #fff;
-        font-family: 'Lora', serif;
-        font-weight: bold;
-    }
-
-    form {
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .input-box {
-        position: relative;
-        margin-bottom: 30px;
-    }
-
-    .input {
-        width: 100%;
-        padding: 15px;
-        background: transparent;
-        border: 2px solid #fff;
-        border-radius: 10px;
-        outline: none;
-        color: #fff;
-        font-size: 16px;
-    }
-
-    .input-box label {
-        position: absolute;
-        top: 50%;
-        left: 15px;
-        transform: translateY(-50%);
-        font-size: 16px;
-        color: #fff;
-        pointer-events: none;
-        transition: 0.3s ease;
-    }
-
-    .input:focus ~ label,
-    .input:valid ~ label {
-        top: -10px;
-        left: 15px;
-        background-color: green;
-        padding: 0 5px;
-        font-size: 14px;
-    }
-
-    button.submit-btn {
-        display: block;
-        width: 100%;
-        padding: 15px;
-        background-color: orange;
-        border: none;
-        border-radius: 10px;
-        font-size: 18px;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    button.submit-btn:hover {
-        background-color: #05af77;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .Instruction {
-        margin-top: 20px;
-        font-size: 16px;
-        text-align: center;
-    }
-
-    .Instruction a {
-        color: orange;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    @media (max-width: 850px) {
-        .container {
-            padding: 20px;
-        }
-
-        .first-text {
-            font-size: 24px;
-        }
-
-        .Media i {
-            font-size: 24px;
-            padding: 8px;
-        }
-
-        .input-box label {
-            font-size: 14px;
-        }
-
-        .input {
-            font-size: 14px;
-            padding: 10px;
-        }
-
-        .submit-btn {
-            font-size: 16px;
-            padding: 12px;
-        }
-    }
-  </style>
-</head>
-<body>
-<div class="container">
-    <div class="first-text">Let's Get In Touch</div>
-    <img class="logoimg" src="{% static 'Images/Cont6.webp' %}" alt="Logo">
-    <div class="submit-form">
-        <ul class="Media">
+<footer>
+    <div class="footer-col about">
+        <h4>About us</h4>
+        <p style="color: Orange;font-size: 20px;font-family: 'Times New Roman', Times, serif;">Established in 2010 by the dynamic duo of Mr. Yogendra Kumar Jain and his son Lokesh Jain, our firm has been a trusted name in the electronics and furniture industry for over 15 years. What began as a humble venture in electronics has flourished into a comprehensive enterprise, expanding to include furniture, kitchen appliances, and More.</p>
+    </div>
+    <div class="footer-col services">
+        <h4 style="margin-left: 120px;font-family: 'Times New Roman', Times, serif;font-size: 25px;">Catego</h4>
+        <ul style="margin-left: 120px;">
+            <li><a href="http://127.0.0.1:2000/collections/Electronics">Home Appliences</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/KitchenWare">Kitchen Appliences</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Washroom">Washroom Ware</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Handloom">Handlooms</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Bags">Bags and Switcase</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Plastic%20Furnioture">Moulded Furniture</a></li>
+            <li><a href="http://127.0.0.1:2000/collections/Glass">Glasses and Mugs</a></li>
+        </ul>
+    </div>
+    <div class="footer-col company">
+        <h4 style="margin-left: 50px;">Company</h4>
+        <ul style="margin-left: 50px;">
+            <li><a href="{% url 'Aboutus' %}">About</a></li>
+            <li><a href="http://127.0.0.1:1000/contact/">Legal</a></li>
+            <li><a href="{% url 'Contact' %}">Contact us</a></li>
+            <li><a href="{% url 'Feedbacks' %}">Feedback</a></li>
+            <li><a href="{% url 'Complaint' %}">Product Complaints</a></li>
+           
+        </ul>
+    </div>
+    <div class="footer-col follow">
+        <h4>Follow us</h4>
+        <div class="links">
             <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="https://www.instagram.com/anveshjain1635/"><i class="fab fa-instagram"></i></a>
-        </ul>
-
-        <h4 class="Third-text">Register Now</h4>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="input-box">
-                <input type="text" class="input" name="name" required>
-                <label for="">Name</label>
-            </div>
-            <div class="input-box">
-                <input type="email" class="input" name="email" required>
-                <label for="">Email</label>
-            </div>
-            <div class="input-box">
-                <input type="password" class="input" name="Password1" required>
-                <label for="">Password</label>
-            </div>
-            <div class="input-box">
-                <input type="password" class="input" name="Password2" required>
-                <label for="">Confirm Password</label>
-            </div>
-            <button type="submit" class="submit-btn">Signup</button>
-        </form>
-
-        <div class="Instruction">
-            <p>You already have an account? <a href="{% url.Login %}">Login Now</a></p>
         </div>
     </div>
-</div>
-</body>
-</html>
+    <div class="line">
+        <p style="font-size: 20px;color:Orange;font-family: 'Times New Roman', Times, serif;">Copyright © 2024 SwastikTraders. All Rights Reserved.</p>
+        
+    </div>
+</footer>
+
+<style>
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color:black;
+    padding: 40px 5%;
+    color: black;
+    margin-top: 300px;
+    height: auto; /* Change from fixed height */
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+    text-align: center; /* Center align content on smaller screens */
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 23px;
+    color: rgb(156, 47, 14);
+    text-transform: capitalize;
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.footer-col p {
+    color: Orange;
+    font-size: 20px; /* Adjusted for consistent sizing */
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 50%; /* Center the line */
+    transform: translateX(-50%);
+    bottom: -6px;
+    background-color: green;
+    height: 2px;
+    width: 90px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    display: block;
+    font-size: 23px;
+    text-transform: capitalize;
+    color: Orange;
+    text-decoration: none;
+    transition: 0.4s;
+    font-family: "Lora";
+}
+
+ul li a:hover {
+    color: Orange;
+    padding-left: 2px;
+}
+
+.links a {
+    display: inline-block;
+    height: 50px;
+    width: 45px;
+    color: black;
+    background-color: Orange;
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 44px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.links a:hover {
+    color: orange;
+    background-color: black;
+    box-shadow: 5px 5px 0px orange;
+}
+
+.line {
+    text-align: center;
+    font-size: 20px; /* Ensure readability */
+    color: orange;
+    margin-top: 20px;
+}
+
+@media (max-width: 740px) {
+    .footer-col {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-col h4::before {
+        display: none;
+    }
+}
+
+@media (max-width: 555px) {
+    footer {
+        padding: 20px 2%;
+        height: auto; /* Adjust for smaller screens */
+    }
+
+    .footer-col h4 {
+        font-size: 20px;
+        margin-left: 0;
+    }
+
+    .footer-col p {
+        font-size: 15px;
+        margin-left: 0;
+    }
+
+    ul li a {
+        font-size: 15px;
+    }
+
+    .line {
+        font-size: 12px;
+    }
+}
+
+</style>
+
+
+
+
+
+
+<style>
+    /* Style for Alertify notifications */
+    .ajs-message.ajs-success {
+    border-radius: 50px; /* Add border-radius */
+    /* Add border */
+    background-color: red; /* Change background color to red */
+    color: black; /* Change text color to white */
+    padding: 10px; /* Add padding */
+    margin-bottom: 10px; /* Add margin bottom */
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;    
+
+}
+</style>

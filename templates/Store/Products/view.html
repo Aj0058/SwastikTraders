@@ -7,17 +7,17 @@
 <link rel="stylesheet" href="{% static 'css/alertify.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'css/themes/default.min.css' %}"/>
 
-<div class="container" style="height: 150%; width: 120%;">
+<div class="container" style="height: auto; width: 100%;">
     <div class="row">
         <div class="col-md-12">
-            <div class="card shadow product_data" style="margin-top: 70px; height: 830px; border: groove; border-color: darkgoldenrod; border-width: 4px; background-color: black;">
+            <div class="card shadow product_data" style="margin-top: 70px; border: groove; border-color: darkgoldenrod; border-width: 4px; background-color: black;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 text-center">
                             {% if product.Tag %}
                                 <label class="product-view-tag" style="font-size: 16px; font-weight: bold; border-radius: 2px; padding: 2px; text-align: center; background-color: green; color: white; margin-top: 10px; font-weight: 800; font-family: 'Times New Roman', Times, serif; width: 70px;color:darkgoldenrod">{{ product.Tag }}</label>
                             {% endif %}
-                            <img src="{{ product.Product_image.url }}" class="w-100 main-image" alt="image" style="border-color: #ccc; border-radius: 0px; width: 220px; height: 350px; margin-top: 10px;">
+                            <img src="{{ product.Product_image.url }}" class="w-100 main-image" alt="image" style="border-color: #ccc; border-radius: 0px; width: 100%; height: auto; margin-top: 10px;">
                             {% for image in product.Product.all %}
                                 <a href="#" class="thumbnail-link" data-image-url="{{ image.image.url }}" style="margin-left: 10px;">
                                     <img src="{{ image.image.url }}" class="thumbnail-image shadow" width="70" height="70" alt="image" style="border-style: ridge; border-width: 2px; border-color: rgb(34, 0, 158); margin-top: 10px; border-radius: 5px;">
@@ -71,72 +71,23 @@
     </div>
 </div>
 
-<script>
-    function dec() {
-        var x = document.getElementById('q-item');
-        var quantity = parseInt(x.value);
-
-        quantity = quantity - 1;
-        if (quantity < 1) {
-            alert("Quantity cannot be less than 1");
-            return;
-        }
-        x.value = quantity;
-    }
-
-    function inc() {
-        var x = document.getElementById('q-item');
-        var quantity = parseInt(x.value);
-
-        quantity = quantity + 1;
-        if (quantity > 10) {
-            alert("Maximum limit reached");
-            return;
-        }
-
-        x.value = quantity;
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var mainImage = document.querySelector('.main-image');
-        var thumbnailLinks = document.querySelectorAll('.thumbnail-link');
-
-        thumbnailLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                var imageUrl = this.getAttribute('data-image-url');
-                mainImage.setAttribute('src', imageUrl);
-            });
-        });
-
-        document.querySelector('.addToCartBtn').addEventListener('click', addToCart);
-        document.querySelector('.addToWishlistBtn').addEventListener('click', addToWishlist);
-    });
-
-    function addToCart() {
-        alertify.success('Your product has been added to the cart');
-    }
-
-    function addToWishlist() {
-        alertify.success('Your product has been added to the wishlist');
-    }
-</script>
-
 <style>
+    /* General adjustments for mobile devices */
     @media (max-width: 768px) {
         .container {
-            width: 100%;
+            padding: 0 15px;
         }
         .card {
             height: auto;
+            margin-top: 20px;
         }
         .main-image {
             width: 100%;
             height: auto;
         }
         .thumbnail-image {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
         }
         .product-view-tag,
         .trending_tag {
@@ -148,38 +99,41 @@
         }
         .btn {
             width: 100px;
-            height: 30px;
-            font-size: 12px;
+            height: 35px;
+            font-size: 14px;
         }
         .qty-input {
             width: 50px;
         }
+        .input-group-text-decrement-btn, .input-group-text-Increment-btn {
+            font-size: 20px;
+        }
     }
 
+    /* Adjustments for very small screens */
     @media (max-width: 480px) {
         .container {
-            padding: 0 15px;
+            padding: 0 10px;
         }
         .main-image {
             width: 100%;
             height: auto;
         }
         .thumbnail-image {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
         }
         .product-view-tag,
         .trending_tag {
             font-size: 12px;
-            width: auto;
         }
         .fw-bold {
             font-size: 14px;
         }
         .btn {
             width: 80px;
-            height: 25px;
-            font-size: 10px;
+            height: 30px;
+            font-size: 12px;
         }
         .qty-input {
             width: 40px;
@@ -189,6 +143,7 @@
 
 <script>
     $(document).ready(function() {
+        // Add to Cart
         $('.addToCartBtn').click(function (e) {
             e.preventDefault();
 
@@ -215,12 +170,8 @@
                 }
             });
         });
-    });
 
-
-    
-
-    $(document).ready(function() {
+        // Add to Wishlist
         $('.addToWishlistBtn').click(function (e) {
             e.preventDefault();
 
@@ -247,107 +198,6 @@
         });
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -557,5 +407,7 @@ ul li a:hover {
 
 }
 </style>
+
+
 
 {% endblock content %}
