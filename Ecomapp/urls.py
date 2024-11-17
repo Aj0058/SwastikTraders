@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from django.urls import path
 from . import views
 
@@ -66,15 +67,14 @@ path('complent/',views. complaint_list, name='complaint_list'),
 
 
 ############ Razorpay Url ######
-path('proceed-to-pay/', views.Razorpaycheck, name='Payment')
-
-
-
-
-
-
-
+path('proceed-to-pay/', views.Razorpaycheck, name='Payment'),
 ]
+
+
+
+
+
+
 
 
 

@@ -22,8 +22,40 @@ from django .utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 import logging
 import random
+import requests  # For whatsaap only
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect, render
+from .models import Feedback
+
 logger = logging.getLogger(__name__)
 from .forms import RegisterForm
+
+
+
+
+
+
+def send_whatsapp_message(message):
+    import requests
+
+    # WhatsApp API Integration
+    api_url = "https://api.twilio.com/2010-04-01/Accounts/your_account_sid/Messages.json"
+    account_sid = "your_account_sid"  # Replace with your Twilio Account SID
+    auth_token = "your_auth_token"  # Replace with your Twilio Auth Token
+    from_whatsapp_number = "whatsapp:+14155238886"  # Twilio Sandbox Number
+    to_whatsapp_number = "whatsapp:+918949167574"  # Admin's WhatsApp number
+
+    data = {
+        "From": from_whatsapp_number,
+        "To": to_whatsapp_number,
+        "Body": message,
+    }
+
+    response = requests.post(api_url, data=data, auth=(account_sid, auth_token))
+    return response.status_code, response.text
+
+
+
 
 
 
@@ -87,17 +119,43 @@ def Contactus(request):
         phone = request.POST['phone']
         message = request.POST['message']
         
-        # Create a new contact instance and save it to the database
+        # Save contact details to the database
         contact = Contact(Name=name, Email=email, Phone=phone, Message=message)
         contact.save()
+        
+        # Message content
+        message_content = f"""
+        A new contact form submission has been received:
 
-        return redirect('success')    
-    return render(request, 'Contact.html')     
+        Name: {name}
+        Email: {email}
+        Phone: {phone}
+        Message: {message}
+
+        Regards,
+        Swastik Traders
+        """
+
+        # Send Email
+        admin_email = "techstech506@gmail.com"
+        mail_subject = "New Contact Us Form Submitted"
+        mail = EmailMessage(mail_subject, message_content, to=[admin_email])
+        mail.send()
+
+        # Send WhatsApp Notification to Admin
+        whatsapp_status, whatsapp_response = send_whatsapp_message(message_content)
+        if whatsapp_status != 201:
+            print("Failed to send WhatsApp message:", whatsapp_response)
+        
+        return redirect('success')  # Redirect to success page
+    
+    return render(request, 'Contact.html')
+
 
 @login_required(login_url='Login')
 @csrf_exempt 
 def FeedbackView(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
         phone = request.POST['phone']
@@ -107,9 +165,29 @@ def FeedbackView(request):
         # Create a new feedback instance and save it to the database
         feedback = Feedback(Name2=name, Email2=email, Phone2=phone, Product2=product, Message2=message)
         feedback.save()
+        
+        # Send feedback details to your email ID
+        admin_email = "techstech506@gmail.com"  # Your email ID
+        mail_subject = "New Feedback Received"
+        mail_message = f"""
+        A new feedback has been submitted:
 
-        return redirect('Feedback')    
-     return render(request, 'Feedback.html')
+        Name: {name}
+        Email: {email}
+        Phone: {phone}
+        Product: {product}
+        Message: {message}
+
+        Regards,
+        Swastik Traders
+        """
+        
+        mail = EmailMessage(mail_subject, mail_message, to=[admin_email])
+        mail.send()
+
+        return redirect('Feedback')  # Redirect to the same page or any other desired page
+    
+    return render(request, 'Feedback.html')
 
 @login_required(login_url='Login')
 @csrf_exempt

@@ -1,8 +1,10 @@
-{% autoescape off %}
-  
-Hello {{ user.username }},
-Thank you for registering.Please Click On the Link Which Given below and Congirm your ragistration and login now...
-
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
-
-{% endautoescape %}
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Activate Your Account</h2>
+    <p>Hello {{ user.username }},</p>
+    <p>Thank you for signing up. Please click the link below to activate your account:</p>
+    <a href="http://{{ domain }}/activate/{{ uid }}/{{ token }}">Activate Now</a>
+    <p>If you did not sign up, please ignore this email.</p>
+</body>
+</html>
