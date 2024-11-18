@@ -12,8 +12,8 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-b+xix_v=ryij_d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
-#ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='127.0.0.1').split(',')
-ALLOWED_HOSTS = ['.versal.app', '.now.sh']
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='127.0.0.1').split(',')
+#ALLOWED_HOSTS = ['.versal.app', '.now.sh']
 
 # Application definition
 INSTALLED_APPS = [

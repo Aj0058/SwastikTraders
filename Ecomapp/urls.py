@@ -68,6 +68,7 @@ path('complent/',views. complaint_list, name='complaint_list'),
 
 ############ Razorpay Url ######
 path('proceed-to-pay/', views.Razorpaycheck, name='Payment'),
+path('order-history/', views.order_history, name='order_history')
 ]
 
 

@@ -681,21 +681,40 @@ def Pay(request):
 
 
 
+@login_required
+def payment_success(request):
+    # Save order details and clear the cart
+    cartitems = Cart.objects.filter(user=request.user)
+    if cartitems:
+        order = Order.objects.create(
+            user=request.user,
+            total_price=sum(item.product.Selling_Price * item.product_qty for item in cartitems),
+        )
+        for item in cartitems:
+            order.items.add(item)  # Assuming a Many-to-Many field in the Order model
+        cartitems.delete()  # Clear the cart
 
+    return redirect('order_history')
 
 
 
 ############################### Razorpay Views #######################
 def Razorpaycheck(request):
-    cart = Cart.objects.filter(user=request.user)
-    total_price = 0 
-    for item in cart:
+    # Calculate total price
+    rawcart = Cart.objects.filter(user=request.user)
+    total_price = 0
+    for item in rawcart:
         total_price += item.product.Selling_Price * item.product_qty
-    
+
+    # Return the price to the frontend for Razorpay integration
     return JsonResponse({'total_price': total_price})
 
 
 
+@login_required
+def order_history(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'order_history.html', {'orders': orders})
 
 
 def Gallary(request):
