@@ -18,27 +18,27 @@
                             <hr>
                             <div class="form-group">
                                 <label class="label"style="font-size:25px;">First Name:</label>
-                                <div class="value"style="font-size:17px;">{{ order.Fname }}</div>
+                                <div class="value"style="font-size:20px;">{{ order.Fname }}</div>
                             </div>
                             <div class="form-group">
                                 <label class="label"style="font-size:25px;">Last Name:</label>
-                                <div class="value"style="font-size:17px;">{{ order.Lname }}</div>
+                                <div class="value"style="font-size:20px;">{{ order.Lname }}</div>
                             </div>
                             <div class="form-group">
                                 <label class="label"style="font-size:25px;">Email:</label>
-                                <div class="value"style=font-size:17px;>{{ order.Email }}</div>
+                                <div class="value"style=font-size:20px;>{{ order.Email }}</div>
                             </div>
                             <div class="form-group">
                                 <label class="label"style="font-size:25px;">Phone:</label>
-                                <div class="value"style="font-size:17px;">{{ order.Phone }}</div>
+                                <div class="value"style="font-size:20px;">{{ order.Phone }}</div>
                             </div>
                             <div class="form-group">
                                 <label class="label"style="font-size:25px;">Address:</label>
-                                <div class="value"style="font-size:17px">{{ order.Address }}, {{ order.City }}, {{ order.State }}, {{ order.Country }}</div>
+                                <div class="value"style="font-size:20px">{{ order.Address }}, {{ order.City }}, {{ order.State }}, {{ order.Country }}</div>
                             </div>
                             <div class="form-group">
                                 <label class="label"style="font-size:25px;">Zip Code:</label>
-                                <div class="value"style="font-size:17px;">{{ order.Pincode }}</div>    
+                                <div class="value"style="#">{{ order.Pincode }}</div>    
                             </div>
                         </div>
 
@@ -50,10 +50,10 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Name</th>
-                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Quantity</th>
-                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Price</th>
-                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Image</th>
+                                            <th style="background-color: black; font-size: 1.3rem; color: aliceblue; text-align: center;color: darkgoldenrod;">Name</th>
+                                            <th style="background-color: black; font-size: 1.3rem; color: aliceblue; text-align: center;color: darkgoldenrod;">Quantity</th>
+                                            <th style="background-color: black; font-size: 1.3rem; color: aliceblue; text-align: center;color: darkgoldenrod;">Price</th>
+                                            <th style="background-color: black; font-size: 1.3rem; color: aliceblue; text-align: center;color: darkgoldenrod;">Image</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,6 +83,22 @@
 
 <!-- Custom CSS for Responsiveness -->
 <style>
+.label{
+font-family: 'Times New Roman', Times, serif;
+color: white;
+}
+
+.value {
+font-family: 'Times New Roman', Times, serif;
+font-size: 20px;
+}
+
+.tr{
+font-family: 'Times New Roman', Times, serif;
+
+}
+
+
 @media (max-width: 768px) {
     .label {
         font-size: 1.2rem;
