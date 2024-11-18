@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-
+from datetime import timedelta, date
 import os
 
 
@@ -284,3 +284,27 @@ class Orderhistory(models.Model):
     items = models.ManyToManyField('Cart')  # Adjust based on your cart model
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+# order View Tracker #
+class OrderTracker(models.Model):
+    Fname = models.CharField(max_length=100)
+    Lname = models.CharField(max_length=100)
+    Email = models.EmailField()
+    Phone = models.CharField(max_length=15)
+    Address = models.TextField()
+    City = models.CharField(max_length=100)
+    State = models.CharField(max_length=100)
+    Country = models.CharField(max_length=100)
+    Pincode = models.CharField(max_length=10)
+    Total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    Status = models.CharField(max_length=50, default='Pending')  # Pending, Shipped, Delivered
+    tracking_no = models.CharField(max_length=50, unique=True)
+    order_date = models.DateField(auto_now_add=True)
+    delivery_date = models.DateField(blank=True, null=True)
+
+def save(self, *args, **kwargs):
+        # Automatically set delivery date to 10-15 days after order_date
+        if not self.delivery_date:
+            self.delivery_date = self.order_date + timedelta(days=10)
+        super().save(*args, **kwargs)    

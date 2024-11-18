@@ -1,0 +1,50 @@
+{% extends 'Store/layouts/main.html' %}
+{% block content %}
+<div class="container my-4">
+    <div class="card shadow-sm">
+        <div class="card-header" style="background-color: darkgoldenrod; color: white; font-family: 'Times New Roman', Times, serif;">
+            <h3>Order Tracker</h3>
+        </div>
+        <div class="card-body">
+            <h4>Order Details</h4>
+            <hr>
+            <p><strong>Order Number:</strong> {{ order.tracking_no }}</p>
+            <p><strong>Status:</strong> {{ order.Status }}</p>
+            <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+            <p><strong>Estimated Delivery Date:</strong> {{ order.delivery_date }}</p>
+            <p><strong>Remaining Days:</strong> {{ remaining_days }}</p>
+            <hr>
+            <h4>Shipping Address</h4>
+            <p>{{ order.Address }}, {{ order.City }}, {{ order.State }}, {{ order.Country }} - {{ order.Pincode }}</p>
+            <h4>Total Price:</h4>
+            <p>₹ {{ order.Total_price }}</p>
+            <hr>
+            <h4>Order Progress</h4>
+            <div class="progress" style="height: 30px;">
+                <div 
+                    class="progress-bar progress-bar-striped bg-success" 
+                    role="progressbar" 
+                    style="width: {{ progress }}%;" 
+                    aria-valuenow="{{ progress }}" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100">
+                    {{ progress|floatformat:2 }}%
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.progress {
+    background-color: #e9ecef;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+}
+</style>
+{% endblock %}

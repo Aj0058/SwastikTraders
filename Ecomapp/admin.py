@@ -22,6 +22,7 @@ admin.site.register(Video)
 admin.site.register(Brands)    
 admin.site.register(Logo)    
 admin.site.register(Orderhistory)    
+admin.site.register(OrderTracker)    
 
 
 

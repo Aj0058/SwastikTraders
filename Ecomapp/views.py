@@ -26,6 +26,9 @@ import requests  # For whatsaap only
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from .models import Feedback
+from datetime import date
+from .models import Order
+
 
 logger = logging.getLogger(__name__)
 from .forms import RegisterForm
@@ -731,3 +734,29 @@ def Companies(request):
     brands = Brands.objects.all()  # Fetch all Brand objects
     context = {'Brands': brands}  # Corrected the key name to lowercase
     return render(request, 'Companies.html', context)  # Pass the context to render
+
+
+#-------------------------------------- Order Tracker--------------------------------------#
+def order_tracker(request, tracking_no):
+    # Fetch data from the correct model (OrderTracker)
+    order = get_object_or_404(OrderTracker, tracking_no=tracking_no)
+    
+    # Calculate delivery progress
+    if order.delivery_date:  # Ensure delivery_date exists
+        total_days = (order.delivery_date - order.order_date).days
+        remaining_days = (order.delivery_date - date.today()).days
+        progress = max(0, ((total_days - remaining_days) / total_days) * 100)
+    else:
+        total_days = remaining_days = progress = 0
+
+    context = {
+        'order': order,
+        'progress': progress,  # Percentage of order completion
+        'remaining_days': remaining_days if remaining_days > 0 else 0,
+    }
+    return render(request, 'Order_tracker.html', context)
+
+def order_view(request, tracking_no):
+    order = get_object_or_404(OrderTracker, tracking_no=tracking_no)  # Correct model
+    orderitems = order.items.all() if hasattr(order, 'items') else []  # Adjust for your structure
+    return render(request, 'template_name.html', {'order': order, 'orderitems': orderitems})

@@ -5,73 +5,74 @@
 
 <div class="container my-3">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow-sm" style="background-color:darkgoldenrod;">
-                <div class="card-header" style="font-family: 'Times New Roman', Times, serif; background-color:; color: black;">
+        <div class="col-12">
+            <div class="card shadow-sm" style="background-color: darkgoldenrod;">
+                <div class="card-header text-center" style="font-family: 'Times New Roman', Times, serif; color: black;">
                     <h3>Order View</h3>
                 </div>
-          
                 <div class="card-body">
-                    <div class="row" style="background-color: white;">
-                        <div class="col-md-12 col-lg-6 mb-4 mb-lg-0">
-                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: black; padding: 8px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Shipping Details</h4>
+                    <div class="row">
+                        <!-- Shipping Details -->
+                        <div class="col-12 col-lg-6 mb-4">
+                            <h4 class="text-teal text-center" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: black; padding: 8px; border-radius: 5px; color: aliceblue;">Shipping Details</h4>
                             <hr>
                             <div class="form-group">
-                                <label class="label">First Name:</label>
-                                <div class="value">{{ order.Fname }}</div>
+                                <label class="label"style="font-size:25px;">First Name:</label>
+                                <div class="value"style="font-size:17px;">{{ order.Fname }}</div>
                             </div>
                             <div class="form-group">
-                                <label class="label">Last Name:</label>
-                                <div class="value">{{ order.Lname }}</div>
+                                <label class="label"style="font-size:25px;">Last Name:</label>
+                                <div class="value"style="font-size:17px;">{{ order.Lname }}</div>
                             </div>
                             <div class="form-group">
-                                <label class="label">Email:</label>
-                                <div class="value">{{ order.Email }}</div>
+                                <label class="label"style="font-size:25px;">Email:</label>
+                                <div class="value"style=font-size:17px;>{{ order.Email }}</div>
                             </div>
                             <div class="form-group">
-                                <label class="label">Phone:</label>
-                                <div class="value">{{ order.Phone }}</div>
+                                <label class="label"style="font-size:25px;">Phone:</label>
+                                <div class="value"style="font-size:17px;">{{ order.Phone }}</div>
                             </div>
                             <div class="form-group">
-                                <label class="label">Address:</label>
-                                <div class="value">{{ order.Address }}, {{ order.City }}, {{ order.State }}, {{ order.Country }}</div>
+                                <label class="label"style="font-size:25px;">Address:</label>
+                                <div class="value"style="font-size:17px">{{ order.Address }}, {{ order.City }}, {{ order.State }}, {{ order.Country }}</div>
                             </div>
                             <div class="form-group">
-                                <label class="label">Zip Code:</label>
-                                <div class="value">{{ order.Pincode }}</div>    
+                                <label class="label"style="font-size:25px;">Zip Code:</label>
+                                <div class="value"style="font-size:17px;">{{ order.Pincode }}</div>    
                             </div>
                         </div>
-                        
-                        <div class="col-md-12 col-lg-6">
-                            <h4 class="text-teal" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: black; padding: 10px; border-radius: 5px; color: aliceblue;margin-top: 10px;">Order Items</h4>
+
+                        <!-- Order Items -->
+                        <div class="col-12 col-lg-6">
+                            <h4 class="text-teal text-center" style="font-family: 'Times New Roman', Times, serif; font-size: 26px; background-color: black; padding: 10px; border-radius: 5px; color: aliceblue;">Order Items</h4>
                             <hr>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="background-color: black; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Name</th>
-                                            <th style="background-color: black; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Quantity</th>
-                                            <th style="background-color: black; font-size: 1.5rem;font-family: 'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Price</th>
-                                            <th style="background-color: black; font-size: 1.5rem;font-family:'Times New Roman', Times, serif;color: aliceblue;text-align: center;">Image</th>
+                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Name</th>
+                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Quantity</th>
+                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Price</th>
+                                            <th style="background-color: black; font-size: 1.2rem; color: aliceblue; text-align: center;">Image</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for item in orderitems %}
-                                            <tr style="border-radius: 20px;">
-                                                <td style="background-color:white; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: black;">{{ item.Product.name }}</td> 
-                                                <td style="background-color:White; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;color: black;text-align: center;">0 {{ item.Quantity }}</td> 
-                                                <td style="background-color:White; font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;text-align: center;color: black;">{{ item.Product.Selling_Price }}</td> 
-                                                <td style="background-color:White;font-size: 1.4rem;font-family: 'Times New Roman', Times, serif;">
+                                            <tr>
+                                                <td style="background-color:white; font-size: 1.1rem; color: black;">{{ item.Product.name }}</td> 
+                                                <td style="background-color:white; font-size: 1.1rem; text-align: center; color: black;">{{ item.Quantity }}</td> 
+                                                <td style="background-color:white; font-size: 1.1rem; text-align: center; color: black;">{{ item.Product.Selling_Price }}</td> 
+                                                <td style="background-color:white; text-align: center;">
+                                                    <img src="{{ item.Product.image.url }}" alt="{{ item.Product.name }}" style="width: 60px; height: auto;">
                                                 </td>
-                                                
                                             </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
-                            <h4 style="font-size: 1.7rem; background-color: black; color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Grand Total: {{ order.Total_price }}</h4>
-                            <h4 style="font-size: 1.7rem; background-color: black; color: white; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Payment Status: {{ order.Status }}</h4>
-                            <h4 style="font-size: 1.5rem; background-color: black; color: aliceblue; border-radius: 3px; padding: 4px;font-family: 'Times New Roman', Times, serif;">Tracking Number: {{ order.tracking_no }}</h4>
+                            <h4 style="font-size: 1.3rem; background-color: black; color: aliceblue; padding: 5px; border-radius: 5px;">Grand Total: {{ order.Total_price }}</h4>
+                            <h4 style="font-size: 1.3rem; background-color: black; color: white; padding: 5px; border-radius: 5px;">Payment Status: {{ order.Status }}</h4>
+                            <h4 style="font-size: 1.3rem; background-color: black; color: aliceblue; padding: 5px; border-radius: 5px;">Tracking Number: {{ order.tracking_no }}</h4>
                         </div>
                     </div>
                 </div>
@@ -80,23 +81,24 @@
     </div>
 </div>
 
+<!-- Custom CSS for Responsiveness -->
 <style>
-.label {
-    font-size: 1.7rem; /* Larger font size for labels */
-    color: black; /* Default text color for labels */
-    font-family: 'Times New Roman', Times, serif;
-}
-.value {
-    font-size: 1.5rem; /* Larger font size for values */
-    font-family: 'Times New Roman', Times, serif;
-}
-.form-group {
-    margin-bottom: 1rem; /* Space between each form group */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (max-width: 768px) {
+    .label {
+        font-size: 1.2rem;
+    }
+    .value {
+        font-size: 1rem;
+    }
+    .table th, .table td {
+        font-size: 0.9rem;
+    }
+    h4 {
+        font-size: 1.2rem !important;
+    }
 }
 </style>
+
 
 
 
