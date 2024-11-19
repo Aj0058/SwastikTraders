@@ -653,16 +653,26 @@ def Book(request):
 
 def vieworder(request, t_no):
     try:
+        # ट्रैकिंग नंबर और उपयोगकर्ता के आधार पर ऑर्डर प्राप्त करें
         order = get_object_or_404(Order, tracking_no=t_no, user=request.user)
         orderitems = Orderitem.objects.filter(order=order)
-        context = {'order': order, 'orderitems': orderitems}
+
+        # नए ऑर्डर्स को दिखाने के लिए सॉर्टिंग (Descending order)
+        orders = Order.objects.all().order_by('-Created_at')  # ऑर्डर्स को डेट के हिसाब से Descending order में सॉर्ट करें
+        
+        # Context में सभी डेटा भेजें
+        context = {
+            'order': order,
+            'orderitems': orderitems,
+            'orders': orders
+        }
+
     except Exception as e:
         logging.error(f"Error retrieving order or items for tracking number {t_no}: {e}")
-        # Optional: redirect to an error page or display an error message
         context = {'error_message': 'An error occurred while retrieving your order. Please try again later.'}
 
+    # 'views.html' टेम्पलेट में context भेजें
     return render(request, 'views.html', context)
-
 
 def already(request):
     return render(request,'already.html')
@@ -760,3 +770,28 @@ def order_view(request, tracking_no):
     order = get_object_or_404(OrderTracker, tracking_no=tracking_no)  # Correct model
     orderitems = order.items.all() if hasattr(order, 'items') else []  # Adjust for your structure
     return render(request, 'template_name.html', {'order': order, 'orderitems': orderitems})
+
+
+@csrf_exempt
+def clear_cart(request):
+    if request.method == 'POST':
+        # Get payment ID and order status from request
+        payment_id = request.POST.get('payment_id')
+        order_status = request.POST.get('order_status')
+
+        if order_status == "completed":
+            # Mark the order as completed or do any other order-related logic
+            user = request.user
+            cart_items = Cart.objects.filter(user=user)
+            total_price = sum(item.product.Selling_Price * item.quantity for item in cart_items)
+
+            order = Order(user=user, total_price=total_price, payment_id=payment_id, status="Completed")
+            order.save()
+
+            # Empty the user's cart after successful payment
+            cart_items.delete()
+
+            return JsonResponse({"status": "success", "message": "Order completed and cart cleared."})
+        else:
+            return JsonResponse({"status": "error", "message": "Payment failed"})
+    return JsonResponse({"status": "error", "message": "Invalid request"})

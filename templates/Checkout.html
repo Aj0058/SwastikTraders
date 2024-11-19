@@ -253,7 +253,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: "GET",
-                url: "/proceed-to-pay/",
+                url: "/proceed-to-pay/",  // This is the endpoint for Razorpay payment
                 success: function (response) {
                     console.log(response);
 
@@ -264,8 +264,28 @@ $(document).ready(function () {
                         "name": "Swastik Traders",
                         "description": "Thank you For Purchasing ",
                         "image": "", // Replace with your logo URL
-                        "handler": function (response) {
-                            alert("Payment ID: " + response.razorpay_payment_id);
+                        "handler": function (paymentResponse) {
+                            alert("Payment ID: " + paymentResponse.razorpay_payment_id);
+
+                            // Send request to update the order status and clear the cart after successful payment
+                            $.ajax({
+                                type: "POST",
+                                url: "{% url 'clear_cart' %}",  // Server-side endpoint to clear cart
+                                data: {
+                                    "payment_id": paymentResponse.razorpay_payment_id,
+                                    "order_status": "completed",
+                                    "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val()
+                                },
+                                success: function (clearCartResponse) {
+                                    // Empty the order summary table on success
+                                    alert("Order has been successfully placed!");
+                                    $(".order-summary-table tbody").empty();
+                                    $(".order-summary-grand-total").text("Grand Total: Rs 0");
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("Error clearing cart: ", error);
+                                }
+                            });
                         },
                         "prefill": {
                             "name": Fname + " " + Lname,
@@ -296,7 +316,6 @@ $(document).ready(function () {
         }
     });
 });
-
 </script>
 
 {% block scripts %}
