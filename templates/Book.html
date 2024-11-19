@@ -5,8 +5,8 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="card shadow-sm black"style="">
-
+                <div class="card shadow-sm black">
+<div>Hello</div>
                     <div class="card-header text-white" style="font-family: 'Times New Roman', Times, serif; padding: 5px;background-color: black;">
                         <h2 class="text-center my-2" style="font-size: 2.5rem;color:darkgoldenrod;"><i class="fa-solid fa-cart-flatbed" style="color: darkgoldenrod"></i> My Orders</h2>
                     </div>
@@ -16,11 +16,11 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr style="font-size: 1.5rem; font-family: 'Times New Roman', Times, serif;">
-                                        <th class="text-white text-center"style="background-color:darkgoldenrod;">Orders Date</th>
-                                        <th class="text-white text-center"style="background-color:darkgoldenrod;">Tracking Number</th>
-                                        <th class="text-white text-center"style="background-color:darkgoldenrod">Total Price</th>
-                                        <th class="text-white text-center"style="background-color:darkgoldenrod">Status</th>
-                                        <th class="text-white text-center"style="background-color:darkgoldenrod">Action</th>
+                                        <th class="text-white text-center" style="background-color:darkgoldenrod;">Orders Date</th>
+                                        <th class="text-white text-center" style="background-color:darkgoldenrod;">Tracking Number</th>
+                                        <th class="text-white text-center" style="background-color:darkgoldenrod">Total Price</th>
+                                        <th class="text-white text-center" style="background-color:darkgoldenrod">Status</th>
+                                        <th class="text-white text-center" style="background-color:darkgoldenrod">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -28,8 +28,8 @@
                                         <tr style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
                                             <td style="color: black;font-size: 1.5rem;" class="text-center">{{ item.Created_at }}</td>
                                             <td style="color: black;font-size: 1.5rem;" class="text-center">{{ item.tracking_no }}</td>
-                                            <td style="color: black;"class="text-center">{{ item.Total_price }}</td>
-                                            <td style="color: black;"class="text-center">{{ item.Status }}</td>
+                                            <td style="color: black;" class="text-center">{{ item.Total_price }}</td>
+                                            <td style="color: black;" class="text-center">{{ item.Status }}</td>
                                             <td class="text-center">
                                                 <a href="{% url 'vieworder' item.tracking_no %}" class="btn btn-success text-white" style="font-size: 1.25rem; padding: 8px 12px;color: black;">View order</a>
                                             </td>
@@ -44,10 +44,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 
 
