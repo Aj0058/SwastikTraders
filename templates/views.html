@@ -63,7 +63,7 @@
                                                 <td style="background-color:white; font-size: 1.1rem; text-align: center; color: black;">{{ item.Quantity }}</td> 
                                                 <td style="background-color:white; font-size: 1.1rem; text-align: center; color: black;">{{ item.Product.Selling_Price }}</td> 
                                                 <td style="background-color:white; text-align: center;">
-                                                    <img src="{{ item.Product.image.url }}" alt="{{ item.Product.name }}" style="width: 60px; height: auto;">
+                                               <img src="{{ item.Product.image.url }}" alt="{{ item.Product.name }}" style="width: 60px; height: auto;">
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -71,8 +71,10 @@
                                 </table>
                             </div>
                             <h4 style="font-size: 1.3rem; background-color: black; color: aliceblue; padding: 5px; border-radius: 5px;">Grand Total: {{ order.Total_price }}</h4>
-                            <h4 style="font-size: 1.3rem; background-color: black; color: white; padding: 5px; border-radius: 5px;">Payment Status: {{ order.Status }}</h4>
+                            <h4 style="font-size: 1.3rem; background-color: black; color: white; padding: 5px; border-radius: 5px;">Order Status: {{ order.Status }}</h4>
                             <h4 style="font-size: 1.3rem; background-color: black; color: aliceblue; padding: 5px; border-radius: 5px;">Tracking Number: {{ order.tracking_no }}</h4>
+                            <h4 style="font-size: 1.3rem; background-color: black; color: aliceblue; padding: 5px; border-radius: 5px;">Payment Mode: {{ payment_mode }}</h4>
+                    
                         </div>
                     </div>
                 </div>

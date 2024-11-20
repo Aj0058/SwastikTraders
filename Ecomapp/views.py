@@ -28,8 +28,8 @@ from django.shortcuts import redirect, render
 from .models import Feedback
 from datetime import date
 from .models import Order
-
-
+from django.core.mail import send_mail
+import hashlib
 logger = logging.getLogger(__name__)
 from .forms import RegisterForm
 
@@ -244,6 +244,37 @@ def Login(request):
             return redirect('wrong')
 
     return render(request, 'Login.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -527,7 +558,7 @@ def Check(request):
     return render(request, 'Checkout.html', context)
 
 
-
+from django.core.mail import send_mail
 
 @login_required(login_url='Login')
 def placeorder2(request):
@@ -566,6 +597,7 @@ def placeorder2(request):
             State=request.POST.get('State'),
             Country=request.POST.get('Country'),
             Pincode=request.POST.get('Pincode'),
+            Payment_mode="COD",  # Assume COD for this scenario
         )
         
         # Calculate total price
@@ -582,6 +614,7 @@ def placeorder2(request):
         neworder.save()
         
         # Save order items
+        order_items_details = ""
         for item in cart:
             Orderitem.objects.create(
                 order=neworder,
@@ -594,8 +627,58 @@ def placeorder2(request):
             orderproduct.quantity -= item.product_qty
             orderproduct.save()
 
+            # Add product details to the email body
+            order_items_details += f"Product: {item.product.name}, Quantity: {item.product_qty}, Price: Rs {item.product.Selling_Price * item.product_qty}\n"
+
         # Clear the cart
         Cart.objects.filter(user=request.user).delete()
+
+        # Send email for COD orders to admin
+        send_mail(
+            subject="New  Order Received",
+            message=f"""
+            A new order has been placed.
+
+            Order Details:
+            Name: {neworder.Fname} {neworder.Lname}
+            Email: {neworder.Email}
+            Phone: {neworder.Phone}
+            Address: {neworder.Address}, {neworder.City}, {neworder.State}, {neworder.Country} - {neworder.Pincode}
+            Total Price: Rs {neworder.Total_price}
+            Tracking Number: {neworder.tracking_no}
+
+            Ordered Products:
+            {order_items_details}
+            """,
+            from_email="your-email@gmail.com",
+            recipient_list=["techstech506@gmail.com"],
+        )
+
+        # Send order details to customer's email
+        send_mail(
+            subject="Your Order Confirmation",
+            message=f"""
+            Thank you for your order!
+
+            Your order has been placed successfully with the following details:
+
+            Order Details:
+            Name: {neworder.Fname} {neworder.Lname}
+            Email: {neworder.Email}
+            Phone: {neworder.Phone}
+            Address: {neworder.Address}, {neworder.City}, {neworder.State}, {neworder.Country} - {neworder.Pincode}
+            Total Price: Rs {neworder.Total_price}
+            Tracking Number: {neworder.tracking_no}
+
+            Ordered Products:
+            {order_items_details}
+
+            Payment Mode: Cash on Delivery (COD)
+            We will notify you once your order is shipped.
+            """,
+            from_email="your-email@gmail.com",
+            recipient_list=[neworder.Email],
+        )
 
         # Success message
         messages.success(request, "Your order has been placed successfully.")
@@ -653,25 +736,28 @@ def Book(request):
 
 def vieworder(request, t_no):
     try:
-        # ट्रैकिंग नंबर और उपयोगकर्ता के आधार पर ऑर्डर प्राप्त करें
+        # Fetch the specific order for the logged-in user
         order = get_object_or_404(Order, tracking_no=t_no, user=request.user)
         orderitems = Orderitem.objects.filter(order=order)
 
-        # नए ऑर्डर्स को दिखाने के लिए सॉर्टिंग (Descending order)
-        orders = Order.objects.all().order_by('-Created_at')  # ऑर्डर्स को डेट के हिसाब से Descending order में सॉर्ट करें
+        # Determine Payment Mode
+        payment_mode = order.Payment_mode
+        if payment_mode.lower() == "cod":
+            payment_mode = "Cash on Delivery (COD)"
+        elif payment_mode.lower() == "razorpay":
+            payment_mode = "Razorpay"
         
-        # Context में सभी डेटा भेजें
+        # Context dictionary to pass data to the template
         context = {
             'order': order,
             'orderitems': orderitems,
-            'orders': orders
+            'payment_mode': payment_mode,
         }
 
     except Exception as e:
         logging.error(f"Error retrieving order or items for tracking number {t_no}: {e}")
         context = {'error_message': 'An error occurred while retrieving your order. Please try again later.'}
 
-    # 'views.html' टेम्पलेट में context भेजें
     return render(request, 'views.html', context)
 
 def already(request):
@@ -721,6 +807,12 @@ def Razorpaycheck(request):
 
     # Return the price to the frontend for Razorpay integration
     return JsonResponse({'total_price': total_price})
+
+
+
+
+
+
 
 
 
