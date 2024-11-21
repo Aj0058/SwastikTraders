@@ -219,35 +219,24 @@ class Complaint(models.Model):
     Message3 = models.TextField()
 
 class Order(models.Model):
-    user = models.ForeignKey(User ,on_delete= models.CASCADE)
-    Fname =models.CharField(max_length=150 ,null=False)
-    Lname =models.CharField(max_length=150 ,null=False)
-    Email =models.CharField(max_length=150 ,null=False)
-    Phone =models.CharField(max_length=150 ,null=False)
-    Address =models.TextField(null=False)
-    City =models.CharField(max_length=150 ,null=False)
-    State =models.CharField(max_length=150 ,null=False)
-    Country =models.CharField(max_length=150 ,null=False)
-    Pincode =models.CharField(max_length=150 ,null=False)
-    Total_price =models.FloatField(max_length=150 ,null=False)
-    Payment_mode =models.CharField(max_length=150 ,null=False)
-    Payment_Id = models.CharField(max_length= 250 ,null=False)
-    orderstatus = (
-        ('Pending','Pending'),
-        ('Out of Shipping','Out of Shipping'),
-        ('Completed','Completed'),
-
-    )
-
-    Status = models.CharField(max_length=190 ,choices=orderstatus , default='Pending')
-    message = models.TextField(null=True)
-    tracking_no =models.TextField(max_length=150 , null=True)
-    Created_at =models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now= True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    Fname = models.CharField(max_length=100)
+    Lname = models.CharField(max_length=100)
+    Email = models.EmailField()
+    Phone = models.CharField(max_length=15)
+    Address = models.TextField()
+    City = models.CharField(max_length=100)
+    State = models.CharField(max_length=100)
+    Country = models.CharField(max_length=100)
+    Pincode = models.CharField(max_length=10)
+    Payment_mode = models.CharField(max_length=20)  # COD or Razorpay
+    Payment_id = models.CharField(max_length=100, null=True, blank=True)  # Razorpay payment ID
+    Total_price = models.FloatField()
+    tracking_no = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return'{}  - {}'.format(self.id, self.tracking_no)
-    
+        return f"Order {self.tracking_no} by {self.user.username}"    
 
 class Orderitem(models.Model):
     order = models.ForeignKey(Order, on_delete = models.CASCADE)

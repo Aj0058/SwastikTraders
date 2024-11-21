@@ -71,6 +71,7 @@ path('proceed-to-pay/', views.Razorpaycheck, name='Payment'),
 path('order-history/', views.order_history, name='order_history'),
 path('order/tracker/<str:tracking_no>/', views.order_tracker, name='order_tracker'),
 path('clear_cart/', views.clear_cart, name='clear_cart'),
+path('order-success/', views.OrderSuccess, name='OrderSuccess'),
 ]
 
 

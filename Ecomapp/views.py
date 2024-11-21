@@ -32,7 +32,7 @@ from django.core.mail import send_mail
 import hashlib
 logger = logging.getLogger(__name__)
 from .forms import RegisterForm
-
+from razorpay import Client
 
 
 
@@ -558,131 +558,152 @@ def Check(request):
     return render(request, 'Checkout.html', context)
 
 
-from django.core.mail import send_mail
+
+razorpay_client = Client(auth=("YOUR_RAZORPAY_KEY", "YOUR_RAZORPAY_SECRET"))
 
 @login_required(login_url='Login')
 def placeorder2(request):
     if request.method == "POST":
 
-        # Update User Information
-        CurrentUser = request.user
+        # Check payment status
+        payment_mode = request.POST.get('payment_mode', 'COD')  # Default is COD
+        payment_id = request.POST.get('razorpay_payment_id', None)
+        payment_status = False
 
-        if not CurrentUser.first_name:
-            CurrentUser.first_name = request.POST.get('Fname')
-            CurrentUser.last_name = request.POST.get('Lname')
-            CurrentUser.save()
+        if payment_mode == "Razorpay" and payment_id:
+            try:
+                # Verify Razorpay payment
+                payment = razorpay_client.payment.fetch(payment_id)
+                if payment["status"] == "captured":
+                    payment_status = True
+                else:
+                    messages.error(request, "Payment verification failed. Please try again.")
+                    return redirect('Cart')
+            except Exception as e:
+                messages.error(request, f"Error verifying payment: {str(e)}")
+                return redirect('Cart')
 
-        # Update or Create Profile Information
-        if not Profile.objects.filter(user=CurrentUser).exists():
-            Userprofile = Profile(
+        if payment_mode == "COD" or payment_status:
+            # Update User Information
+            CurrentUser = request.user
+
+            if not CurrentUser.first_name:
+                CurrentUser.first_name = request.POST.get('Fname')
+                CurrentUser.last_name = request.POST.get('Lname')
+                CurrentUser.save()
+
+            # Update or Create Profile Information
+            if not Profile.objects.filter(user=CurrentUser).exists():
+                Userprofile = Profile(
+                    user=CurrentUser,
+                    phone=request.POST.get('Phone'),
+                    address=request.POST.get('Address'),
+                    city=request.POST.get('City'),
+                    state=request.POST.get('State'),
+                    country=request.POST.get('Country'),
+                    pincode=request.POST.get('Pincode')
+                )
+                Userprofile.save()
+
+            # Create a new Order
+            neworder = Order(
                 user=CurrentUser,
-                phone=request.POST.get('Phone'),
-                address=request.POST.get('Address'),
-                city=request.POST.get('City'),
-                state=request.POST.get('State'),
-                country=request.POST.get('Country'),
-                pincode=request.POST.get('Pincode')
+                Fname=request.POST.get('Fname'),
+                Lname=request.POST.get('Lname'),
+                Email=request.POST.get('Email'),
+                Phone=request.POST.get('Phone'),
+                Address=request.POST.get('Address'),
+                City=request.POST.get('City'),
+                State=request.POST.get('State'),
+                Country=request.POST.get('Country'),
+                Pincode=request.POST.get('Pincode'),
+                Payment_mode=payment_mode,
+                Payment_id=payment_id if payment_mode == "Razorpay" else None,
             )
-            Userprofile.save()
 
-        # Create a new Order
-        neworder = Order(
-            user=CurrentUser,
-            Fname=request.POST.get('Fname'),
-            Lname=request.POST.get('Lname'),
-            Email=request.POST.get('Email'),
-            Phone=request.POST.get('Phone'),
-            Address=request.POST.get('Address'),
-            City=request.POST.get('City'),
-            State=request.POST.get('State'),
-            Country=request.POST.get('Country'),
-            Pincode=request.POST.get('Pincode'),
-            Payment_mode="COD",  # Assume COD for this scenario
-        )
-        
-        # Calculate total price
-        cart = Cart.objects.filter(user=request.user)
-        cart_total_price = sum(item.product.Selling_Price * item.product_qty for item in cart)
-        neworder.Total_price = cart_total_price
-        
-        # Generate a unique tracking number
-        trackno = 'AnveshJain' + str(random.randint(1111111, 9999999))
-        while Order.objects.filter(tracking_no=trackno).exists():
+            # Calculate total price
+            cart = Cart.objects.filter(user=request.user)
+            cart_total_price = sum(item.product.Selling_Price * item.product_qty for item in cart)
+            neworder.Total_price = cart_total_price
+
+            # Generate a unique tracking number
             trackno = 'AnveshJain' + str(random.randint(1111111, 9999999))
-        neworder.tracking_no = trackno
-        
-        neworder.save()
-        
-        # Save order items
-        order_items_details = ""
-        for item in cart:
-            Orderitem.objects.create(
-                order=neworder,
-                Product=item.product,
-                Price=item.product.Selling_Price,
-                Quantity=item.product_qty
+            while Order.objects.filter(tracking_no=trackno).exists():
+                trackno = 'AnveshJain' + str(random.randint(1111111, 9999999))
+            neworder.tracking_no = trackno
+
+            neworder.save()
+
+            # Save order items
+            order_items_details = ""
+            for item in cart:
+                Orderitem.objects.create(
+                    order=neworder,
+                    Product=item.product,
+                    Price=item.product.Selling_Price,
+                    Quantity=item.product_qty
+                )
+                # Update product quantity
+                orderproduct = Product.objects.get(id=item.product_id)
+                orderproduct.quantity -= item.product_qty
+                orderproduct.save()
+
+                # Add product details to the email body
+                order_items_details += f"Product: {item.product.name}, Quantity: {item.product_qty}, Price: Rs {item.product.Selling_Price * item.product_qty}\n"
+
+            # Clear the cart
+            Cart.objects.filter(user=request.user).delete()
+
+            # Send email for COD or Razorpay orders
+            send_mail(
+                subject="New Order Received",
+                message=f"""
+                A new order has been placed.
+
+                Order Details:
+                Name: {neworder.Fname} {neworder.Lname}
+                Email: {neworder.Email}
+                Phone: {neworder.Phone}
+                Address: {neworder.Address}, {neworder.City}, {neworder.State}, {neworder.Country} - {neworder.Pincode}
+                Total Price: Rs {neworder.Total_price}
+                Tracking Number: {neworder.tracking_no}
+
+                Ordered Products:
+                {order_items_details}
+                """,
+                from_email="your-email@gmail.com",
+                recipient_list=["techstech506@gmail.com"],
             )
-            # Update product quantity
-            orderproduct = Product.objects.get(id=item.product_id)
-            orderproduct.quantity -= item.product_qty
-            orderproduct.save()
 
-            # Add product details to the email body
-            order_items_details += f"Product: {item.product.name}, Quantity: {item.product_qty}, Price: Rs {item.product.Selling_Price * item.product_qty}\n"
+            # Send order details to customer's email
+            send_mail(
+                subject="Your Order Confirmation",
+                message=f"""
+                Thank you for your order!
 
-        # Clear the cart
-        Cart.objects.filter(user=request.user).delete()
+                Your order has been placed successfully with the following details:
 
-        # Send email for COD orders to admin
-        send_mail(
-            subject="New  Order Received",
-            message=f"""
-            A new order has been placed.
+                Order Details:
+                Name: {neworder.Fname} {neworder.Lname}
+                Email: {neworder.Email}
+                Phone: {neworder.Phone}
+                Address: {neworder.Address}, {neworder.City}, {neworder.State}, {neworder.Country} - {neworder.Pincode}
+                Total Price: Rs {neworder.Total_price}
+                Tracking Number: {neworder.tracking_no}
 
-            Order Details:
-            Name: {neworder.Fname} {neworder.Lname}
-            Email: {neworder.Email}
-            Phone: {neworder.Phone}
-            Address: {neworder.Address}, {neworder.City}, {neworder.State}, {neworder.Country} - {neworder.Pincode}
-            Total Price: Rs {neworder.Total_price}
-            Tracking Number: {neworder.tracking_no}
+                Ordered Products:
+                {order_items_details}
+                """,
+                from_email="techstech506@gmail.com",
+                recipient_list=[neworder.Email],
+            )
 
-            Ordered Products:
-            {order_items_details}
-            """,
-            from_email="your-email@gmail.com",
-            recipient_list=["techstech506@gmail.com"],
-        )
+            # Success message
+            messages.success(request, "Your order has been placed successfully.")
+            return redirect('OrderSuccess')  # Redirect to a success page
 
-        # Send order details to customer's email
-        send_mail(
-            subject="Your Order Confirmation",
-            message=f"""
-            Thank you for your order!
-
-            Your order has been placed successfully with the following details:
-
-            Order Details:
-            Name: {neworder.Fname} {neworder.Lname}
-            Email: {neworder.Email}
-            Phone: {neworder.Phone}
-            Address: {neworder.Address}, {neworder.City}, {neworder.State}, {neworder.Country} - {neworder.Pincode}
-            Total Price: Rs {neworder.Total_price}
-            Tracking Number: {neworder.tracking_no}
-
-            Ordered Products:
-            {order_items_details}
-
-            Payment Mode: Cash on Delivery (COD)
-            We will notify you once your order is shipped.
-            """,
-            from_email="your-email@gmail.com",
-            recipient_list=[neworder.Email],
-        )
-
-        # Success message
-        messages.success(request, "Your order has been placed successfully.")
-        return redirect('Pay')
+        messages.error(request, "Payment failed or invalid request. Please try again.")
+        return redirect('Cart')
 
 def productlist(request):
     products = Product.objects.filter(status=0).values_list('name', flat=True)  # Use values_list
@@ -887,3 +908,7 @@ def clear_cart(request):
         else:
             return JsonResponse({"status": "error", "message": "Payment failed"})
     return JsonResponse({"status": "error", "message": "Invalid request"})
+
+
+def OrderSuccess(request):
+    return render(request, 'order_success.html')
