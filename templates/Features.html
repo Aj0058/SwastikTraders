@@ -822,6 +822,115 @@
 
 
 }
+</style>
+
+<div class="Banner10">
+    <h1>We are Improving Lifestyle</h1>
+    <img src="{% static 'Images/Clip34.jpg' %}" alt="Banner Image">
+    <p>Improving lifestyle is about making conscious choices to enhance the quality of your daily life. It includes adopting healthy habits, such as eating nutritious food, exercising regularly, and maintaining a positive mindset. It also involves optimizing your living environment with smart solutions, like energy-efficient appliances and organized spaces, to save time and reduce stress. Small, consistent changes—like prioritizing self-care, learning new skills, and embracing sustainability—can lead to a healthier, more fulfilling, and balanced life. By integrating modern tools and thoughtful practices, we can shape a lifestyle that promotes happiness, productivity, and overall well-being.</p>
+    <a href="{% url 'blog_detail' %}" class="Banner4"><span>Click Me</span></a>
+
+</div>
+
+<style>
+.Banner10 {
+    margin-top: 350px;
+    padding: 20px;
+    text-align: center;
+
+}
+
+.Banner10 h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color:Orange;
+    text-decoration:Underline;
+
+}
+
+.Banner10 img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    user-select: none;
+    border-radius: 200px;
+}
+
+.Banner10 p {
+    width: 90%;
+    max-width: 900px;
+    font-size: 1.2rem;
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+.Banner10 a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight:bold;
+    border-radius: 30px;
+    padding: 10px 50px;
+    margin-top: 20px;
+    color: inherit;
+    background-color: Orange;
+    border-width: 1px;
+    overflow: hidden; /* Ensure the water effect stays within the button */
+    transition: color 0.1s ease; /* Smooth color transition for text */
+    font-family:Times New Roman;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+}
+
+/* Create the water filling effect */
+.Banner10 a::before {
+    content: "";
+    position: absolute;
+    bottom: 0; /* Start from the bottom of the button */
+    left: 0;
+    width: 100%;
+    height: 0%; /* Initially set to 0% to appear as if it's empty */
+    background-color: black; /* Water color */
+    transition: height 0.7s ease; /* Animate the filling effect */
+    z-index: 0;
+}
+
+.Banner10 a:hover::before {
+    height: 100%; /* Fill the button with 'water' on hover */
+}
+
+.Banner10 a:hover {
+    color: Orange; /* Change text color to white when hovered */
+}
+
+/* Ensure text stays above the water fill */
+.Banner10 a span {
+    position: relative;
+    z-index: 1; /* Keep text above the animated background */
+}
+
+
+
+@media (min-width: 768px) {
+    .Banner10 img {
+        margin-top: 50px;
+    }
+
+    .Banner10 p {
+        font-size: 1.2rem;
+        margin-top: 50px;
+    }
+
+
+
+
+
+}
 
 
 

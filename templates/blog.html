@@ -4,6 +4,7 @@
 {% block content %}
 <div class="container">
     <h1 class="page-title">All Blogs</h1>
+    <p class="P"style="text-align:center;font-size:23px;font-family:Times new Roman;text-decoration:underline">Discover the top tips for enhancing your home appliances' lifespan and performance, and learn how to improve your lifestyle through smart appliance choices.</p>
     <div class="blog-list">
         {% if blogs %}
             {% for blog in blogs %}
@@ -17,7 +18,7 @@
                         <div class="blog-content">
                             <h2 class="blog-heading">{{ blog.heading }}</h2>
                             <p class="blog-description">
-                                {{ blog.description }} <!-- Full description displayed -->
+                                {{ blog.description }}
                             </p>
                         </div>
                     </div>
@@ -58,9 +59,9 @@
 
     .blog-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-        gap: 20px; /* Space between cards */
-        padding: 0 20px; /* Add padding around the grid */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 0 20px;
         margin: auto;
     }
 
@@ -72,7 +73,7 @@
         background: black;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s, box-shadow 0.2s;
-        margin: auto; /* Center align items */
+        margin: auto;
     }
 
     .blog-item:hover {
@@ -103,20 +104,22 @@
         margin-bottom: 10px;
         font-weight: bold;
         font-family: 'Times New Roman', Times, serif;
+        text-align: center; /* Center the heading */
     }
 
     .blog-description {
         font-size: 18px;
         color: darkgoldenrod;
         line-height: 1.5;
-        text-align: justify;
+        text-align: center; /* Center the description */
+        padding: 0 20px;
     }
 
     /* Responsive Design */
     @media (max-width: 1200px) {
         .blog-list {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Reduce minimum width */
-            gap: 15px; /* Adjust gap for smaller screens */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
         }
 
         .blog-heading {
@@ -190,7 +193,7 @@ footer {
     background-color:black;
     padding: 40px 5%;
     color: black;
-    margin-top: 300px;
+    margin-top: 100px;
     height: auto; /* Change from fixed height */
 }
 
