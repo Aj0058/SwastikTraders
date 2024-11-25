@@ -100,7 +100,7 @@
     .blog-content {
         padding: 15px;
         text-align: center;
-        user-select: none;
+        
     }
 
     .blog-heading {
@@ -111,6 +111,21 @@
         font-family: 'Times New Roman', Times, serif;
         text-align: center; /* Center the heading */
     }
+
+
+    .blog-heading::selection {
+    background: orange; /* Background color for selected text */
+    color: black; /* Text color for selected text */
+    font-weight: bold; /* Optional: Make the selected text bold */
+}
+
+    .blog-description::selection {
+    background: orange; /* Background color for selected text */
+    color: black; /* Text color for selected text */
+    font-weight: bold; /* Optional: Make the selected text bold */
+}
+
+
 
     .blog-description {
         font-size: 20px;
