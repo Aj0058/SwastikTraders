@@ -33,7 +33,7 @@ import hashlib
 logger = logging.getLogger(__name__)
 from .forms import RegisterForm
 from razorpay import Client
-
+from .models import Blog
 
 
 
@@ -912,3 +912,10 @@ def clear_cart(request):
 
 def OrderSuccess(request):
     return render(request, 'order_success.html')
+
+
+
+def BLOG(request):
+    blogs = Blog.objects.filter()  # Fetch blogs associated with the logged-in user
+    context = {'blogs': blogs}  # Pass the blogs to the template
+    return render(request, 'blog.html', context)

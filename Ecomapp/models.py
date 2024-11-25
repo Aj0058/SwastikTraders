@@ -296,3 +296,10 @@ def save(self, *args, **kwargs):
         if not self.delivery_date:
             self.delivery_date = self.order_date + timedelta(days=10)
         super().save(*args, **kwargs)    
+
+class Blog(models.Model):  # Class name should be in PascalCase
+    product_image = models.ImageField(upload_to='uploads/blog_images/', null=True, blank=True)        
+    heading = models.CharField(max_length=150, null=False, blank=False)  # CharField for headings is generally sufficient
+    description = models.TextField(max_length=1800, null=False, blank=False)  # Fixed typo 'max_legth'
+
+    

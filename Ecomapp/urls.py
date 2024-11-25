@@ -24,10 +24,7 @@ urlpatterns = [
     path('Pay/', views.Pay, name='Pay'),
     path('Gall/',views.Gallary,name='Gallery'),
     path('Vidios/',views.Vidios,name='Vidios'),
-    path('Companies/',views.Companies,name='Companies'),
-    
-    
-    
+    path('blog/', views.BLOG, name='blog_detail'),
     path('Wishlist/', views.Wishlists, name='Wishlist'),
     path('add-to-Wishlist/', views.addWishlist, name='addtoWishlist'),
     path('delete-list-item/', views.delete_list_item, name='delete_list_item'),
@@ -72,6 +69,8 @@ path('order-history/', views.order_history, name='order_history'),
 path('order/tracker/<str:tracking_no>/', views.order_tracker, name='order_tracker'),
 path('clear_cart/', views.clear_cart, name='clear_cart'),
 path('order-success/', views.OrderSuccess, name='OrderSuccess'),
+
+
 ]
 
 
